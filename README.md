@@ -2,10 +2,22 @@
 :dancers: Hands-On with Spring JPA, Hibernate, Transactions, SQL
 
 ## E-Commerce
+![shop](utils/img/online-shop.png)
 
-### TODO:
+```bash
+Another E-Commerce Application
+```
 
-1. First release 
+###Objectives:
+- Apply best practices
+- Play with transactions
+- Clean Code
+- Use Design Patterns
+- Keep it simple
+- Enjoy the work
+
+## Planning
+### 1. First release 
    - Modular architecture
    - REST API - Swagger API
    - Security JWT authentication
@@ -22,13 +34,14 @@
    - Pagination
    - CI with GitHub Action
    - Docker Compose
-   - Migration Script
+   - Migration Script (Use Liquibase)
 
-2. Second release
+### 2. Second release
    - Split into microservices
    - Distributed transactions
    - SAGA Pattern
    - Helm Charts
+   - Cloud Native
 
 ### Tools:
  - Java 17
