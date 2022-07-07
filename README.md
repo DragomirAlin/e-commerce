@@ -40,12 +40,14 @@
  - PostgreSQL
  - Maven
 
-### Data Model
+### Planning
+[E-Commerce Kanban](https://github.com/DragomirAlin/spring-transactions/projects/1)
 
+### Data Model
 soon
 
 ### References and further reading
-[Transaction Management](https://docs.spring.io/spring-framework/docs/4.2.x/spring-framework-reference/html/transaction.html#:~:text=The%20Spring%20Framework%20provides%20a,Java%20Data%20Objects%20(JDO).)
-[https://microservices.io/](https://microservices.io/)
-[https://12factor.net/](https://12factor.net/)
+- [Transaction Management](https://docs.spring.io/spring-framework/docs/4.2.x/spring-framework-reference/html/transaction.html#:~:text=The%20Spring%20Framework%20provides%20a,Java%20Data%20Objects%20(JDO).)
+- [https://microservices.io/](https://microservices.io/)
+- [https://12factor.net/](https://12factor.net/)
 
