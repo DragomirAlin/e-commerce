@@ -8,7 +8,7 @@
 Another E-Commerce Application
 ```
 
-###Objectives:
+### Objectives:
 - Apply best practices
 - Play with transactions
 - Clean Code
