@@ -31,7 +31,6 @@ Another E-Commerce Application
    - User management
    - Pagination
    - Relationships between entities
-   - Pagination
    - CI with GitHub Action
    - Docker Compose
    - Migration Script (Use Liquibase)
