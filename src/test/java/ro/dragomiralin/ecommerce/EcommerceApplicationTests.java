@@ -1,10 +1,10 @@
-package ro.dragomiralin.transacton;
+package ro.dragomiralin.ecommerce;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TransactonApplicationTests {
+class EcommerceApplicationTests {
 
 	@Test
 	void contextLoads() {
