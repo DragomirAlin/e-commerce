@@ -2,7 +2,7 @@
 :dancers: Hands-On with Spring JPA, Hibernate, Transactions, SQL
 
 ## E-Commerce
-![shop](utils/img/online-shop.png)
+![shop](doc/img/online-shop.png)
 
 ```bash
 Another E-Commerce Application
@@ -18,7 +18,7 @@ Another E-Commerce Application
 
 ## Planning
 ### 1. First release 
-   - Modular architecture
+   - Hexagonal Architecture
    - REST API - Swagger API
    - Security JWT authentication
    - Cart & Order management
