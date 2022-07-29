@@ -2,7 +2,7 @@
 :dancers: Hands-On with Spring JPA, Hibernate, Transactions, SQL
 
 ## E-Commerce
-![shop](doc/img/online-shop.png)
+![shop](documentation/img/online-shop.png)
 
 ```bash
 Another E-Commerce Application
