@@ -1,4 +1,4 @@
-package ro.dragomiralin.ecommerce;
+package ro.dragomiralin.ecommerce.boot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
