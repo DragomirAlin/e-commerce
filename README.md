@@ -1,8 +1,8 @@
-# spring-transactions
-:dancers: Hands-On with Spring JPA, Hibernate, Transactions, SQL
+![shop](.documentation/img/online-shop.png)
 
 ## E-Commerce
-![shop](.documentation/img/online-shop.png)
+:dancers: Hands-On with Spring JPA, Hibernate, Transactions, SQL
+
 
 ```bash
 Another E-Commerce Application
