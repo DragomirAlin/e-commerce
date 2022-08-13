@@ -39,6 +39,7 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<!-- Tools -->
 
 		<!-- Testing Dependency -->
 		<dependency>
@@ -56,6 +57,7 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- Testing Dependency -->
 
 		<!-- Persistence -->
 		<dependency>
@@ -71,6 +73,21 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.4.1</version>
 		</dependency>
+		<!-- Persistence -->
+
+		<!-- API Documentation -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<!-- API Documentation -->
+
 	</dependencies>
 
 	<build>

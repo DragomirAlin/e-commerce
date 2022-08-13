@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ro.dragomiralin.ecommerce.domain.service.CategoryService;
 import ro.dragomiralin.ecommerce.domain.service.ports.CategoryPort;
+import ro.dragomiralin.ecommerce.infra.api.rest.error.ResourceNotFoundException;
 import ro.dragomiralin.ecommerce.infra.persistence.domain.Category;
 
 @Service
@@ -15,16 +16,17 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Page<Category> list(PageRequest pageRequest) {
-        return null;
+        return categoryPort.list(pageRequest);
     }
 
     @Override
     public Category get(long id) {
-        return null;
+        return categoryPort.get(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
     }
 
     @Override
     public long add(Category category) {
-        return 0;
+        return categoryPort.save(category);
     }
 }

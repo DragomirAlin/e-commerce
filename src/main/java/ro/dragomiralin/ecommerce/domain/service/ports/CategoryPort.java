@@ -12,6 +12,6 @@ public interface CategoryPort {
 
     Optional<Category> get(long id);
 
-    long add(Category category);
+    long save(Category category);
 
 }

@@ -26,7 +26,7 @@ public class CategoryAdapter implements CategoryPort {
     }
 
     @Override
-    public long add(Category category) {
+    public long save(Category category) {
         var c = categoryRepository.save(category);
         return c.getId();
     }
