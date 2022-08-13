@@ -1,4 +1,4 @@
-package ro.dragomiralin.ecommerce.boot;
+package ro.dragomiralin.ecommerce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
