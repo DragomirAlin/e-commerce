@@ -39,4 +39,17 @@ public class ProductController {
         var customResponse = CustomResponse.list(ListResponse.build(productsPage));
         return ResponseEntity.ok(customResponse);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CustomResponse<Product>> get(@PathVariable long id) {
+        var product = productService.get(id);
+        var customResponse = CustomResponse.single(product);
+        return ResponseEntity.ok(customResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CustomResponse<Void>> delete(@PathVariable long id) {
+        productService.delete(id);
+        return ResponseEntity.ok(CustomResponse.empty());
+    }
 }

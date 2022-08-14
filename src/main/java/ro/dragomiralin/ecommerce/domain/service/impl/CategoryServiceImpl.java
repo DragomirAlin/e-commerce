@@ -29,4 +29,10 @@ public class CategoryServiceImpl implements CategoryService {
     public long add(Category category) {
         return categoryPort.save(category);
     }
+
+    @Override
+    public void delete(long id) {
+        var category = get(id);
+        categoryPort.delete(category.getId());
+    }
 }

@@ -36,6 +36,10 @@ public class CustomResponse<T> {
         return customHttpResponse;
     }
 
+    public static CustomResponse<Void> empty(){
+        return CustomResponse.<Void>builder().build();
+    }
+
     public static <T> CustomResponse<T> redirect(String url) {
         return CustomResponse.<T>builder()
                 .redirect(Redirect.builder().url(url).build())

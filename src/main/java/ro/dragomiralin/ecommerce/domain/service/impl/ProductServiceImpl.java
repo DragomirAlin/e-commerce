@@ -29,4 +29,10 @@ public class ProductServiceImpl implements ProductService {
     public long add(Product product) {
         return productPort.save(product);
     }
+
+    @Override
+    public void delete(long id) {
+        var product = get(id);
+        productPort.delete(product.getId());
+    }
 }

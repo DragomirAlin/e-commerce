@@ -1,7 +1,6 @@
 package ro.dragomiralin.ecommerce.infra.api.rest;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +31,18 @@ public class CategoryController {
         var categoriesPage = categoryService.list(PageRequest.of(page, size));
         var customResponse = CustomResponse.list(ListResponse.build(categoriesPage));
         return ResponseEntity.ok(customResponse);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CustomResponse<Category>> get(@PathVariable long id) {
+        var category = categoryService.get(id);
+        var customResponse = CustomResponse.single(category);
+        return ResponseEntity.ok(customResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CustomResponse<Void>> delete(@PathVariable long id) {
+        categoryService.delete(id);
+        return ResponseEntity.ok(CustomResponse.empty());
     }
 }

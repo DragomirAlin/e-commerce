@@ -14,4 +14,6 @@ public interface CategoryPort {
 
     long save(Category category);
 
+    void delete(long id);
+
 }

@@ -30,4 +30,9 @@ public class ProductAdapter implements ProductPort {
         var p = productRepository.save(product);
         return p.getId();
     }
+
+    @Override
+    public void delete(long id) {
+        productRepository.deleteById(id);
+    }
 }

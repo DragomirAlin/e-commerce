@@ -30,4 +30,9 @@ public class CategoryAdapter implements CategoryPort {
         var c = categoryRepository.save(category);
         return c.getId();
     }
+
+    @Override
+    public void delete(long id) {
+        categoryRepository.deleteById(id);
+    }
 }

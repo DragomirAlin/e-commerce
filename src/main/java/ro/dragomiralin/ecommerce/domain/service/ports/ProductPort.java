@@ -14,4 +14,6 @@ public interface ProductPort {
 
     long save(Product product);
 
+    void delete(long id);
+
 }
