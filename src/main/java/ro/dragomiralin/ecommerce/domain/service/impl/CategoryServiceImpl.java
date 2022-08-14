@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import ro.dragomiralin.ecommerce.domain.service.CategoryService;
 import ro.dragomiralin.ecommerce.domain.service.ports.CategoryPort;
 import ro.dragomiralin.ecommerce.infra.api.rest.error.ResourceNotFoundException;
-import ro.dragomiralin.ecommerce.infra.persistence.domain.Category;
+import ro.dragomiralin.ecommerce.infra.persistence.entity.Category;
 
 @Service
 @RequiredArgsConstructor

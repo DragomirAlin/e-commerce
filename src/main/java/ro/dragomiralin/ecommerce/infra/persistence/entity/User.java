@@ -1,4 +1,4 @@
-package ro.dragomiralin.ecommerce.infra.persistence.domain;
+package ro.dragomiralin.ecommerce.infra.persistence.entity;
 
 public class User {
     public String id;

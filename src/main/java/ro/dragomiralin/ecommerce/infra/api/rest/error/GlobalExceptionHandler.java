@@ -1,11 +1,10 @@
-package ro.dragomiralin.ecommerce.infra.api.rest;
+package ro.dragomiralin.ecommerce.infra.api.rest.error;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import ro.dragomiralin.ecommerce.infra.api.rest.error.ResourceNotFoundException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;

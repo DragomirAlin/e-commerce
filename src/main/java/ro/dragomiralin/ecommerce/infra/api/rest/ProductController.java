@@ -1,26 +1,42 @@
 package ro.dragomiralin.ecommerce.infra.api.rest;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ro.dragomiralin.ecommerce.domain.service.CategoryService;
 import ro.dragomiralin.ecommerce.domain.service.ProductService;
-import ro.dragomiralin.ecommerce.infra.persistence.domain.Product;
+import ro.dragomiralin.ecommerce.infra.api.rest.dto.CustomResponse;
+import ro.dragomiralin.ecommerce.infra.api.rest.dto.ListResponse;
+import ro.dragomiralin.ecommerce.infra.api.rest.dto.ProductCreateReq;
+import ro.dragomiralin.ecommerce.infra.api.rest.mapper.ProductMapper;
+import ro.dragomiralin.ecommerce.infra.persistence.entity.Product;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/product")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
+    private final CategoryService categoryService;
+    private final ProductMapper productMapper;
 
     @PostMapping
-    public ResponseEntity<Long> add(@RequestBody Product product) {
-        return ResponseEntity.ok(productService.add(product));
+    public ResponseEntity<CustomResponse<Long>> add(@RequestBody ProductCreateReq productCreateReq) {
+        var categories = productCreateReq.getCategories().stream()
+                .map(categoryService::get)
+                .collect(Collectors.toList());
+
+        var product = productMapper.toProduct(productCreateReq, categories);
+        return ResponseEntity.ok(CustomResponse.single(productService.add(product)));
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Page<Product>> list(@RequestParam int page, @RequestParam int size) {
-        return ResponseEntity.ok(productService.list(PageRequest.of(page, size)));
+    public ResponseEntity<CustomResponse<List<Product>>> list(@RequestParam int page, @RequestParam int size) {
+        var productsPage = productService.list(PageRequest.of(page, size));
+        var customResponse = CustomResponse.list(ListResponse.build(productsPage));
+        return ResponseEntity.ok(customResponse);
     }
 }

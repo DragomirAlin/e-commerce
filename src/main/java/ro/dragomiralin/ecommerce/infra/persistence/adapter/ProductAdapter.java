@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ro.dragomiralin.ecommerce.domain.service.ports.ProductPort;
-import ro.dragomiralin.ecommerce.infra.persistence.domain.Product;
+import ro.dragomiralin.ecommerce.infra.persistence.entity.Product;
 import ro.dragomiralin.ecommerce.infra.persistence.repository.ProductRepository;
 
 import java.util.Optional;

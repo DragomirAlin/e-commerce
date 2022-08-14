@@ -2,7 +2,7 @@ package ro.dragomiralin.ecommerce.domain.service.ports;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import ro.dragomiralin.ecommerce.infra.persistence.domain.Category;
+import ro.dragomiralin.ecommerce.infra.persistence.entity.Category;
 
 import java.util.Optional;
 
