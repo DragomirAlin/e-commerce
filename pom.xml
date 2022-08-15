@@ -20,6 +20,7 @@
 		<archunit.version>1.0.0-rc1</archunit.version>
 		<springfox.version>3.0.0</springfox.version>
 		<org.projectlombok.version>1.18.24</org.projectlombok.version>
+		<com.fasterxml.jackson.databind.version>2.13.3</com.fasterxml.jackson.databind.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -48,6 +49,11 @@
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>${org.mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${com.fasterxml.jackson.databind.version}</version>
 		</dependency>
 		<!-- Tools -->
 

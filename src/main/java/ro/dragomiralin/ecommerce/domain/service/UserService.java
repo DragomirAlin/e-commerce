@@ -9,4 +9,8 @@ public interface UserService {
     long create(User user);
 
     Optional<User> findById(long id);
+
+    Optional<User> findByEmail(String email);
+
+    Optional<User> findBySub(String sub);
 }

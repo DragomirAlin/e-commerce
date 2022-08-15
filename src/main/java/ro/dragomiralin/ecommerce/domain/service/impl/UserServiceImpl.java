@@ -29,4 +29,14 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findById(long id) {
         return userPort.findById(id);
     }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userPort.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> findBySub(String sub) {
+        return Optional.empty();
+    }
 }
