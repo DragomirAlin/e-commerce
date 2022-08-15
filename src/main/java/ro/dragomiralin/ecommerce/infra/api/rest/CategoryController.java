@@ -6,10 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ro.dragomiralin.ecommerce.domain.service.CategoryService;
-import ro.dragomiralin.ecommerce.infra.api.rest.dto.CategoryCreateReq;
 import ro.dragomiralin.ecommerce.infra.api.rest.dto.CustomResponse;
 import ro.dragomiralin.ecommerce.infra.api.rest.dto.ListResponse;
-import ro.dragomiralin.ecommerce.infra.api.rest.mapper.CategoryMapper;
 import ro.dragomiralin.ecommerce.infra.persistence.entity.Category;
 import ro.dragomiralin.ecommerce.infra.persistence.entity.User;
 
@@ -20,13 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryService categoryService;
-    private final CategoryMapper categoryMapper;
-
-    @PostMapping
-    public ResponseEntity<CustomResponse<Long>> add(@RequestBody CategoryCreateReq categoryCreateReq) {
-        var category = categoryMapper.toCategory(categoryCreateReq);
-        return ResponseEntity.ok(CustomResponse.single(categoryService.add(category)));
-    }
 
     @GetMapping("/list")
     public ResponseEntity<CustomResponse<List<Category>>> list(@AuthenticationPrincipal User user, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
@@ -43,9 +34,4 @@ public class CategoryController {
         return ResponseEntity.ok(customResponse);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<CustomResponse<Void>> delete(@PathVariable long id) {
-        categoryService.delete(id);
-        return ResponseEntity.ok(CustomResponse.empty());
-    }
 }

@@ -20,18 +20,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
-    private final CategoryService categoryService;
-    private final ProductMapper productMapper;
-
-    @PostMapping
-    public ResponseEntity<CustomResponse<Long>> add(@RequestBody ProductCreateReq productCreateReq) {
-        var categories = productCreateReq.getCategories().stream()
-                .map(categoryService::get)
-                .collect(Collectors.toList());
-
-        var product = productMapper.toProduct(productCreateReq, categories);
-        return ResponseEntity.ok(CustomResponse.single(productService.add(product)));
-    }
 
     @GetMapping("/list")
     public ResponseEntity<CustomResponse<List<Product>>> list(@RequestParam int page, @RequestParam int size) {
@@ -47,9 +35,4 @@ public class ProductController {
         return ResponseEntity.ok(customResponse);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<CustomResponse<Void>> delete(@PathVariable long id) {
-        productService.delete(id);
-        return ResponseEntity.ok(CustomResponse.empty());
-    }
 }
