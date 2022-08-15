@@ -10,5 +10,5 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuerUri: http://localhost:8083/auth/realms/ecommerce
-          jwkSetUri: http://localhost:8083/auth/realms/ecommerce/protocol/openid-connect/certs
+          issuerUri: http://localhost:8083/auth/realms/master
+          jwkSetUri: http://localhost:8083/auth/realms/master/protocol/openid-connect/certs
