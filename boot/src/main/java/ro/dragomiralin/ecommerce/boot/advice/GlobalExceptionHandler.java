@@ -1,4 +1,4 @@
-package ro.dragomiralin.ecommerce.controller;
+package ro.dragomiralin.ecommerce.boot.advice;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -6,16 +6,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.exception.ConstraintViolationException;
+import org.postgresql.util.PSQLException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ro.dragomiralin.ecommerce.controller.request.CustomResponse;
+import ro.dragomiralin.ecommerce.domain.category.error.CategoryNotFoundException;
 import ro.dragomiralin.ecommerce.domain.common.error.ResourceNotFoundException;
+import ro.dragomiralin.ecommerce.domain.product.error.ProductNotFoundException;
+import ro.dragomiralin.ecommerce.domain.user.error.UserAlreadyExistsException;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +32,16 @@ import java.util.List;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({IllegalArgumentException.class, BindException.class})
+    @ExceptionHandler({ConstraintViolationException.class, PSQLException.class, DataIntegrityViolationException.class})
+    public ResponseEntity<CustomResponse> handle(Exception e) {
+        ErrorItem error = ErrorItem.builder()
+                .code(400)
+                .message(e.getCause().getMessage())
+                .build();
+        return new ResponseEntity<>(CustomResponse.error(error), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({IllegalArgumentException.class, BindException.class, ValidationException.class, UserAlreadyExistsException.class})
     public ResponseEntity<CustomResponse> handleAssertValidationException(Exception e) {
         log.info("Validation failed for request.", e);
         ErrorItem customError = ErrorItem.builder()
@@ -36,9 +53,10 @@ public class GlobalExceptionHandler {
 
 
     @SuppressWarnings("rawtypes")
-    @ExceptionHandler(ResourceNotFoundException.class)
+    @ExceptionHandler({ResourceNotFoundException.class, ProductNotFoundException.class, CategoryNotFoundException.class})
     public ResponseEntity<CustomResponse> handle(ResourceNotFoundException e) {
         ErrorItem error = ErrorItem.builder()
+                .code(404)
                 .message(e.getMessage())
                 .build();
 

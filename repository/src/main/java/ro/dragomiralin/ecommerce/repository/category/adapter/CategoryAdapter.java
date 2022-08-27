@@ -20,7 +20,7 @@ public class CategoryAdapter implements CategoryPort {
     @Override
     public PageDO<CategoryDO> list(int page, int size) {
         var categories = categoryRepository.findAll(PageRequest.of(page, size));
-        return null;
+        return mapper.toPageDO(categories);
     }
 
     @Override

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
 import ro.dragomiralin.ecommerce.controller.dto.ListResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,9 +23,8 @@ public class CustomResponse<T> {
     private Paging paging;
 
     public static <T> CustomResponse<List<T>> list(ListResponse<T> listResponse) {
-        Assert.notNull(listResponse.getData(), "List data must not be null.");
         CustomResponse<List<T>> customHttpResponse = new CustomResponse<>();
-        customHttpResponse.setData(listResponse.getData());
+        customHttpResponse.setData(listResponse.getData() == null ? new ArrayList<>() : listResponse.getData());
         customHttpResponse.setPaging(
                 Paging.builder()
                         .limit(listResponse.getLimit() == null ? 50 : listResponse.getLimit())
