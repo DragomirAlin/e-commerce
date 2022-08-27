@@ -43,7 +43,7 @@ Another E-Commerce Application
    - Cloud Native
 
 ### Tools:
- - Java 17
+ - Java 18
  - Spring Boot
  - Spring Security
  - Spring Data JPA
