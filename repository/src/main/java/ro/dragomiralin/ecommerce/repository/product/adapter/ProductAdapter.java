@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
-import ro.dragomiralin.ecommerce.domain.product.ProductDO;
-import ro.dragomiralin.ecommerce.domain.product.ProductPort;
+import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
+import ro.dragomiralin.ecommerce.domain.product.port.ProductPort;
 import ro.dragomiralin.ecommerce.repository.product.mapper.ProductDOMapper;
 import ro.dragomiralin.ecommerce.repository.product.repository.ProductRepository;
 

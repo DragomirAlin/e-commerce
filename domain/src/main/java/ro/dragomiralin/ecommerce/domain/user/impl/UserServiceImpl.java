@@ -1,9 +1,12 @@
-package ro.dragomiralin.ecommerce.domain.user;
+package ro.dragomiralin.ecommerce.domain.user.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ro.dragomiralin.ecommerce.domain.user.UserService;
+import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 import ro.dragomiralin.ecommerce.domain.user.error.UserAlreadyExistsException;
+import ro.dragomiralin.ecommerce.domain.user.port.UserPort;
 
 import java.util.Optional;
 

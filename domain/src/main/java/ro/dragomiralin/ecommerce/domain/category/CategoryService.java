@@ -1,5 +1,6 @@
 package ro.dragomiralin.ecommerce.domain.category;
 
+import ro.dragomiralin.ecommerce.domain.category.domain.CategoryDO;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 
 public interface CategoryService {

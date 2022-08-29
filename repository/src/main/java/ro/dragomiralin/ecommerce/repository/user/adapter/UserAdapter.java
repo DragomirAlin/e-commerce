@@ -2,8 +2,8 @@ package ro.dragomiralin.ecommerce.repository.user.adapter;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ro.dragomiralin.ecommerce.domain.user.UserDO;
-import ro.dragomiralin.ecommerce.domain.user.UserPort;
+import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
+import ro.dragomiralin.ecommerce.domain.user.port.UserPort;
 import ro.dragomiralin.ecommerce.repository.user.mapper.UserDOMapper;
 import ro.dragomiralin.ecommerce.repository.user.repository.UserRepository;
 

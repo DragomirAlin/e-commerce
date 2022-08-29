@@ -1,8 +1,11 @@
-package ro.dragomiralin.ecommerce.domain.category;
+package ro.dragomiralin.ecommerce.domain.category.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ro.dragomiralin.ecommerce.domain.category.CategoryService;
+import ro.dragomiralin.ecommerce.domain.category.domain.CategoryDO;
 import ro.dragomiralin.ecommerce.domain.category.error.CategoryNotFoundException;
+import ro.dragomiralin.ecommerce.domain.category.port.CategoryPort;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 
 @Service

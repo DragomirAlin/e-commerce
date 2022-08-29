@@ -1,6 +1,7 @@
 package ro.dragomiralin.ecommerce.domain.product;
 
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
+import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 
 public interface ProductService {
 

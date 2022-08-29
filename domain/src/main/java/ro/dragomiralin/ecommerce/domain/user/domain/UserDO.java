@@ -1,4 +1,4 @@
-package ro.dragomiralin.ecommerce.domain.user;
+package ro.dragomiralin.ecommerce.domain.user.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

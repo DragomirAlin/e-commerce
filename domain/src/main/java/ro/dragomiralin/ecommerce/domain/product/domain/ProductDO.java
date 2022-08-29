@@ -1,10 +1,10 @@
-package ro.dragomiralin.ecommerce.domain.product;
+package ro.dragomiralin.ecommerce.domain.product.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import ro.dragomiralin.ecommerce.domain.category.CategoryDO;
+import ro.dragomiralin.ecommerce.domain.category.domain.CategoryDO;
 
 import java.math.BigDecimal;
 import java.util.Set;

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import ro.dragomiralin.ecommerce.controller.dto.UserDTO;
 import ro.dragomiralin.ecommerce.domain.common.error.ServiceException;
 import ro.dragomiralin.ecommerce.controller.mapper.UserDTOMapper;
-import ro.dragomiralin.ecommerce.domain.user.UserDO;
+import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 import ro.dragomiralin.ecommerce.domain.user.UserService;
 
 

@@ -1,6 +1,8 @@
 package ro.dragomiralin.ecommerce.domain.user;
 
 
+import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
+
 import java.util.Optional;
 
 public interface UserService {

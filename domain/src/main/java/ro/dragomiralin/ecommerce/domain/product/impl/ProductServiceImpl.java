@@ -1,9 +1,12 @@
-package ro.dragomiralin.ecommerce.domain.product;
+package ro.dragomiralin.ecommerce.domain.product.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
+import ro.dragomiralin.ecommerce.domain.product.ProductService;
+import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 import ro.dragomiralin.ecommerce.domain.product.error.ProductNotFoundException;
+import ro.dragomiralin.ecommerce.domain.product.port.ProductPort;
 
 @Service
 @RequiredArgsConstructor

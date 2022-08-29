@@ -5,9 +5,9 @@ import org.mapstruct.Mapping;
 import ro.dragomiralin.ecommerce.controller.dto.PageDTO;
 import ro.dragomiralin.ecommerce.controller.dto.ProductDTO;
 import ro.dragomiralin.ecommerce.controller.request.ProductCreateReq;
-import ro.dragomiralin.ecommerce.domain.category.CategoryDO;
+import ro.dragomiralin.ecommerce.domain.category.domain.CategoryDO;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
-import ro.dragomiralin.ecommerce.domain.product.ProductDO;
+import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 
 import java.util.List;
 

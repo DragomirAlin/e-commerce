@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import ro.dragomiralin.ecommerce.controller.dto.CategoryDTO;
 import ro.dragomiralin.ecommerce.controller.dto.PageDTO;
 import ro.dragomiralin.ecommerce.controller.request.CategoryCreateReq;
-import ro.dragomiralin.ecommerce.domain.category.CategoryDO;
+import ro.dragomiralin.ecommerce.domain.category.domain.CategoryDO;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 
 @Mapper(componentModel = "spring")

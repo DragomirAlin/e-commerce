@@ -1,4 +1,6 @@
-package ro.dragomiralin.ecommerce.domain.user;
+package ro.dragomiralin.ecommerce.domain.user.port;
+
+import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
 import java.util.Optional;
 

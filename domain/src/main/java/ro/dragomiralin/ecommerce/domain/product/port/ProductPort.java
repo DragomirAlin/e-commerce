@@ -1,6 +1,7 @@
-package ro.dragomiralin.ecommerce.domain.product;
+package ro.dragomiralin.ecommerce.domain.product.port;
 
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
+import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 
 import java.util.Optional;
 

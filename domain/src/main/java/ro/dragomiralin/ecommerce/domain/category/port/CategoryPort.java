@@ -1,5 +1,6 @@
-package ro.dragomiralin.ecommerce.domain.category;
+package ro.dragomiralin.ecommerce.domain.category.port;
 
+import ro.dragomiralin.ecommerce.domain.category.domain.CategoryDO;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 
 import java.util.Optional;
