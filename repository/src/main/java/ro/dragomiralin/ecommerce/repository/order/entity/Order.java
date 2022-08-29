@@ -34,4 +34,7 @@ public class Order {
     @JsonIgnore
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @Column(name = "customer_comments")
+    private String customerComments;
 }
