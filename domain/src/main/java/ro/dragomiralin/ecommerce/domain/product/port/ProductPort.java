@@ -11,7 +11,7 @@ public interface ProductPort {
 
     Optional<ProductDO> get(long id);
 
-    long save(ProductDO product);
+    long save(ProductDO productDO);
 
     void delete(long id);
 
