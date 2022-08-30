@@ -1,4 +1,9 @@
 package ro.dragomiralin.ecommerce.domain.order.domain;
 
-public class OrderDOStatus {
+public enum OrderDOStatus {
+    PENDING,
+    PROCESSING,
+    SHIPPED,
+    DELIVERED,
+    CANCELLED
 }

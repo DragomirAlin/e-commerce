@@ -15,18 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class OrderDO {
-
     private Long id;
-
     private OrderDOStatus status;
-
     private Date orderedDate;
-
     private List<OrderDOItem> orderItems;
-
     @JsonIgnore
     private UserDO user;
-
     private String customerComments;
 
 }
