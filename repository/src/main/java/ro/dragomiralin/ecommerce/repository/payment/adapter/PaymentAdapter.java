@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.payment.domain.PaymentDO;
 import ro.dragomiralin.ecommerce.domain.payment.port.PaymentPort;
+import ro.dragomiralin.ecommerce.repository.payment.mapper.PaymentDOMapper;
 import ro.dragomiralin.ecommerce.repository.payment.repository.PaymentRepository;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class PaymentAdapter implements PaymentPort {
+    private final PaymentDOMapper mapper;
     private final PaymentRepository paymentRepository;
 
     @Override

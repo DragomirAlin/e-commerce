@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
 import ro.dragomiralin.ecommerce.domain.order.port.OrderPort;
+import ro.dragomiralin.ecommerce.repository.order.mapper.OrderDOMapper;
 import ro.dragomiralin.ecommerce.repository.order.repository.OrderRepository;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class OrderAdapter implements OrderPort {
+    private final OrderDOMapper mapper;
     private final OrderRepository orderRepository;
 
     @Override
