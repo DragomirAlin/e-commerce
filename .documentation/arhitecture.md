@@ -40,15 +40,13 @@ There are 2 ways to manage dependencies:
  - Multi-module projects, where each module has its own dependencies and JAR(maven multi-module)
  - Single module project, enforcing the dependency constraints through architectural unit tests.
 
-I'm going to use the **Single module project** approach.
+I'm going to use the **Multi-module project** approach.
 
-| Layer   |      Package      |  Depends on |
-|----------|:-------------:|------:|
-| domain |  ro.dragomiralin.ecommerce.domain | - |
-| boot |    ro.dragomiralin.ecommerce.boot   |   domain |
-| infra:persistence |    ro.dragomiralin.ecommerce.infra.persistence   |   domain |
-| infra:api:rest |    ro.dragomiralin.ecommerce.infra.api.rest   |   api, domain |
+| Layer      |                   Module                    |                     Depends on |
+|------------|:-------------------------------------------:|-------------------------------:|
+| domain     |      ro.dragomiralin.ecommerce.domain       |                              - |
+| boot       |       ro.dragomiralin.ecommerce.boot        | domain, repository, controller |
+| repository | ro.dragomiralin.ecommerce.infra.persistence |                         domain |
+| controller |  ro.dragomiralin.ecommerce.infra.api.rest   |                    api, domain |
 
-#### Unit tests for software architecture
-ArchUnit is a library for testing the code architecture of Java projects using simple unit tests.
 
