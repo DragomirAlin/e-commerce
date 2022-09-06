@@ -12,7 +12,7 @@ public interface PaymentPort {
 
     Optional<PaymentDO> findById(long id);
 
-    boolean delete(long id);
+    void delete(long id);
 
     PageDO<PaymentDO> list(int page, int size);
 
