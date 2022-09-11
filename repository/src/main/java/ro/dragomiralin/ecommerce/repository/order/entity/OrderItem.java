@@ -26,11 +26,11 @@ public class OrderItem {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @OneToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JoinColumn(name = "product_id")
     private Product product;
 }
 

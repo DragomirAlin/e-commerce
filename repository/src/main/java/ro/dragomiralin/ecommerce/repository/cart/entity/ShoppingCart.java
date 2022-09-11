@@ -20,6 +20,6 @@ public class ShoppingCart {
     @Column(name = "id")
     private Long id;
 
-    @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "shoppingCart", fetch = FetchType.LAZY)
     private List<ShoppingCartItem> cartItems;
 }

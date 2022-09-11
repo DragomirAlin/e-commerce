@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 @Data
 @Entity
-@Table(name = "payment")
+@Table(name = "payments")
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -26,10 +26,8 @@ public class Payment {
 
     private PaymentCurrency currency;
 
-    @JoinColumn(name = "py_order")
-    @OneToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "order_id")
     private Order order;
-
-
 
 }
