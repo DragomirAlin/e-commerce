@@ -5,3 +5,16 @@ spring:
         jwt:
           issuerUri: http://localhost:8083/auth/realms/master
           jwkSetUri: http://localhost:8083/auth/realms/master/protocol/openid-connect/certs
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecommerce
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: postgres
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false

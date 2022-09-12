@@ -1,8 +1,12 @@
-FROM openjdk:latest
+FROM openjdk:17-bullseye
 
-COPY target/*.jar /srv/
-COPY src/main/resources/application.yml /srv/config/
+WORKDIR /app
+
+RUN echo $(ls -1)
+
+COPY /boot/target/*.jar /srv/
+COPY /boot/src/main/resources/application.yml /srv/config/
 
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","/srv/ecommerce-0.0.1-SNAPSHOT.jar", "--spring.config.location=file:/srv/config/application.yml"]
+ENTRYPOINT ["java","-jar","/srv/boot-0.0.1-SNAPSHOT.jar", "--spring.config.location=file:/srv/config/application.yml"]
