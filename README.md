@@ -1,12 +1,15 @@
-![shop](.documentation/img/online-shop.png)
+# E-Commerce
+![build](https://img.shields.io/github/workflow/status/dragomiralin/e-commerce/ECommerce%20CI?style=plastic)
+![issues](https://img.shields.io/github/issues/dragomiralin/e-commerce)
+![last commit](https://img.shields.io/github/last-commit/dragomiralin/e-commerce)
 
-## E-Commerce
 :dancers: Hands-On with Spring JPA, Hibernate, Transactions, SQL
 
+![shop](.documentation/img/online-shop.png)
 
-```bash
-Another E-Commerce Application
-```
+## Documentation
+The E-Commerce documentation can be found [.documentation](https://github.com/DragomirAlin/e-commerce/tree/main/.documentation)
+
 
 ### Objectives:
 - Apply best practices
