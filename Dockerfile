@@ -2,8 +2,6 @@ FROM openjdk:17-bullseye
 
 WORKDIR /app
 
-RUN echo $(ls -1)
-
 COPY /boot/target/*.jar /srv/
 COPY /boot/src/main/resources/application.yml /srv/config/
 
