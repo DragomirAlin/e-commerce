@@ -1,23 +1,21 @@
 package ro.dragomiralin.ecommerce.repository.product.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import ro.dragomiralin.ecommerce.repository.category.entity.Category;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-@Data
-@Builder
 @Entity
-@Table(name = "products")
-@RequiredArgsConstructor
-@AllArgsConstructor
+@Table
+@Getter
+@Setter
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +26,15 @@ public class Product {
     private BigDecimal price;
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
+                    CascadeType.MERGE,
+                    CascadeType.DETACH,
+                    CascadeType.REFRESH,
+                    CascadeType.REMOVE,
             })
     @JoinTable(name = "products_categories", joinColumns = {
             @JoinColumn(name = "product_id", referencedColumnName = "id")}, inverseJoinColumns = {
             @JoinColumn(name = "category_id", referencedColumnName = "id")})
-    private Set<Category> categories = new HashSet<>();
+    @ToString.Exclude
+    private List<Category> categories;
 }
+

@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Builder
@@ -14,5 +14,5 @@ import java.util.Set;
 public class CategoryDTO {
     private Long id;
     private String name;
-    private Set<ProductDTO> products;
+    private List<ProductDTO> products;
 }

@@ -1,22 +1,20 @@
 package ro.dragomiralin.ecommerce.repository.category.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import ro.dragomiralin.ecommerce.repository.product.entity.Product;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-@Data
 @Entity
-@Table(name = "categories")
+@Table
+@Getter
+@Setter
+@ToString
 @Builder
-@RequiredArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,13 +23,8 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
-            mappedBy = "categories")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
     @JsonIgnore
-    private Set<Product> products = new HashSet<>();
+    private List<Product> products;
 
 }

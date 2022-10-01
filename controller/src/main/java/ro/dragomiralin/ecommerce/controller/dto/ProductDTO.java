@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Builder
@@ -17,5 +17,5 @@ public class ProductDTO {
     private String name;
     private String description;
     private BigDecimal price;
-    private Set<CategoryDTO> categories;
+    private List<CategoryDTO> categories;
 }

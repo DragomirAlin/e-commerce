@@ -8,14 +8,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @EnableWebMvc
-@ComponentScan(basePackages = "ro.dragomiralin.ecommerce.*")
+@ComponentScan(basePackages = {"ro.dragomiralin.ecommerce.*"})
 @EnableJpaRepositories(basePackages = "ro.dragomiralin.ecommerce.repository.*")
-@EntityScan("ro.dragomiralin.ecommerce.repository.*")
+@EntityScan(basePackages ={"ro.dragomiralin.ecommerce.repository.*"})
 @SpringBootApplication
 public class ECommerceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ECommerceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ECommerceApplication.class, args);
+    }
 
 }

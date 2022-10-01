@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import ro.dragomiralin.ecommerce.domain.category.domain.CategoryDO;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Builder
@@ -18,5 +18,5 @@ public class ProductDO {
     private String name;
     private String description;
     private BigDecimal price;
-    private Set<CategoryDO> categories;
+    private List<CategoryDO> categories;
 }

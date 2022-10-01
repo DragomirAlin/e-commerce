@@ -22,15 +22,14 @@ import ro.dragomiralin.ecommerce.domain.common.error.ResourceNotFoundException;
 import ro.dragomiralin.ecommerce.domain.product.error.ProductNotFoundException;
 import ro.dragomiralin.ecommerce.domain.user.error.UserAlreadyExistsException;
 
-import javax.validation.ConstraintViolation;
 import javax.validation.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @Order(Ordered.HIGHEST_PRECEDENCE)
-@RestControllerAdvice
-public class GlobalExceptionHandler {
+@RestControllerAdvice(basePackages = "ro.dragomiralin.ecommerce.boot.advice")
+public class GlobalControllerAdvice {
 
     @ExceptionHandler({ConstraintViolationException.class, PSQLException.class, DataIntegrityViolationException.class})
     public ResponseEntity<CustomResponse> handle(Exception e) {
@@ -101,5 +100,4 @@ public class GlobalExceptionHandler {
         }
 
     }
-
 }
