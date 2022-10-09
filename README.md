@@ -5,6 +5,7 @@
 ![last commit](https://img.shields.io/github/last-commit/dragomiralin/e-commerce)
 
 Another E-Commerce project used to learn and practice a wide range of best practices and tools.
+
 :dancers: Hands-On with Spring JPA, Hibernate, Transactions, SQL
 
 ![shop](.documentation/img/online-shop.png)
@@ -36,15 +37,20 @@ The provided services are:
 ## Planning
 I'm going to build a monolithic application with Hexagonal Architecture, and then I'm going to split it into
 microservices.
-Detailed planning can be found here [Planning](./documentation/planning.md)
-[E-Commerce Kanban](https://github.com/DragomirAlin/spring-transactions/projects/1)
+Detailed planning can be found here:
+- [Planning](./documentation/planning.md)
+- [E-Commerce Kanban](https://github.com/DragomirAlin/spring-transactions/projects/1)
 
 
 ### Data Model
 [E-Commerce Data Model](./documentation/dbdiagram.md)
 
 ### References and further reading
-- [Transaction Management](https://docs.spring.io/spring-framework/docs/4.2.x/spring-framework-reference/html/transaction.html#:~:text=The%20Spring%20Framework%20provides%20a,Java%20Data%20Objects%20(JDO).)
+#### Architecture & Design
 - [https://microservices.io/](https://microservices.io/)
 - [https://12factor.net/](https://12factor.net/)
+
+#### Persistence
+- [Transaction Management](https://docs.spring.io/spring-framework/docs/4.2.x/spring-framework-reference/html/transaction.html#:~:text=The%20Spring%20Framework%20provides%20a,Java%20Data%20Objects%20(JDO).)
+
 
