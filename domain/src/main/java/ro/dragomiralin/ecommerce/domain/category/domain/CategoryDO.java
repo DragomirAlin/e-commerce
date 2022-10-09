@@ -1,5 +1,6 @@
 package ro.dragomiralin.ecommerce.domain.category.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,5 +16,6 @@ import java.util.List;
 public class CategoryDO {
     private Long id;
     private String name;
+    @JsonIgnore
     private List<ProductDO> products;
 }

@@ -12,7 +12,7 @@ import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 import java.util.List;
 
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {CategoryDTOMapper.class})
 public interface ProductDTOMapper {
 
     @Mapping(target = "categories", source = "categs")
