@@ -1,7 +1,9 @@
 package ro.dragomiralin.ecommerce.repository.order.adapter;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import ro.dragomiralin.ecommerce.domain.cart.domain.ShoppingCartItemDO;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
 import ro.dragomiralin.ecommerce.domain.order.port.OrderPort;
@@ -19,26 +21,32 @@ public class OrderAdapter implements OrderPort {
 
     @Override
     public long save(OrderDO orderDO) {
-        return 0;
+        var order = mapper.toOrder(orderDO);
+        return orderRepository.save(order).getId();
     }
 
     @Override
     public Optional<OrderDO> findById(long id) {
-        return Optional.empty();
+        return orderRepository.findById(id)
+                .map(mapper::toOrderDO);
     }
 
     @Override
-    public boolean delete(long id) {
-        return false;
+    public void delete(long id) {
+        orderRepository.deleteById(id);
     }
 
     @Override
     public PageDO<OrderDO> list(int page, int size) {
-        return null;
+        var orders = orderRepository.findAll(PageRequest.of(page, size));
+        return mapper.toPageDO(orders);
     }
 
     @Override
     public List<OrderDO> list() {
-        return null;
+        return orderRepository.findAll()
+                .stream()
+                .map(mapper::toOrderDO)
+                .toList();
     }
 }

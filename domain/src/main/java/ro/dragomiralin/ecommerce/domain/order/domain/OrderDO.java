@@ -19,8 +19,7 @@ public class OrderDO {
     private OrderDOStatus status;
     private Date orderedDate;
     private List<OrderDOItem> orderItems;
-    @JsonIgnore
-    private UserDO user;
+    private long userId;
     private String customerComments;
 
 }

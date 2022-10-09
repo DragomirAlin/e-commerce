@@ -1,5 +1,6 @@
 package ro.dragomiralin.ecommerce.domain.order.port;
 
+import ro.dragomiralin.ecommerce.domain.cart.domain.ShoppingCartItemDO;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
 
@@ -12,7 +13,7 @@ public interface OrderPort {
 
     Optional<OrderDO> findById(long id);
 
-    boolean delete(long id);
+    void delete(long id);
 
     PageDO<OrderDO> list(int page, int size);
 

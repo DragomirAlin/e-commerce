@@ -1,6 +1,6 @@
 package ro.dragomiralin.ecommerce.domain.cart.port;
 
-import ro.dragomiralin.ecommerce.domain.cart.domain.ShoppingCartDO;
+import ro.dragomiralin.ecommerce.domain.cart.domain.ShoppingCartItemDO;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 
 import java.util.List;
@@ -8,13 +8,16 @@ import java.util.Optional;
 
 public interface ShoppingCartPort {
 
-    long save(ShoppingCartDO shoppingCartDO);
+    long save(ShoppingCartItemDO shoppingCartItemDO);
 
-    Optional<ShoppingCartDO> findById(long id);
+    Optional<ShoppingCartItemDO> findById(long id);
 
-    boolean delete(long id);
+    Optional<ShoppingCartItemDO> findByIdAndUserId(long userId, long id);
 
-    PageDO<ShoppingCartDO> list(int page, int size);
+    void delete(long id);
 
-    List<ShoppingCartDO> list();
+    PageDO<ShoppingCartItemDO> list(long userId, int page, int size);
+
+    List<ShoppingCartItemDO> list(long userId);
+
 }

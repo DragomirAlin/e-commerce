@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import ro.dragomiralin.ecommerce.repository.product.entity.Product;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@Table(name = "shopping_cart")
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -19,11 +19,13 @@ public class ShoppingCartItem {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    private Product product;
+    @Column(name = "user_id")
+    private String userId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id")
-    private ShoppingCart shoppingCart;
+    @Column(name = "product_id")
+    private String productId;
+
+    @Column(name = "quantity")
+    private Integer quantity;
+
 }

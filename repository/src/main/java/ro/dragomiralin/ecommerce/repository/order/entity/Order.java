@@ -32,10 +32,7 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderItem> items;
 
-    @OneToOne
-    @JsonIgnore
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Long userId;
 
     @Column(name = "customer_comments")
     private String customerComments;
