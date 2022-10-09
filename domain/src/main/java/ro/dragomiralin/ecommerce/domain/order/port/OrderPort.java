@@ -13,9 +13,13 @@ public interface OrderPort {
 
     Optional<OrderDO> findById(long id);
 
+    Optional<OrderDO> findById(long userId, long id);
+
+    OrderDO update(OrderDO orderDO);
+
     void delete(long id);
 
-    PageDO<OrderDO> list(int page, int size);
+    PageDO<OrderDO> list(long userId, int page, int size);
 
-    List<OrderDO> list();
+    List<OrderDO> list(long userId);
 }

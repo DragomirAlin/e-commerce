@@ -1,9 +1,11 @@
-package ro.dragomiralin.ecommerce.domain.order.domain;
+package ro.dragomiralin.ecommerce.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import ro.dragomiralin.ecommerce.domain.order.domain.OrderItemDO;
+import ro.dragomiralin.ecommerce.domain.order.domain.OrderDOStatus;
 
 import java.util.Date;
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.List;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class OrderDO {
+public class OrderDTO {
     private Long id;
     private OrderDOStatus status;
     private Date orderedDate;

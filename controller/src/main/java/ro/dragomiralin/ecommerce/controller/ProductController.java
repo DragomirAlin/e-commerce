@@ -18,7 +18,7 @@ public class ProductController {
     private final ProductDTOMapper mapper;
     private final ProductService productService;
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<CustomResponse<List<ProductDTO>>> list(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "50") int size) {
         var productsPageDO = productService.list(page, size);
         var productsPageDTO = mapper.toPageDTO(productsPageDO);

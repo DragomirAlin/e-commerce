@@ -2,23 +2,30 @@ package ro.dragomiralin.ecommerce.domain.cart.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ro.dragomiralin.ecommerce.domain.cart.ShoppingCartService;
+import ro.dragomiralin.ecommerce.domain.cart.ShoppingCartItemService;
 import ro.dragomiralin.ecommerce.domain.cart.domain.ShoppingCartItemDO;
 import ro.dragomiralin.ecommerce.domain.cart.port.ShoppingCartPort;
 import ro.dragomiralin.ecommerce.domain.common.error.ShoppingCartItemException;
+import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.order.OrderService;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ShoppingCartServiceImpl implements ShoppingCartService {
+public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     private final OrderService orderService;
     private final ShoppingCartPort shoppingCartPort;
 
     @Override
-    public long create(ShoppingCartItemDO shoppingCartItemDO) {
-        return shoppingCartPort.save(shoppingCartItemDO);
+    public long create(long userId, ShoppingCartItemDO shoppingCartItemDO) {
+        var req = ShoppingCartItemDO.builder()
+                .userId(userId)
+                .productId(shoppingCartItemDO.getProductId())
+                .quantity(shoppingCartItemDO.getQuantity())
+                .build();
+
+        return shoppingCartPort.save(req);
     }
 
     @Override
@@ -43,6 +50,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
+    public PageDO<ShoppingCartItemDO> list(long userId, int page, int size) {
+        return shoppingCartPort.list(userId, page, size);
+    }
+
+    @Override
     public List<ShoppingCartItemDO> list(long userId) {
         return shoppingCartPort.list(userId);
     }
@@ -58,6 +70,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void checkout(long userId) {
-        orderService.checkout(shoppingCartPort.list(userId));
+        var shoppingCartItems = list(userId);
+        orderService.checkout(userId, shoppingCartItems);
+        shoppingCartItems
+                .forEach(shoppingCartItem -> shoppingCartPort.delete(shoppingCartItem.getId()));
     }
 }

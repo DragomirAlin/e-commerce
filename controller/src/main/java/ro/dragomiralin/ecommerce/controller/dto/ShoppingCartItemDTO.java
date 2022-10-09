@@ -1,4 +1,4 @@
-package ro.dragomiralin.ecommerce.domain.cart.domain;
+package ro.dragomiralin.ecommerce.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class ShoppingCartItemDO {
+public class ShoppingCartItemDTO {
     private Long id;
     private Long userId;
     private Long productId;

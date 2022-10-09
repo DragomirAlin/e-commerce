@@ -33,7 +33,7 @@ public class ShoppingCartItemAdapter implements ShoppingCartPort {
 
     @Override
     public Optional<ShoppingCartItemDO> findByIdAndUserId(long userId, long id) {
-        return shoppingCartRepository.findByIdAndUserId(id, userId)
+        return shoppingCartRepository.findByIdAndUserId(userId, id)
                 .map(mapper::toShoppingCartItemDO);
     }
 

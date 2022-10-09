@@ -32,19 +32,31 @@ public class OrderAdapter implements OrderPort {
     }
 
     @Override
+    public Optional<OrderDO> findById(long userId, long id) {
+        return orderRepository.findByUserIdAndId(userId, id)
+                .map(mapper::toOrderDO);
+    }
+
+    @Override
+    public OrderDO update(OrderDO orderDO) {
+        var order = mapper.toOrder(orderDO);
+        return mapper.toOrderDO(orderRepository.save(order));
+    }
+
+    @Override
     public void delete(long id) {
         orderRepository.deleteById(id);
     }
 
     @Override
-    public PageDO<OrderDO> list(int page, int size) {
-        var orders = orderRepository.findAll(PageRequest.of(page, size));
+    public PageDO<OrderDO> list(long userId, int page, int size) {
+        var orders = orderRepository.findAllByUserId(userId, PageRequest.of(page, size));
         return mapper.toPageDO(orders);
     }
 
     @Override
-    public List<OrderDO> list() {
-        return orderRepository.findAll()
+    public List<OrderDO> list(long userId) {
+        return orderRepository.findAllByUserId(userId)
                 .stream()
                 .map(mapper::toOrderDO)
                 .toList();

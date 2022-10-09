@@ -1,18 +1,17 @@
-package ro.dragomiralin.ecommerce.domain.order.domain;
+package ro.dragomiralin.ecommerce.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 
 @Data
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class OrderDOItem {
+public class OrderItemDTO {
     private Long id;
     private int quantity;
-    private OrderDO order;
-    private ProductDO product;
+    private OrderDTO order;
+    private ProductDTO product;
 }
