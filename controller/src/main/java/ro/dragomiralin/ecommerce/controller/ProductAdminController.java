@@ -3,17 +3,20 @@ package ro.dragomiralin.ecommerce.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ro.dragomiralin.ecommerce.controller.dto.Roles;
 import ro.dragomiralin.ecommerce.controller.mapper.ProductDTOMapper;
 import ro.dragomiralin.ecommerce.controller.request.CustomResponse;
 import ro.dragomiralin.ecommerce.controller.request.ProductCreateReq;
 import ro.dragomiralin.ecommerce.domain.category.CategoryService;
 import ro.dragomiralin.ecommerce.domain.product.ProductService;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/admin/product")
 @RequiredArgsConstructor
+@RolesAllowed(Roles.ADMIN_ROLE)
 public class ProductAdminController {
     private final ProductService productService;
     private final CategoryService categoryService;
