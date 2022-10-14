@@ -11,7 +11,7 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
   keycloak:
-    image: jboss/keycloak:latest
+    image: wizzn/keycloak:14
     restart: on-failure
     command:
       - "-b"
