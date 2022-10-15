@@ -11,7 +11,7 @@ import ro.dragomiralin.ecommerce.domain.category.CategoryService;
 @RestController
 @RequestMapping("/admin/category")
 @RequiredArgsConstructor
-public class CategoryAdminController {
+public class  CategoryAdminController {
     private final CategoryDTOMapper mapper;
     private final CategoryService categoryService;
 

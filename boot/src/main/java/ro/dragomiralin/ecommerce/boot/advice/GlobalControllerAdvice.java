@@ -13,6 +13,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -28,14 +29,24 @@ import java.util.List;
 
 @Slf4j
 @Order(Ordered.HIGHEST_PRECEDENCE)
-@RestControllerAdvice(basePackages = "ro.dragomiralin.ecommerce.boot.advice")
+@RestControllerAdvice
 public class GlobalControllerAdvice {
+
+    @ExceptionHandler({AccessDeniedException.class})
+    public ResponseEntity<CustomResponse> handleAccessDeniedException(AccessDeniedException ex) {
+        var error = ErrorItem.builder()
+                .code(HttpStatus.FORBIDDEN.value())
+                .message(ex.getMessage())
+                .build();
+
+        return new ResponseEntity<>(CustomResponse.error(error), HttpStatus.FORBIDDEN);
+    }
 
     @ExceptionHandler({ConstraintViolationException.class, PSQLException.class, DataIntegrityViolationException.class})
     public ResponseEntity<CustomResponse> handle(Exception e) {
         ErrorItem error = ErrorItem.builder()
                 .code(400)
-                .message(e.getCause().getMessage())
+                .message(e.getMessage())
                 .build();
         return new ResponseEntity<>(CustomResponse.error(error), HttpStatus.BAD_REQUEST);
     }

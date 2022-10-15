@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/admin/product")
 @RequiredArgsConstructor
-@RolesAllowed(Roles.ADMIN_ROLE)
 public class ProductAdminController {
     private final ProductService productService;
     private final CategoryService categoryService;

@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.util.Assert;
 import ro.dragomiralin.ecommerce.controller.dto.ListResponse;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomResponse<T> {
     private T data;
-    private Object errors;
+    private Object error;
     private Redirect redirect;
     private Paging paging;
 
@@ -55,7 +54,7 @@ public class CustomResponse<T> {
 
     public static CustomResponse error(Object errorObject) {
         CustomResponse customHttpResponse = new CustomResponse();
-        customHttpResponse.setErrors(errorObject);
+        customHttpResponse.setError(errorObject);
         return customHttpResponse;
     }
 

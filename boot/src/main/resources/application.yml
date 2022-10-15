@@ -1,10 +1,4 @@
 spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuerUri: http://localhost:8083/auth/realms/master
-          jwkSetUri: http://localhost:8083/auth/realms/master/protocol/openid-connect/certs
   datasource:
     url: jdbc:postgresql://localhost:5432/ecommerce
     username: postgres
@@ -17,4 +11,13 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: false
+    show-sql: true
+
+keycloak:
+  enabled: true
+  realm: master
+  auth-server-url: http://localhost:8083/auth
+  ssl-required: external
+  resource: ecommerce
+  use-resource-role-mappings: true
+  enable-basic-auth: true
