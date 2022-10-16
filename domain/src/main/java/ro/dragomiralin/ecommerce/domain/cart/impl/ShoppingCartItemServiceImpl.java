@@ -8,6 +8,7 @@ import ro.dragomiralin.ecommerce.domain.cart.port.ShoppingCartPort;
 import ro.dragomiralin.ecommerce.domain.common.error.ShoppingCartItemException;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.order.OrderService;
+import ro.dragomiralin.ecommerce.domain.product.ProductService;
 
 import java.util.List;
 
@@ -16,12 +17,15 @@ import java.util.List;
 public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     private final OrderService orderService;
     private final ShoppingCartPort shoppingCartPort;
+    private final ProductService productService;
 
     @Override
     public long create(long userId, ShoppingCartItemDO shoppingCartItemDO) {
+        var product = productService.get(shoppingCartItemDO.getProductId());
+
         var req = ShoppingCartItemDO.builder()
                 .userId(userId)
-                .productId(shoppingCartItemDO.getProductId())
+                .productId(product.getId())
                 .quantity(shoppingCartItemDO.getQuantity())
                 .build();
 

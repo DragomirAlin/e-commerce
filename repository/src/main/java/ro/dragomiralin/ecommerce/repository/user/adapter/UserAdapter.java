@@ -33,4 +33,10 @@ public class UserAdapter implements UserPort {
         return userRepository.findByEmail(email)
                 .map(mapper::toUserDO);
     }
+
+    @Override
+    public Optional<UserDO> findBySub(String sub) {
+        return userRepository.findBySub(sub)
+                .map(mapper::toUserDO);
+    }
 }

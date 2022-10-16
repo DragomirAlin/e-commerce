@@ -8,4 +8,6 @@ import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 public interface UserDTOMapper {
 
     UserDTO toUserDTO(UserDO userDO);
+
+    UserDO toUserDO(UserDTO userDTO);
 }

@@ -9,6 +9,7 @@ import ro.dragomiralin.ecommerce.controller.dto.ListResponse;
 import ro.dragomiralin.ecommerce.controller.dto.ShoppingCartItemDTO;
 import ro.dragomiralin.ecommerce.controller.dto.UserDTO;
 import ro.dragomiralin.ecommerce.controller.mapper.ShoppingCartItemDTOMapper;
+import ro.dragomiralin.ecommerce.controller.request.CreateShoppingCartItem;
 import ro.dragomiralin.ecommerce.controller.request.CustomResponse;
 import ro.dragomiralin.ecommerce.domain.cart.ShoppingCartItemService;
 
@@ -22,8 +23,8 @@ public class ShoppingCartItemController {
     private final ShoppingCartItemService shoppingCartItemService;
 
     @PostMapping
-    public ResponseEntity<CustomResponse<Long>> create(@AuthenticationPrincipal UserDTO userDTO, @RequestBody ShoppingCartItemDTO shoppingCartItemDTO) {
-        var cart = shoppingCartItemService.create(userDTO.getId(), mapper.toShoppingCartItemDO(shoppingCartItemDTO));
+    public ResponseEntity<CustomResponse<Long>> create(@AuthenticationPrincipal UserDTO userDTO, @RequestBody CreateShoppingCartItem createShoppingCartItem) {
+        var cart = shoppingCartItemService.create(userDTO.getId(), mapper.toShoppingCartItemDO(createShoppingCartItem));
         return ResponseEntity.ok(CustomResponse.single(cart));
     }
 

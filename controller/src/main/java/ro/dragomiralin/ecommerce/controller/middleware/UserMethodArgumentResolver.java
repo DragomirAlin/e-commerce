@@ -1,7 +1,6 @@
 package ro.dragomiralin.ecommerce.controller.middleware;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationContext;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -11,7 +10,7 @@ import ro.dragomiralin.ecommerce.controller.dto.UserDTO;
 
 @RequiredArgsConstructor
 public class UserMethodArgumentResolver implements HandlerMethodArgumentResolver {
-    private final ApplicationContext context;
+    private final UserResolver resolver;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -20,7 +19,6 @@ public class UserMethodArgumentResolver implements HandlerMethodArgumentResolver
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-        var resolver = context.getBean(UserResolver.class);
         return resolver.getUser();
     }
 }

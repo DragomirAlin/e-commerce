@@ -3,6 +3,7 @@ package ro.dragomiralin.ecommerce.domain.user.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ro.dragomiralin.ecommerce.domain.common.error.ResourceNotFoundException;
 import ro.dragomiralin.ecommerce.domain.user.UserService;
 import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 import ro.dragomiralin.ecommerce.domain.user.error.UserAlreadyExistsException;
@@ -18,11 +19,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public long create(UserDO user) {
-        userPort.findByEmail(user.getEmail()).ifPresent(u -> {
-            throw new UserAlreadyExistsException("User with email " + u.getEmail() + " already exists");
-        });
-
         return userPort.create(user);
+    }
+
+    @Override
+    public UserDO get(long id) {
+        return findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
     }
 
     @Override
@@ -37,6 +40,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<UserDO> findBySub(String sub) {
-        return Optional.empty();
+        return userPort.findBySub(sub);
     }
 }

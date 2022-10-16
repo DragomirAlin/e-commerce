@@ -9,6 +9,8 @@ public interface UserService {
 
     long create(UserDO userDO);
 
+    UserDO get(long id);
+
     Optional<UserDO> findById(long id);
 
     Optional<UserDO> findByEmail(String email);

@@ -14,8 +14,6 @@ import ro.dragomiralin.ecommerce.boot.ECommerceApplication;
 import ro.dragomiralin.ecommerce.controller.dto.UserDTO;
 import ro.dragomiralin.ecommerce.controller.middleware.UserResolver;
 
-import java.util.UUID;
-
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 
@@ -28,6 +26,7 @@ public class BaseIntegrationTest {
     protected MockMvc mockMvc;
     @MockBean
     protected UserResolver userResolver;
+
     @Container
     protected static final PostgreSQLContainer DB = PostgresqlSingletonContainer.INSTANCE.getContainer();
 
@@ -37,9 +36,13 @@ public class BaseIntegrationTest {
                 .webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
+    }
 
+    @Before
+    public void mockUserResolver() {
         when(userResolver.getUser()).thenReturn(UserDTO.builder()
-                .sub(UUID.randomUUID().toString())
+                .id(1L)
                 .build());
     }
+
 }

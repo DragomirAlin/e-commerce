@@ -2,15 +2,15 @@ package ro.dragomiralin.ecommerce.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import ro.dragomiralin.ecommerce.controller.dto.Roles;
+import ro.dragomiralin.ecommerce.controller.dto.UserDTO;
 import ro.dragomiralin.ecommerce.controller.mapper.ProductDTOMapper;
 import ro.dragomiralin.ecommerce.controller.request.CustomResponse;
 import ro.dragomiralin.ecommerce.controller.request.ProductCreateReq;
 import ro.dragomiralin.ecommerce.domain.category.CategoryService;
 import ro.dragomiralin.ecommerce.domain.product.ProductService;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.stream.Collectors;
 
 @RestController
@@ -22,7 +22,7 @@ public class ProductAdminController {
     private final ProductDTOMapper productMapper;
 
     @PostMapping
-    public ResponseEntity<CustomResponse<Long>> add(@RequestBody ProductCreateReq productCreateReq) {
+    public ResponseEntity<CustomResponse<Long>> add(@AuthenticationPrincipal UserDTO userDTO, @RequestBody ProductCreateReq productCreateReq) {
         var categories = productCreateReq.getCategories().stream()
                 .map(categoryService::get)
                 .collect(Collectors.toList());
@@ -32,7 +32,7 @@ public class ProductAdminController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CustomResponse<Void>> delete(@PathVariable long id) {
+    public ResponseEntity<CustomResponse<Void>> delete(@AuthenticationPrincipal UserDTO userDTO, @PathVariable long id) {
         productService.delete(id);
         return ResponseEntity.ok(CustomResponse.empty());
     }
