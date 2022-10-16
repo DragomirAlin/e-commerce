@@ -20,7 +20,7 @@ public class CategoryController {
     private final CategoryDTOMapper mapper;
     private final CategoryService categoryService;
 
-    @GetMapping("/list")
+    @GetMapping
     public ResponseEntity<CustomResponse<List<CategoryDTO>>> list(@AuthenticationPrincipal UserDTO userDTO, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         var categoriesPageDO = categoryService.list(page, size);
         var categoriesPageDTO = mapper.toPageDTO(categoriesPageDO);
