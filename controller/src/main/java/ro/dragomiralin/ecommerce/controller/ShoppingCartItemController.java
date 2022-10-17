@@ -29,8 +29,8 @@ public class ShoppingCartItemController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomResponse<ShoppingCartItemDTO>> get(@AuthenticationPrincipal UserDTO userDTO, @RequestBody long id) {
-        var cart = shoppingCartItemService.get(userDTO.getId(), id);
+    public ResponseEntity<CustomResponse<ShoppingCartItemDTO>> get(@AuthenticationPrincipal UserDTO userDTO, @PathVariable long id) {
+        var cart = shoppingCartItemService.get(id, userDTO.getId());
         return ResponseEntity.ok(CustomResponse.single(mapper.toShoppingCartItemDTO(cart)));
     }
 
@@ -42,7 +42,7 @@ public class ShoppingCartItemController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CustomResponse<Void>> delete(@AuthenticationPrincipal UserDTO userDTO, @RequestBody long id) {
+    public ResponseEntity<CustomResponse<Void>> delete(@AuthenticationPrincipal UserDTO userDTO, @PathVariable long id) {
         shoppingCartItemService.delete(userDTO.getId(), id);
         return ResponseEntity.ok(CustomResponse.empty());
     }

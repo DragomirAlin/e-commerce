@@ -12,7 +12,7 @@ public interface ShoppingCartPort {
 
     Optional<ShoppingCartItemDO> findById(long id);
 
-    Optional<ShoppingCartItemDO> findByIdAndUserId(long userId, long id);
+    Optional<ShoppingCartItemDO> findByIdAndUserId(long id, long userId);
 
     void delete(long id);
 

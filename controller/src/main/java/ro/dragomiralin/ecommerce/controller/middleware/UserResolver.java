@@ -33,6 +33,7 @@ public class UserResolver {
                     });
         }
 
+        // Testing use case
         if (springAuth instanceof UsernamePasswordAuthenticationToken) {
             UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) springAuth;
             return UserDTO.builder()

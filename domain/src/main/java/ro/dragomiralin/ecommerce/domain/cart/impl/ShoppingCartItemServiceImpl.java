@@ -39,7 +39,7 @@ public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     }
 
     @Override
-    public ShoppingCartItemDO get(long userId, long id) {
+    public ShoppingCartItemDO get(long id, long userId) {
         return shoppingCartPort.findByIdAndUserId(id, userId)
                 .orElseThrow(() -> new ShoppingCartItemException("Shopping cart not found"));
     }

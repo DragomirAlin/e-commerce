@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import ro.dragomiralin.ecommerce.domain.common.error.ResourceNotFoundException;
 import ro.dragomiralin.ecommerce.domain.user.UserService;
 import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
-import ro.dragomiralin.ecommerce.domain.user.error.UserAlreadyExistsException;
 import ro.dragomiralin.ecommerce.domain.user.port.UserPort;
 
 import java.util.Optional;

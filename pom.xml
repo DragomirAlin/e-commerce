@@ -30,6 +30,7 @@
         <testcontainers.version>1.17.3</testcontainers.version>
         <keycloak.version>19.0.3</keycloak.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
+        <net.datafaker.version>1.6.0</net.datafaker.version>
     </properties>
     <dependencies>
         <!-- Test -->
@@ -61,6 +62,11 @@
             <groupId>com.google.truth</groupId>
             <artifactId>truth</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>${net.datafaker.version}</version>
         </dependency>
         <!-- Test -->
 

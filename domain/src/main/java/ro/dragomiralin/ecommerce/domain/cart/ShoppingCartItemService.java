@@ -11,7 +11,7 @@ public interface ShoppingCartItemService {
 
     ShoppingCartItemDO get(long id);
 
-    ShoppingCartItemDO get(long userId, long id);
+    ShoppingCartItemDO get(long id, long userId);
 
     ShoppingCartItemDO update(ShoppingCartItemDO shoppingCartItemDO);
 

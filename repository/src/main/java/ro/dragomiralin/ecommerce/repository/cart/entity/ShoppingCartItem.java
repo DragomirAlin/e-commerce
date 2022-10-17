@@ -20,7 +20,7 @@ public class ShoppingCartItem {
     private Long id;
 
     @Column(name = "user_id")
-    private String userId;
+    private Long userId;
 
     @Column(name = "product_id")
     private String productId;

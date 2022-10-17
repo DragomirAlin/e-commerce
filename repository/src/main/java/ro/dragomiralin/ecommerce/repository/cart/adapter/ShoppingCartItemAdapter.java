@@ -32,8 +32,8 @@ public class ShoppingCartItemAdapter implements ShoppingCartPort {
     }
 
     @Override
-    public Optional<ShoppingCartItemDO> findByIdAndUserId(long userId, long id) {
-        return shoppingCartRepository.findByIdAndUserId(userId, id)
+    public Optional<ShoppingCartItemDO> findByIdAndUserId(long id, long userId) {
+        return shoppingCartRepository.findByIdAndUserId(id, userId)
                 .map(mapper::toShoppingCartItemDO);
     }
 
