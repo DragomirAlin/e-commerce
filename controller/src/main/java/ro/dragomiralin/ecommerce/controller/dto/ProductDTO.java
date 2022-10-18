@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class ProductDTO {
-    private long id;
+    private Long id;
     private String name;
     private String description;
     private BigDecimal price;

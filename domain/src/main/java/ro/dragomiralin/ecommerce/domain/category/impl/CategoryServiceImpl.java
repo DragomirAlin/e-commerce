@@ -19,18 +19,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDO get(long id) {
+    public CategoryDO get(Long id) {
         return categoryPort.get(id)
                 .orElseThrow(() -> new CategoryNotFoundException("Category not found"));
     }
 
     @Override
-    public long add(CategoryDO category) {
+    public Long add(CategoryDO category) {
         return categoryPort.save(category);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
         var category = get(id);
         categoryPort.delete(category.getId());
     }

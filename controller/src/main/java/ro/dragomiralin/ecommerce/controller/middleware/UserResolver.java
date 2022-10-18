@@ -10,6 +10,8 @@ import ro.dragomiralin.ecommerce.controller.dto.UserDTO;
 import ro.dragomiralin.ecommerce.controller.mapper.UserDTOMapper;
 import ro.dragomiralin.ecommerce.domain.user.UserService;
 
+import java.util.UUID;
+
 
 @Service
 @AllArgsConstructor
@@ -37,6 +39,7 @@ public class UserResolver {
         if (springAuth instanceof UsernamePasswordAuthenticationToken) {
             UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) springAuth;
             return UserDTO.builder()
+                    .id(1L)
                     .sub(auth.getName())
                     .firstName(auth.getName())
                     .email("test@cc")

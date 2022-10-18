@@ -15,6 +15,6 @@ public class PageDO<T> {
     private int number;
     private int size;
     private int totalPages;
-    private long totalElements;
+    private Long totalElements;
     private List<T> content;
 }

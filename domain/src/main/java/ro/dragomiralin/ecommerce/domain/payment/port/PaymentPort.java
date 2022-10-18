@@ -8,11 +8,11 @@ import java.util.Optional;
 
 public interface PaymentPort {
 
-    long save(PaymentDO paymentDO);
+    Long save(PaymentDO paymentDO);
 
-    Optional<PaymentDO> findById(long id);
+    Optional<PaymentDO> findById(Long id);
 
-    void delete(long id);
+    void delete(Long id);
 
     PageDO<PaymentDO> list(int page, int size);
 

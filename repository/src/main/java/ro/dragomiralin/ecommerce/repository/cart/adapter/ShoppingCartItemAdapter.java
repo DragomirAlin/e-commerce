@@ -20,25 +20,25 @@ public class ShoppingCartItemAdapter implements ShoppingCartPort {
     private final ShoppingCartItemRepository shoppingCartRepository;
 
     @Override
-    public long save(ShoppingCartItemDO shoppingCartItemDO) {
+    public Long save(ShoppingCartItemDO shoppingCartItemDO) {
         var shoppingCartItem = mapper.toShoppingCartItem(shoppingCartItemDO);
         return shoppingCartRepository.save(shoppingCartItem).getId();
     }
 
     @Override
-    public Optional<ShoppingCartItemDO> findById(long id) {
+    public Optional<ShoppingCartItemDO> findById(Long id) {
         return shoppingCartRepository.findById(id)
                 .map(mapper::toShoppingCartItemDO);
     }
 
     @Override
-    public Optional<ShoppingCartItemDO> findByIdAndUserId(long id, long userId) {
+    public Optional<ShoppingCartItemDO> findByIdAndUserId(Long id, Long userId) {
         return shoppingCartRepository.findByIdAndUserId(id, userId)
                 .map(mapper::toShoppingCartItemDO);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
         var cartItem = shoppingCartRepository.findById(id);
 
         cartItem.ifPresentOrElse(shoppingCartRepository::delete, () -> {
@@ -47,14 +47,14 @@ public class ShoppingCartItemAdapter implements ShoppingCartPort {
     }
 
     @Override
-    public PageDO<ShoppingCartItemDO> list(long userId, int page, int size) {
+    public PageDO<ShoppingCartItemDO> list(Long userId, int page, int size) {
         var pageResult = shoppingCartRepository.findAllByUserId(userId, PageRequest.of(page, size));
 
         return mapper.toPageDO(pageResult);
     }
 
     @Override
-    public List<ShoppingCartItemDO> list(long userId) {
+    public List<ShoppingCartItemDO> list(Long userId) {
         return shoppingCartRepository.findAllByUserId(userId)
                 .stream()
                 .map(mapper::toShoppingCartItemDO)

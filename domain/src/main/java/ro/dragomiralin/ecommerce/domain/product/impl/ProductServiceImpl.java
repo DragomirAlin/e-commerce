@@ -19,18 +19,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDO get(long id) {
+    public ProductDO get(Long id) {
         return productPort.get(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found"));
     }
 
     @Override
-    public long add(ProductDO product) {
+    public Long add(ProductDO product) {
         return productPort.save(product);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
         var product = get(id);
         productPort.delete(product.getId());
     }

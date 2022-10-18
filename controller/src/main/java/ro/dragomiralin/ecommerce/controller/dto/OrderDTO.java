@@ -19,6 +19,6 @@ public class OrderDTO {
     private OrderDOStatus status;
     private Date orderedDate;
     private List<OrderItemDO> orderItems;
-    private long userId;
+    private Long userId;
     private String customerComments;
 }

@@ -20,7 +20,7 @@ public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     private final ProductService productService;
 
     @Override
-    public long create(long userId, ShoppingCartItemDO shoppingCartItemDO) {
+    public Long create(Long userId, ShoppingCartItemDO shoppingCartItemDO) {
         var product = productService.get(shoppingCartItemDO.getProductId());
 
         var req = ShoppingCartItemDO.builder()
@@ -33,13 +33,13 @@ public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     }
 
     @Override
-    public ShoppingCartItemDO get(long id) {
+    public ShoppingCartItemDO get(Long id) {
         return shoppingCartPort.findById(id)
                 .orElseThrow(() -> new ShoppingCartItemException("Shopping cart not found"));
     }
 
     @Override
-    public ShoppingCartItemDO get(long id, long userId) {
+    public ShoppingCartItemDO get(Long id, Long userId) {
         return shoppingCartPort.findByIdAndUserId(id, userId)
                 .orElseThrow(() -> new ShoppingCartItemException("Shopping cart not found"));
     }
@@ -54,17 +54,17 @@ public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     }
 
     @Override
-    public PageDO<ShoppingCartItemDO> list(long userId, int page, int size) {
+    public PageDO<ShoppingCartItemDO> list(Long userId, int page, int size) {
         return shoppingCartPort.list(userId, page, size);
     }
 
     @Override
-    public List<ShoppingCartItemDO> list(long userId) {
+    public List<ShoppingCartItemDO> list(Long userId) {
         return shoppingCartPort.list(userId);
     }
 
     @Override
-    public void delete(long userId, long id) {
+    public void delete(Long userId, Long id) {
         shoppingCartPort.findById(id)
                 .ifPresentOrElse(shoppingCartItem -> shoppingCartPort.delete(id),
                         () -> {
@@ -73,7 +73,7 @@ public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     }
 
     @Override
-    public void checkout(long userId) {
+    public void checkout(Long userId) {
         var shoppingCartItems = list(userId);
         orderService.checkout(userId, shoppingCartItems);
         shoppingCartItems

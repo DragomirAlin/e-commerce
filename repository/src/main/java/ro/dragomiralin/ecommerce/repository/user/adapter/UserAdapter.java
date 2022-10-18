@@ -16,14 +16,14 @@ public class UserAdapter implements UserPort {
     private final UserRepository userRepository;
 
     @Override
-    public long create(UserDO userDO) {
+    public Long create(UserDO userDO) {
         var user = mapper.toUser(userDO);
         var u = userRepository.save(user);
         return u.getId();
     }
 
     @Override
-    public Optional<UserDO> findById(long id) {
+    public Optional<UserDO> findById(Long id) {
         return userRepository.findById(id)
                 .map(mapper::toUserDO);
     }

@@ -25,7 +25,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 
 @SpringBootTest(classes = {ECommerceApplication.class})
 @AutoConfigureMockMvc
-public class BaseIntegrationTest {
+public class BaseIntegrationTest extends BaseTest {
     @Autowired
     private WebApplicationContext context;
     @Autowired

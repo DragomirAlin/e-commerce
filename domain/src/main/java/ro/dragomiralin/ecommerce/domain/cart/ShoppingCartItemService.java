@@ -7,19 +7,19 @@ import java.util.List;
 
 public interface ShoppingCartItemService {
 
-    long create(long userId, ShoppingCartItemDO shoppingCartItemDO);
+    Long create(Long userId, ShoppingCartItemDO shoppingCartItemDO);
 
-    ShoppingCartItemDO get(long id);
+    ShoppingCartItemDO get(Long id);
 
-    ShoppingCartItemDO get(long id, long userId);
+    ShoppingCartItemDO get(Long id, Long userId);
 
     ShoppingCartItemDO update(ShoppingCartItemDO shoppingCartItemDO);
 
-    PageDO<ShoppingCartItemDO> list(long userId, int page, int size);
+    PageDO<ShoppingCartItemDO> list(Long userId, int page, int size);
 
-    List<ShoppingCartItemDO> list(long userId);
+    List<ShoppingCartItemDO> list(Long userId);
 
-    void delete(long userId, long id);
+    void delete(Long userId, Long id);
 
-    void checkout(long userId);
+    void checkout(Long userId);
 }

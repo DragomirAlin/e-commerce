@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ro.dragomiralin.ecommerce.controller.request.CustomResponse;
 import ro.dragomiralin.ecommerce.domain.category.error.CategoryNotFoundException;
 import ro.dragomiralin.ecommerce.domain.common.error.ResourceNotFoundException;
+import ro.dragomiralin.ecommerce.domain.common.error.ShoppingCartItemException;
 import ro.dragomiralin.ecommerce.domain.product.error.ProductNotFoundException;
 import ro.dragomiralin.ecommerce.domain.user.error.UserAlreadyExistsException;
 
@@ -63,8 +64,8 @@ public class GlobalControllerAdvice {
 
 
     @SuppressWarnings("rawtypes")
-    @ExceptionHandler({ResourceNotFoundException.class, ProductNotFoundException.class, CategoryNotFoundException.class})
-    public ResponseEntity<CustomResponse> handle(ResourceNotFoundException e) {
+    @ExceptionHandler({ShoppingCartItemException.class, ResourceNotFoundException.class, ProductNotFoundException.class, CategoryNotFoundException.class})
+    public ResponseEntity<CustomResponse> handleNotFound(Exception e) {
         ErrorItem error = ErrorItem.builder()
                 .code(404)
                 .message(e.getMessage())

@@ -61,8 +61,8 @@ public class CustomResponse<T> {
     @Data
     @Builder
     public static class Paging {
-        private long total;
-        private long offset;
+        private Long total;
+        private Long offset;
         private int limit;
     }
 

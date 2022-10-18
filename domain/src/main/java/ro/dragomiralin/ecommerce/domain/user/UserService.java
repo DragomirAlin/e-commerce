@@ -7,11 +7,11 @@ import java.util.Optional;
 
 public interface UserService {
 
-    long create(UserDO userDO);
+    Long create(UserDO userDO);
 
-    UserDO get(long id);
+    UserDO get(Long id);
 
-    Optional<UserDO> findById(long id);
+    Optional<UserDO> findById(Long id);
 
     Optional<UserDO> findByEmail(String email);
 

@@ -2,7 +2,7 @@ package ro.dragomiralin.ecommerce.domain.common.error;
 
 public class ResourceNotFoundException extends RuntimeException {
 
-    private static final long serialVersionUID = 5861310537366287163L;
+    private static final Long serialVersionUID = 5861310537366287163L;
 
     public ResourceNotFoundException() {
         super();

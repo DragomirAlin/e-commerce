@@ -7,19 +7,19 @@ import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
 import java.util.List;
 
 public interface OrderService {
-    long create(long userId, OrderDO orderDO);
+    Long create(Long userId, OrderDO orderDO);
 
-    OrderDO get(long id);
+    OrderDO get(Long id);
 
-    OrderDO get(long userId, long orderId);
+    OrderDO get(Long userId, Long orderId);
 
     OrderDO update(OrderDO orderDO);
 
-    void delete(long userId, long id);
+    void delete(Long userId, Long id);
 
-    List<OrderDO> list(long userId);
+    List<OrderDO> list(Long userId);
 
-    PageDO<OrderDO> list(long userId, int page, int size);
+    PageDO<OrderDO> list(Long userId, int page, int size);
 
-    void checkout(long userId, List<ShoppingCartItemDO> shoppingCartItems);
+    void checkout(Long userId, List<ShoppingCartItemDO> shoppingCartItems);
 }

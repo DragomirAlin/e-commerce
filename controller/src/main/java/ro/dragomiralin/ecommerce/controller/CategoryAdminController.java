@@ -22,7 +22,7 @@ public class  CategoryAdminController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CustomResponse<Void>> delete(@PathVariable long id) {
+    public ResponseEntity<CustomResponse<Void>> delete(@PathVariable Long id) {
         categoryService.delete(id);
         return ResponseEntity.ok(CustomResponse.empty());
     }

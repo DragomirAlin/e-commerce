@@ -7,9 +7,9 @@ public interface CategoryService {
 
     PageDO<CategoryDO> list(int page, int size);
 
-    CategoryDO get(long id);
+    CategoryDO get(Long id);
 
-    long add(CategoryDO category);
+    Long add(CategoryDO category);
 
-    void delete(long id);
+    void delete(Long id);
 }

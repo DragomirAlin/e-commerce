@@ -12,7 +12,7 @@ import org.keycloak.representations.AccessToken;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
-    private long id;
+    private Long id;
     private String sub;
     private String firstName;
     private String lastName;

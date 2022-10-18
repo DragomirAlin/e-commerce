@@ -9,10 +9,10 @@ public interface ProductPort {
 
     PageDO<ProductDO> list(int page, int size);
 
-    Optional<ProductDO> get(long id);
+    Optional<ProductDO> get(Long id);
 
-    long save(ProductDO productDO);
+    Long save(ProductDO productDO);
 
-    void delete(long id);
+    void delete(Long id);
 
 }
