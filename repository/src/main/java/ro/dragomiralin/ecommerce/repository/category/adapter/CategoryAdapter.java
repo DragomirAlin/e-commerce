@@ -24,20 +24,20 @@ public class CategoryAdapter implements CategoryPort {
     }
 
     @Override
-    public Optional<CategoryDO> get(Long id) {
+    public Optional<CategoryDO> get(long id) {
         var optionalCategory = categoryRepository.findById(id);
         return optionalCategory.map(mapper::toCategoryDO);
     }
 
     @Override
-    public Long save(CategoryDO categoryDO) {
+    public long save(CategoryDO categoryDO) {
         var category = mapper.toCategory(categoryDO);
         var c = categoryRepository.save(category);
         return c.getId();
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         categoryRepository.deleteById(id);
     }
 }

@@ -32,7 +32,7 @@ public class ProductAdminController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CustomResponse<Void>> delete(@AuthenticationPrincipal UserDTO userDTO, @PathVariable Long id) {
+    public ResponseEntity<CustomResponse<Void>> delete(@AuthenticationPrincipal UserDTO userDTO, @PathVariable long id) {
         productService.delete(id);
         return ResponseEntity.ok(CustomResponse.empty());
     }

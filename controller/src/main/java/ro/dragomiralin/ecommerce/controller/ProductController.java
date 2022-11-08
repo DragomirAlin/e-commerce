@@ -27,7 +27,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomResponse<ProductDTO>> get(@PathVariable Long id) {
+    public ResponseEntity<CustomResponse<ProductDTO>> get(@PathVariable long id) {
         var productDO = productService.get(id);
         var productDTO = mapper.toProductDTO(productDO);
         var customResponse = CustomResponse.single(productDTO);

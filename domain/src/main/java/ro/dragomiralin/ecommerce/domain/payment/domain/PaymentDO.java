@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class PaymentDO {
-    private Long id;
+    private long id;
     private BigDecimal amount;
     private PaymentDOCurrency currency;
     private PaymentDOGateway gateway;

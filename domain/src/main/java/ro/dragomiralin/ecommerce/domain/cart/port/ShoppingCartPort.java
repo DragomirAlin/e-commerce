@@ -8,16 +8,16 @@ import java.util.Optional;
 
 public interface ShoppingCartPort {
 
-    Long save(ShoppingCartItemDO shoppingCartItemDO);
+    long save(ShoppingCartItemDO shoppingCartItemDO);
 
-    Optional<ShoppingCartItemDO> findById(Long id);
+    Optional<ShoppingCartItemDO> findById(long id);
 
-    Optional<ShoppingCartItemDO> findByIdAndUserId(Long id, Long userId);
+    Optional<ShoppingCartItemDO> findByIdAndUserId(long id, long userId);
 
-    void delete(Long id);
+    void delete(long id);
 
-    PageDO<ShoppingCartItemDO> list(Long userId, int page, int size);
+    PageDO<ShoppingCartItemDO> list(long userId, int page, int size);
 
-    List<ShoppingCartItemDO> list(Long userId);
+    List<ShoppingCartItemDO> list(long userId);
 
 }

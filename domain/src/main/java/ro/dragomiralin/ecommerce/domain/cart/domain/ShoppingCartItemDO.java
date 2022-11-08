@@ -10,8 +10,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class ShoppingCartItemDO {
-    private Long id;
-    private Long userId;
-    private Long productId;
+    private long id;
+    private long userId;
+    private long productId;
     private Integer quantity;
 }

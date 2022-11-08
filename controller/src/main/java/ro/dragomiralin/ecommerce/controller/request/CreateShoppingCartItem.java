@@ -10,6 +10,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class CreateShoppingCartItem {
-    private Long productId;
+    private long productId;
     private Integer quantity;
 }

@@ -9,17 +9,17 @@ import java.util.Optional;
 
 public interface OrderPort {
 
-    Long save(OrderDO orderDO);
+    long save(OrderDO orderDO);
 
-    Optional<OrderDO> findById(Long id);
+    Optional<OrderDO> findById(long id);
 
-    Optional<OrderDO> findById(Long userId, Long id);
+    Optional<OrderDO> findById(long userId, long id);
 
     OrderDO update(OrderDO orderDO);
 
-    void delete(Long id);
+    void delete(long id);
 
-    PageDO<OrderDO> list(Long userId, int page, int size);
+    PageDO<OrderDO> list(long userId, int page, int size);
 
-    List<OrderDO> list(Long userId);
+    List<OrderDO> list(long userId);
 }

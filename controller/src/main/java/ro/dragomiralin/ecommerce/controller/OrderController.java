@@ -29,7 +29,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomResponse<OrderDTO>> get(@AuthenticationPrincipal UserDTO userDTO, @PathVariable Long id) {
+    public ResponseEntity<CustomResponse<OrderDTO>> get(@AuthenticationPrincipal UserDTO userDTO, @PathVariable long id) {
         var order = orderService.get(userDTO.getId(), id);
         return ResponseEntity.ok(CustomResponse.single(mapper.toOrderDTO(order)));
     }

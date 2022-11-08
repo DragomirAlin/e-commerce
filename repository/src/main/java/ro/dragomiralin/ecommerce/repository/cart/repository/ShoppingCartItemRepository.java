@@ -11,9 +11,9 @@ import java.util.Optional;
 
 @Repository
 public interface ShoppingCartItemRepository extends JpaRepository<ShoppingCartItem, Long> {
-    List<ShoppingCartItem> findAllByUserId(Long userId);
+    List<ShoppingCartItem> findAllByUserId(long userId);
 
-    Page<ShoppingCartItem> findAllByUserId(Long userId, Pageable pageable);
+    Page<ShoppingCartItem> findAllByUserId(long userId, Pageable pageable);
 
-    Optional<ShoppingCartItem> findByIdAndUserId(Long id, Long userId);
+    Optional<ShoppingCartItem> findByIdAndUserId(long id, long userId);
 }

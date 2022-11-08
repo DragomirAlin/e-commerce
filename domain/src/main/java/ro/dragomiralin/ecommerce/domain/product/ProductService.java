@@ -8,10 +8,10 @@ public interface ProductService {
 
     PageDO<ProductDO> list(int size, int page);
 
-    ProductDO get(Long id);
+    ProductDO get(long id);
 
-    Long add(ProductDO product);
+    long add(ProductDO product);
 
-    void delete(Long id);
+    void delete(long id);
 
 }

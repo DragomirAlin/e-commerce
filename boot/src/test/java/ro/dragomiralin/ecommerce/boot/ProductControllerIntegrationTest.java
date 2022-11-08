@@ -51,7 +51,8 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
                 .andExpect(jsonPath("$.data", notNullValue()))
                 .andReturn();
 
-        var response = getMvcResult(result, new TypeReference<CustomResponse<Long>>() {});
+        var response = getMvcResult(result, new TypeReference<CustomResponse<Long>>() {
+        });
 
         var id = response.getData();
         mockMvc
@@ -60,7 +61,7 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
                                 .contentType(APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.data", notNullValue()))
-                .andExpect(jsonPath("$.data.id", equalTo(id.intValue())));
+                .andExpect(jsonPath("$.data.id", equalTo(id)));
     }
 
     @Test

@@ -17,18 +17,18 @@ public class UserServiceImpl implements UserService {
     private final UserPort userPort;
 
     @Override
-    public Long create(UserDO user) {
+    public long create(UserDO user) {
         return userPort.create(user);
     }
 
     @Override
-    public UserDO get(Long id) {
+    public UserDO get(long id) {
         return findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
     }
 
     @Override
-    public Optional<UserDO> findById(Long id) {
+    public Optional<UserDO> findById(long id) {
         return userPort.findById(id);
     }
 

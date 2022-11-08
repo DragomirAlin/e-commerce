@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class CategoryDO {
-    private Long id;
+    private long id;
     private String name;
     @JsonIgnore
     private List<ProductDO> products;

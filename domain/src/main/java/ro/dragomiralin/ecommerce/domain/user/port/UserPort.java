@@ -6,9 +6,9 @@ import java.util.Optional;
 
 public interface UserPort {
 
-    Long create(UserDO user);
+    long create(UserDO user);
 
-    Optional<UserDO> findById(Long id);
+    Optional<UserDO> findById(long id);
 
     Optional<UserDO> findByEmail(String email);
 

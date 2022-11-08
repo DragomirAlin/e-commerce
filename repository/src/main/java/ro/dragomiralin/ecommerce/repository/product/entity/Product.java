@@ -19,7 +19,7 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     @NotNull(message = "Product name is required.")
     private String name;
     private String description;

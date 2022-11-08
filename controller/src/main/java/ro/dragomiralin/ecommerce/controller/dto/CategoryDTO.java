@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class CategoryDTO {
-    private Long id;
+    private long id;
     private String name;
     @JsonIgnore
     private List<ProductDTO> products;

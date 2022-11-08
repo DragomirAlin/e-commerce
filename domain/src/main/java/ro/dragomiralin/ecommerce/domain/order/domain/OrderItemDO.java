@@ -11,7 +11,7 @@ import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class OrderItemDO {
-    private Long id;
+    private long id;
     private int quantity;
     private OrderDO order;
     private ProductDO product;

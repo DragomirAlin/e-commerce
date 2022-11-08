@@ -20,19 +20,19 @@ public class OrderAdapter implements OrderPort {
     private final OrderRepository orderRepository;
 
     @Override
-    public Long save(OrderDO orderDO) {
+    public long save(OrderDO orderDO) {
         var order = mapper.toOrder(orderDO);
         return orderRepository.save(order).getId();
     }
 
     @Override
-    public Optional<OrderDO> findById(Long id) {
+    public Optional<OrderDO> findById(long id) {
         return orderRepository.findById(id)
                 .map(mapper::toOrderDO);
     }
 
     @Override
-    public Optional<OrderDO> findById(Long userId, Long id) {
+    public Optional<OrderDO> findById(long userId, long id) {
         return orderRepository.findByUserIdAndId(userId, id)
                 .map(mapper::toOrderDO);
     }
@@ -44,18 +44,18 @@ public class OrderAdapter implements OrderPort {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         orderRepository.deleteById(id);
     }
 
     @Override
-    public PageDO<OrderDO> list(Long userId, int page, int size) {
+    public PageDO<OrderDO> list(long userId, int page, int size) {
         var orders = orderRepository.findAllByUserId(userId, PageRequest.of(page, size));
         return mapper.toPageDO(orders);
     }
 
     @Override
-    public List<OrderDO> list(Long userId) {
+    public List<OrderDO> list(long userId) {
         return orderRepository.findAllByUserId(userId)
                 .stream()
                 .map(mapper::toOrderDO)

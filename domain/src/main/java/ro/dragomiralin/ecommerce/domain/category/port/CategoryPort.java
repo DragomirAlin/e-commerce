@@ -9,10 +9,10 @@ public interface CategoryPort {
 
     PageDO<CategoryDO> list(int page, int size);
 
-    Optional<CategoryDO> get(Long id);
+    Optional<CategoryDO> get(long id);
 
-    Long save(CategoryDO category);
+    long save(CategoryDO category);
 
-    void delete(Long id);
+    void delete(long id);
 
 }

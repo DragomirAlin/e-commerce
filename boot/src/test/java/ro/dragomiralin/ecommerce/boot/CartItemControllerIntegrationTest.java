@@ -101,7 +101,7 @@ public class CartItemControllerIntegrationTest extends BaseIntegrationTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.data", notNullValue()))
                 .andExpect(jsonPath("$.data.id", notNullValue()))
-                .andExpect(jsonPath("$.data.productId", equalTo(product.getId().intValue())))
+                .andExpect(jsonPath("$.data.productId", equalTo(product.getId())))
                 .andExpect(jsonPath("$.data.userId", notNullValue()))
                 .andExpect(jsonPath("$.data.quantity", equalTo(request.getQuantity())))
                 .andReturn();

@@ -22,7 +22,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private long id;
 
     private OrderStatus status;
 
@@ -32,7 +32,7 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderItem> items;
 
-    private Long userId;
+    private long userId;
 
     @Column(name = "customer_comments")
     private String customerComments;

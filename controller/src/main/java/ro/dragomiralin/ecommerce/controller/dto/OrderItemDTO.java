@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class OrderItemDTO {
-    private Long id;
+    private long id;
     private int quantity;
     private OrderDTO order;
     private ProductDTO product;

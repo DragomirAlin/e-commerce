@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class UserDO {
-    private Long id;
+    private long id;
     private String sub;
     private String firstName;
     private String lastName;

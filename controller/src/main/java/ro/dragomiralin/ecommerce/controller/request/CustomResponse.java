@@ -26,17 +26,16 @@ public class CustomResponse<T> {
         customHttpResponse.setData(listResponse.getData() == null ? new ArrayList<>() : listResponse.getData());
         customHttpResponse.setPaging(
                 Paging.builder()
-                        .limit(listResponse.getLimit() == null ? 50 : listResponse.getLimit())
-                        .offset(listResponse.getOffset() == null ? 0L : listResponse.getOffset())
-                        .total(listResponse.getTotal() == null ? listResponse.getData().size() : listResponse
-                                .getTotal())
+                        .limit(listResponse.getLimit())
+                        .offset(listResponse.getOffset())
+                        .total(listResponse.getTotal())
                         .build()
         );
 
         return customHttpResponse;
     }
 
-    public static CustomResponse<Void> empty(){
+    public static CustomResponse<Void> empty() {
         return CustomResponse.<Void>builder().build();
     }
 
@@ -61,8 +60,8 @@ public class CustomResponse<T> {
     @Data
     @Builder
     public static class Paging {
-        private Long total;
-        private Long offset;
+        private long total;
+        private long offset;
         private int limit;
     }
 

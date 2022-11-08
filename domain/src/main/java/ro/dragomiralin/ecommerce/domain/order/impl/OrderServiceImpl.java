@@ -22,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
     private final ProductService productService;
 
     @Override
-    public Long create(Long userId, OrderDO orderDO) {
+    public long create(long userId, OrderDO orderDO) {
         var req = OrderDO.builder()
                 .userId(userId)
                 .status(OrderDOStatus.PENDING)
@@ -35,13 +35,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDO get(Long id) {
+    public OrderDO get(long id) {
         return orderPort.findById(id)
                 .orElseThrow(() -> new OrderException("Order not found"));
     }
 
     @Override
-    public OrderDO get(Long userId, Long orderId) {
+    public OrderDO get(long userId, long orderId) {
         return orderPort.findById(userId, orderId)
                 .orElseThrow(() -> new OrderException("Order not found"));
     }
@@ -57,23 +57,23 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void delete(Long userId, Long id) {
+    public void delete(long userId, long id) {
         var orderDO = get(userId, id);
         orderPort.delete(orderDO.getId());
     }
 
     @Override
-    public List<OrderDO> list(Long userId) {
+    public List<OrderDO> list(long userId) {
         return orderPort.list(userId);
     }
 
     @Override
-    public PageDO<OrderDO> list(Long userId, int page, int size) {
+    public PageDO<OrderDO> list(long userId, int page, int size) {
         return orderPort.list(userId, page, size);
     }
 
     @Override
-    public void checkout(Long userId, List<ShoppingCartItemDO> shoppingCartItems) {
+    public void checkout(long userId, List<ShoppingCartItemDO> shoppingCartItems) {
         var orderItems = shoppingCartItems.stream()
                 .map(item -> OrderItemDO.builder()
                         .product(productService.get(item.getProductId()))

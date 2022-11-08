@@ -18,18 +18,18 @@ public class PaymentAdapter implements PaymentPort {
     private final PaymentRepository paymentRepository;
 
     @Override
-    public Long save(PaymentDO paymentDO) {
+    public long save(PaymentDO paymentDO) {
         var payment = mapper.toPayment(paymentDO);
         return paymentRepository.save(payment).getId();
     }
 
     @Override
-    public Optional<PaymentDO> findById(Long id) {
+    public Optional<PaymentDO> findById(long id) {
         return paymentRepository.findById(id).map(mapper::toPaymentDO);
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         paymentRepository.deleteById(id);
     }
 

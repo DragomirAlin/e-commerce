@@ -24,20 +24,20 @@ public class ProductAdapter implements ProductPort {
     }
 
     @Override
-    public Optional<ProductDO> get(Long id) {
+    public Optional<ProductDO> get(long id) {
         var optionalProduct = productRepository.findById(id);
         return optionalProduct.map(mapper::toProductDO);
     }
 
     @Override
-    public Long save(ProductDO productDO) {
+    public long save(ProductDO productDO) {
         var product = mapper.toProduct(productDO);
         var p = productRepository.save(product);
         return p.getId();
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         productRepository.deleteById(id);
     }
 }

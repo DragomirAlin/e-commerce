@@ -9,11 +9,11 @@ import java.util.List;
 @Builder
 public class ListResponse<T> {
     private List<T> data;
-    private Long total;
+    private long total;
     private Integer limit;
-    private Long offset;
+    private long offset;
 
-    public static <T> ListResponse<T> build(List<T> data, Long total, Integer limit, Long offset) {
+    public static <T> ListResponse<T> build(List<T> data, long total, Integer limit, long offset) {
         return new ListResponse<>(data, total, limit, offset);
     }
 

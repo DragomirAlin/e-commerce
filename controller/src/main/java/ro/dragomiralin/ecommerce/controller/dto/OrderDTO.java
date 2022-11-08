@@ -15,10 +15,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class OrderDTO {
-    private Long id;
+    private long id;
     private OrderDOStatus status;
     private Date orderedDate;
     private List<OrderItemDO> orderItems;
-    private Long userId;
+    private long userId;
     private String customerComments;
 }
