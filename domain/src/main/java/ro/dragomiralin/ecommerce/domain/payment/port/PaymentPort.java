@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface PaymentPort {
 
-    long save(PaymentDO paymentDO);
+    PaymentDO save(PaymentDO paymentDO);
 
     Optional<PaymentDO> findById(long id);
 

@@ -5,17 +5,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
 import ro.dragomiralin.ecommerce.boot.setup.BaseIntegrationTest;
+import ro.dragomiralin.ecommerce.controller.dto.ShoppingCartItemDTO;
 import ro.dragomiralin.ecommerce.controller.request.CreateShoppingCartItem;
 import ro.dragomiralin.ecommerce.controller.request.CustomResponse;
 import ro.dragomiralin.ecommerce.domain.product.ProductService;
 import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
-import ro.dragomiralin.ecommerce.domain.user.UserService;
-import ro.dragomiralin.ecommerce.repository.cart.entity.ShoppingCartItem;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -29,15 +27,13 @@ import static ro.dragomiralin.ecommerce.boot.util.JsonUtil.getMvcResult;
 
 public class CartItemControllerIntegrationTest extends BaseIntegrationTest {
     @Autowired
-    private UserService userService;
-    @Autowired
     private ProductService productService;
     private static final String USER = "user";
 
     @Test
     @WithMockUser(username = "user", password = "user", roles = "USER")
     public void create_cartItem_and_then_get() throws Exception {
-        var product = productService.add(ProductDO.builder()
+        var productDO = productService.add(ProductDO.builder()
                 .name("apple")
                 .description("this is an apple")
                 .categories(new ArrayList<>())
@@ -45,7 +41,7 @@ public class CartItemControllerIntegrationTest extends BaseIntegrationTest {
                 .build());
 
         var cartItem = CreateShoppingCartItem.builder()
-                .productId(product)
+                .productId(productDO.getId())
                 .quantity(1)
                 .build();
 
@@ -59,17 +55,16 @@ public class CartItemControllerIntegrationTest extends BaseIntegrationTest {
                 .andExpect(jsonPath("$.data", notNullValue()))
                 .andReturn();
 
-        var response = getMvcResult(result, new TypeReference<CustomResponse<Long>>() {
+        var response = getMvcResult(result, new TypeReference<CustomResponse<ShoppingCartItemDTO>>() {
         });
 
-        var id = response.getData();
+        var id = response.getData().getId();
         mockMvc
                 .perform(
                         get("/cart/{id}", id)
                                 .contentType(APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$.data", notNullValue()))
-                .andExpect(jsonPath("$.data.id", equalTo(id)));
+                .andExpect(jsonPath("$.data", notNullValue()));
     }
 
     @Test
@@ -90,10 +85,10 @@ public class CartItemControllerIntegrationTest extends BaseIntegrationTest {
                 .andExpect(jsonPath("$.data", notNullValue()))
                 .andReturn();
 
-        var response = getMvcResult(itemAddedResult, new TypeReference<CustomResponse<Object>>() {
+        var response = getMvcResult(itemAddedResult, new TypeReference<CustomResponse<ShoppingCartItemDTO>>() {
         });
 
-        var id = response.getData();
+        var id = response.getData().getId();
         mockMvc
                 .perform(
                         get("/cart/{id}", id)
@@ -101,7 +96,6 @@ public class CartItemControllerIntegrationTest extends BaseIntegrationTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.data", notNullValue()))
                 .andExpect(jsonPath("$.data.id", notNullValue()))
-                .andExpect(jsonPath("$.data.productId", equalTo(product.getId())))
                 .andExpect(jsonPath("$.data.userId", notNullValue()))
                 .andExpect(jsonPath("$.data.quantity", equalTo(request.getQuantity())))
                 .andReturn();

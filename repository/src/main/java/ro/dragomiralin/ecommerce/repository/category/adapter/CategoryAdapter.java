@@ -30,10 +30,10 @@ public class CategoryAdapter implements CategoryPort {
     }
 
     @Override
-    public long save(CategoryDO categoryDO) {
+    public CategoryDO save(CategoryDO categoryDO) {
         var category = mapper.toCategory(categoryDO);
         var c = categoryRepository.save(category);
-        return c.getId();
+        return mapper.toCategoryDO(c);
     }
 
     @Override

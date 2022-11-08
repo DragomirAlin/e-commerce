@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ShoppingCartItemService {
 
-    long create(long userId, ShoppingCartItemDO shoppingCartItemDO);
+    ShoppingCartItemDO create(long userId, ShoppingCartItemDO shoppingCartItemDO);
 
     ShoppingCartItemDO get(long id);
 

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface OrderPort {
 
-    long save(OrderDO orderDO);
+    OrderDO save(OrderDO orderDO);
 
     Optional<OrderDO> findById(long id);
 

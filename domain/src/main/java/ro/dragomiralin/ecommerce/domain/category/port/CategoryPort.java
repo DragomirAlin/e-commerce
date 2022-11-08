@@ -11,7 +11,7 @@ public interface CategoryPort {
 
     Optional<CategoryDO> get(long id);
 
-    long save(CategoryDO category);
+    CategoryDO save(CategoryDO category);
 
     void delete(long id);
 

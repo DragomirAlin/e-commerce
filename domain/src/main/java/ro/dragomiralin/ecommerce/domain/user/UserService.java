@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    long create(UserDO userDO);
+    UserDO create(UserDO userDO);
 
     UserDO get(long id);
 

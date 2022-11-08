@@ -1,15 +1,9 @@
 package ro.dragomiralin.ecommerce.domain.product;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 import ro.dragomiralin.ecommerce.domain.category.domain.CategoryDO;
 import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 import ro.dragomiralin.ecommerce.domain.product.impl.ProductServiceImpl;
@@ -31,6 +25,7 @@ public class ProductUnitTests {
     @Test
     public void add_product() {
         var product = ProductDO.builder()
+                .id(1L)
                 .name("Product")
                 .description("This is a test product")
                 .price(BigDecimal.ONE)
@@ -40,10 +35,12 @@ public class ProductUnitTests {
                         .build()))
                 .build();
 
-        when(productPort.save(product)).thenReturn(1L);
 
-        var id = classUnderTest.add(product);
-        assertEquals(1L, id);
+
+        when(productPort.save(product)).thenReturn(product);
+
+        var createdProduct = classUnderTest.add(product);
+        assertEquals(1, createdProduct.getId());
     }
 
 }

@@ -9,7 +9,7 @@ public interface CategoryService {
 
     CategoryDO get(long id);
 
-    long add(CategoryDO category);
+    CategoryDO add(CategoryDO category);
 
     void delete(long id);
 }

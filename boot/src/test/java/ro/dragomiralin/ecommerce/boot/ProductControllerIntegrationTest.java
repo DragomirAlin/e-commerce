@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.test.context.support.WithMockUser;
 import ro.dragomiralin.ecommerce.boot.setup.BaseIntegrationTest;
+import ro.dragomiralin.ecommerce.controller.dto.ProductDTO;
 import ro.dragomiralin.ecommerce.controller.request.CustomResponse;
 import ro.dragomiralin.ecommerce.controller.request.ProductCreateReq;
 
@@ -51,17 +52,16 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
                 .andExpect(jsonPath("$.data", notNullValue()))
                 .andReturn();
 
-        var response = getMvcResult(result, new TypeReference<CustomResponse<Long>>() {
+        var response = getMvcResult(result, new TypeReference<CustomResponse<ProductDTO>>() {
         });
 
-        var id = response.getData();
+        var id = response.getData().getId();
         mockMvc
                 .perform(
                         get("/product/{id}", id)
                                 .contentType(APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$.data", notNullValue()))
-                .andExpect(jsonPath("$.data.id", equalTo(id)));
+                .andExpect(jsonPath("$.data", notNullValue()));
     }
 
     @Test

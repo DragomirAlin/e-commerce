@@ -28,13 +28,12 @@ public class BaseTest {
         var faker = new Faker();
 
         var fruit = faker.food().fruit();
-        var id = productService.add(ProductDO.builder()
+        return productService.add(ProductDO.builder()
                 .name(fruit)
                 .categories(new ArrayList<>())
                 .description(String.format("This is a %s", fruit))
                 .price(BigDecimal.valueOf(faker.number().randomDouble(2, 1, 100)))
                 .build());
-        return productService.get(id);
     }
 
 }

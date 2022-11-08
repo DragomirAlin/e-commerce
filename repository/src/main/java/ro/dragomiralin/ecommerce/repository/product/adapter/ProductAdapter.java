@@ -30,10 +30,10 @@ public class ProductAdapter implements ProductPort {
     }
 
     @Override
-    public long save(ProductDO productDO) {
+    public ProductDO save(ProductDO productDO) {
         var product = mapper.toProduct(productDO);
-        var p = productRepository.save(product);
-        return p.getId();
+        var createdProduct = productRepository.save(product);
+        return mapper.toProductDO(createdProduct);
     }
 
     @Override

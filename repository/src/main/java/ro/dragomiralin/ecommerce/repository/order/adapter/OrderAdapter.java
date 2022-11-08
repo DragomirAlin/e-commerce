@@ -20,9 +20,10 @@ public class OrderAdapter implements OrderPort {
     private final OrderRepository orderRepository;
 
     @Override
-    public long save(OrderDO orderDO) {
+    public OrderDO save(OrderDO orderDO) {
         var order = mapper.toOrder(orderDO);
-        return orderRepository.save(order).getId();
+        var createdOrder = orderRepository.save(order);
+        return mapper.toOrderDO(createdOrder);
     }
 
     @Override

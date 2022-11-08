@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     private final UserPort userPort;
 
     @Override
-    public long create(UserDO user) {
+    public UserDO create(UserDO user) {
         return userPort.create(user);
     }
 

@@ -3,11 +3,12 @@ package ro.dragomiralin.ecommerce.domain.order;
 import ro.dragomiralin.ecommerce.domain.cart.domain.ShoppingCartItemDO;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
+import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 
 import java.util.List;
 
 public interface OrderService {
-    long create(long userId, OrderDO orderDO);
+    OrderDO create(long userId, OrderDO orderDO);
 
     OrderDO get(long id);
 

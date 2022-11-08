@@ -22,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
     private final ProductService productService;
 
     @Override
-    public long create(long userId, OrderDO orderDO) {
+    public OrderDO create(long userId, OrderDO orderDO) {
         var req = OrderDO.builder()
                 .userId(userId)
                 .status(OrderDOStatus.PENDING)

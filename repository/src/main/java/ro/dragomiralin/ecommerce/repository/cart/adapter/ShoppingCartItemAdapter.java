@@ -20,9 +20,10 @@ public class ShoppingCartItemAdapter implements ShoppingCartPort {
     private final ShoppingCartItemRepository shoppingCartRepository;
 
     @Override
-    public long save(ShoppingCartItemDO shoppingCartItemDO) {
+    public ShoppingCartItemDO save(ShoppingCartItemDO shoppingCartItemDO) {
         var shoppingCartItem = mapper.toShoppingCartItem(shoppingCartItemDO);
-        return shoppingCartRepository.save(shoppingCartItem).getId();
+        var createdShoppingCartItem = shoppingCartRepository.save(shoppingCartItem);
+        return mapper.toShoppingCartItemDO(createdShoppingCartItem);
     }
 
     @Override

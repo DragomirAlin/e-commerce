@@ -21,11 +21,12 @@ public class CategoryUnitTests {
     @Test
     public void add_category() {
         var category = CategoryDO.builder()
+                .id(1L)
                 .name("Category")
                 .build();
-        when(categoryPort.save(category)).thenReturn(1L);
+        when(categoryPort.save(category)).thenReturn(category);
 
-        var id = classUnderTest.add(category);
-        assertEquals(1L, id);
+        var createdCategory = classUnderTest.add(category);
+        assertEquals(1L, createdCategory.getId());
     }
 }

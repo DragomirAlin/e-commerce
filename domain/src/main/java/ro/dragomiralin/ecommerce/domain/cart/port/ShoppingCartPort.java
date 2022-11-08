@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ShoppingCartPort {
 
-    long save(ShoppingCartItemDO shoppingCartItemDO);
+    ShoppingCartItemDO save(ShoppingCartItemDO shoppingCartItemDO);
 
     Optional<ShoppingCartItemDO> findById(long id);
 

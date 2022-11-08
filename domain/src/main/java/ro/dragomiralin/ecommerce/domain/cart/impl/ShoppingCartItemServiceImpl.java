@@ -20,7 +20,7 @@ public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     private final ProductService productService;
 
     @Override
-    public long create(long userId, ShoppingCartItemDO shoppingCartItemDO) {
+    public ShoppingCartItemDO create(long userId, ShoppingCartItemDO shoppingCartItemDO) {
         var product = productService.get(shoppingCartItemDO.getProductId());
 
         var req = ShoppingCartItemDO.builder()
@@ -48,9 +48,7 @@ public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     public ShoppingCartItemDO update(ShoppingCartItemDO shoppingCartItemDO) {
         return shoppingCartPort.findById(shoppingCartItemDO.getId())
                 .map(shoppingCartItem -> shoppingCartPort.save(shoppingCartItemDO))
-                .map(shoppingCartPort::findById)
-                .orElseThrow(() -> new ShoppingCartItemException("Shopping cart not found"))
-                .get();
+                .orElseThrow(() -> new ShoppingCartItemException("Shopping cart not found"));
     }
 
     @Override

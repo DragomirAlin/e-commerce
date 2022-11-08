@@ -23,9 +23,9 @@ public class OrderController {
     private final OrderDTOMapper mapper;
 
     @PostMapping
-    public ResponseEntity<CustomResponse<Long>> create(@AuthenticationPrincipal UserDTO userDTO, @RequestBody OrderDTO orderDTO) {
+    public ResponseEntity<CustomResponse<OrderDTO>> create(@AuthenticationPrincipal UserDTO userDTO, @RequestBody OrderDTO orderDTO) {
         var order = orderService.create(userDTO.getId(), mapper.toOrderDO(orderDTO));
-        return ResponseEntity.ok(CustomResponse.single(order));
+        return ResponseEntity.ok(CustomResponse.single(mapper.toOrderDTO(order)));
     }
 
     @GetMapping("/{id}")

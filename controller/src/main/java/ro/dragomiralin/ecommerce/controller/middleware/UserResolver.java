@@ -30,8 +30,8 @@ public class UserResolver {
                     .map(userDTOMapper::toUserDTO)
                     .orElseGet(() -> {
                         var userDO = userDTOMapper.toUserDO(userDTO);
-                        var id = userService.create(userDO);
-                        return userDTOMapper.toUserDTO(userService.get(id));
+                        var createdUser = userService.create(userDO);
+                        return userDTOMapper.toUserDTO(createdUser);
                     });
         }
 

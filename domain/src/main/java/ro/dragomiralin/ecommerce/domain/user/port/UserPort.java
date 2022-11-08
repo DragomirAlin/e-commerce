@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface UserPort {
 
-    long create(UserDO user);
+    UserDO create(UserDO user);
 
     Optional<UserDO> findById(long id);
 

@@ -23,9 +23,9 @@ public class ShoppingCartItemController {
     private final ShoppingCartItemService shoppingCartItemService;
 
     @PostMapping
-    public ResponseEntity<CustomResponse<Long>> create(@AuthenticationPrincipal UserDTO userDTO, @RequestBody CreateShoppingCartItem createShoppingCartItem) {
+    public ResponseEntity<CustomResponse<ShoppingCartItemDTO>> create(@AuthenticationPrincipal UserDTO userDTO, @RequestBody CreateShoppingCartItem createShoppingCartItem) {
         var cart = shoppingCartItemService.create(userDTO.getId(), mapper.toShoppingCartItemDO(createShoppingCartItem));
-        return ResponseEntity.ok(CustomResponse.single(cart));
+        return ResponseEntity.ok(CustomResponse.single(mapper.toShoppingCartItemDTO(cart)));
     }
 
     @GetMapping("/{id}")

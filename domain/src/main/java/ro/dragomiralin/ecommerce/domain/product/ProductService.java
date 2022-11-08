@@ -10,7 +10,7 @@ public interface ProductService {
 
     ProductDO get(long id);
 
-    long add(ProductDO product);
+    ProductDO add(ProductDO product);
 
     void delete(long id);
 

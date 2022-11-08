@@ -25,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public long add(CategoryDO category) {
+    public CategoryDO add(CategoryDO category) {
         return categoryPort.save(category);
     }
 
