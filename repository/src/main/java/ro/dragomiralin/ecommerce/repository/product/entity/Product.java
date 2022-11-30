@@ -3,8 +3,8 @@ package ro.dragomiralin.ecommerce.repository.product.entity;
 import lombok.*;
 import ro.dragomiralin.ecommerce.repository.category.entity.Category;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;

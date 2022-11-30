@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.keycloak.KeycloakSecurityContext;
-import org.keycloak.representations.AccessToken;
 
 @Data
 @Builder
@@ -26,14 +24,6 @@ public class UserDTO {
         public static final String CLAIMS = "claims";
     }
 
-    public static UserDTO map(KeycloakSecurityContext ctx) {
-        AccessToken token = ctx.getToken();
-        return UserDTO.builder()
-                .sub(token.getSubject())
-                .lastName(token.getFamilyName())
-                .firstName(token.getGivenName())
-                .email(token.getEmail())
-                .build();
-    }
+
 
 }

@@ -24,7 +24,7 @@ import ro.dragomiralin.ecommerce.domain.common.error.ShoppingCartItemException;
 import ro.dragomiralin.ecommerce.domain.product.error.ProductNotFoundException;
 import ro.dragomiralin.ecommerce.domain.user.error.UserAlreadyExistsException;
 
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 

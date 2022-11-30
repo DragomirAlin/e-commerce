@@ -7,8 +7,8 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import ro.dragomiralin.ecommerce.repository.product.entity.Product;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Data
 @Entity

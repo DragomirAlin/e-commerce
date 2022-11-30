@@ -11,7 +11,6 @@ import ro.dragomiralin.ecommerce.controller.request.ProductCreateReq;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;

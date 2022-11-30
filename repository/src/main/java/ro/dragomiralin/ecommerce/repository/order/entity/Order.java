@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import ro.dragomiralin.ecommerce.repository.payment.entity.Payment;
 import ro.dragomiralin.ecommerce.repository.user.entity.User;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
 

@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: e-commerce
   datasource:
     url: jdbc:postgresql://localhost:5432/ecommerce
     username: postgres
@@ -12,12 +14,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
-
-keycloak:
-  enabled: true
-  realm: master
-  auth-server-url: http://localhost:8083/auth
-  ssl-required: external
-  resource: ecommerce
-  use-resource-role-mappings: true
-  enable-basic-auth: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_URL:http://localhost:8083}/auth/realms/master

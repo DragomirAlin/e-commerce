@@ -26,6 +26,7 @@ public class CategoryAdapter implements CategoryPort {
     @Override
     public Optional<CategoryDO> get(long id) {
         var optionalCategory = categoryRepository.findById(id);
+
         return optionalCategory.map(mapper::toCategoryDO);
     }
 

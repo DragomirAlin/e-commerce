@@ -11,6 +11,8 @@ import ro.dragomiralin.ecommerce.repository.product.entity.Product;
 import ro.dragomiralin.ecommerce.repository.product.mapper.ProductDOMapper;
 import ro.dragomiralin.ecommerce.repository.product.repository.ProductRepository;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Optional;
 
 @Service
@@ -22,6 +24,7 @@ public class ProductAdapter implements ProductPort {
 
 
     @Override
+    @Transactional
     public PageDO<ProductDO> list(int page, int size) {
         var q = """
                 SELECT p FROM Product p
@@ -42,14 +45,29 @@ public class ProductAdapter implements ProductPort {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<ProductDO> get(long id) {
-        var optionalProduct = productRepository.findById(id);
-        return optionalProduct.map(mapper::toProductDO);
+        var q = """
+                SELECT p FROM Product p
+                WHERE p.id = :id
+                """;
+
+        var productQuery = getCurrentSession().createQuery(q, Product.class);
+        productQuery.setParameter("id", id);
+
+        return Optional.of(productQuery.getSingleResult())
+                .map(mapper::toProductDO);
     }
 
     @Override
     public ProductDO save(ProductDO productDO) {
         var product = mapper.toProduct(productDO);
+        var q = """ 
+                INSERT INTO Product (id, name, price, quantity)      
+                 """;
+
+        var productQuery = getCurrentSession().createQuery(q, Product.class);
+
         var createdProduct = productRepository.save(product);
         return mapper.toProductDO(createdProduct);
     }
