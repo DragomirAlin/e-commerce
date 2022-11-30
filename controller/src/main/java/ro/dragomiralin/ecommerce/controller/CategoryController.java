@@ -30,7 +30,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomResponse<CategoryDTO>> get(@PathVariable long id) {
+    public ResponseEntity<CustomResponse<CategoryDTO>> get(@AuthenticationPrincipal UserDTO userDTO, @PathVariable long id) {
         var categoryDO = categoryService.get(id);
         var categoryDTO = mapper.toCategoryDTO(categoryDO);
         var customResponse = CustomResponse.single(categoryDTO);

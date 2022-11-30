@@ -1,23 +1,25 @@
 spring:
+#  datasource:
+#    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password:
   datasource:
-    url: jdbc:tc:postgresql:14:///ecommerce
+    url: jdbc:tc:postgresql:14:///ecommerce?TC_REUSABLE=true
     username: root
     password: pass
     driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     database-platform: postgres
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+#        dialect: org.hibernate.dialect.H2Dialect
     show-sql: true
-
-keycloak:
-  enabled: true
-  realm: master
-  auth-server-url: http://localhost:8083/auth
-  ssl-required: external
-  resource: ecommerce
-  use-resource-role-mappings: true
-  enable-basic-auth: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_URL:http://localhost:8083}/auth/realms/master

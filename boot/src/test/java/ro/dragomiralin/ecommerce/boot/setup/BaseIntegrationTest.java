@@ -30,7 +30,6 @@ public class BaseIntegrationTest extends BaseTest {
     private WebApplicationContext context;
     @Autowired
     protected MockMvc mockMvc;
-
     @Container
     protected static final PostgreSQLContainer DB = PostgresqlSingletonContainer.INSTANCE.getContainer();
 

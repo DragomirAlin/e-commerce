@@ -1,14 +1,12 @@
 package ro.dragomiralin.ecommerce.repository.order.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import ro.dragomiralin.ecommerce.repository.payment.entity.Payment;
-import ro.dragomiralin.ecommerce.repository.user.entity.User;
 
-import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
 

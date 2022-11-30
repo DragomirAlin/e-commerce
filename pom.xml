@@ -23,15 +23,14 @@
     <description>Another E-Commerce Application</description>
     <properties>
         <java.version>17</java.version>
-        <org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
+        <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
         <org.projectlombok.version>1.18.24</org.projectlombok.version>
-        <com.fasterxml.jackson.databind.version>2.13.3</com.fasterxml.jackson.databind.version>
+        <com.fasterxml.jackson.databind.version>2.14.0</com.fasterxml.jackson.databind.version>
         <com.google.truth.version>1.1.3</com.google.truth.version>
-        <testcontainers.version>1.17.3</testcontainers.version>
-        <keycloak.version>19.0.3</keycloak.version>
+        <testcontainers.version>1.17.6</testcontainers.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
         <net.datafaker.version>1.6.0</net.datafaker.version>
-        <guava.version>30.1.1-jre</guava.version>
+        <guava.version>31.1-jre</guava.version>
     </properties>
     <dependencies>
         <!-- Test -->
@@ -48,6 +47,11 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
@@ -186,13 +190,6 @@
                 <artifactId>truth</artifactId>
                 <version>${com.google.truth.version}</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.keycloak.bom</groupId>
-                <artifactId>keycloak-adapter-bom</artifactId>
-                <version>${keycloak.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

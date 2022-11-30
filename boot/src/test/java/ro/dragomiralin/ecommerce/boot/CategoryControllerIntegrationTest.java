@@ -3,6 +3,7 @@ package ro.dragomiralin.ecommerce.boot;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.annotation.DirtiesContext;
 import ro.dragomiralin.ecommerce.boot.setup.BaseIntegrationTest;
 import ro.dragomiralin.ecommerce.controller.request.CategoryCreateReq;
 
@@ -14,6 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ro.dragomiralin.ecommerce.boot.util.JsonUtil.asJsonString;
 
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class CategoryControllerIntegrationTest extends BaseIntegrationTest {
 
         @Test
