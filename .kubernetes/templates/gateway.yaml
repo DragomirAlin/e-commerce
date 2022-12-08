@@ -1,0 +1,44 @@
+{{- if .Values.istio.enabled -}}
+{{- $serviceName := include "ecommerce.fullname" . -}}
+{{- $servicePort := .Values.service.port -}}
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: {{ include "ecommerce.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "ecommerce.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ include "ecommerce.chart" . }}
+spec:
+  selector:
+    istio: {{ .Values.istio.gateway }}
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+    {{- if eq .Values.istio.protocol "https" }}
+      tls:
+        httpsRedirect: true
+    {{- end }}
+      hosts:
+        {{- range .Values.istio.hosts }}
+        - {{ .host }}
+        {{- end }}
+  {{- if eq .Values.istio.protocol "https" }}
+    - hosts:
+       {{- range .Values.istio.hosts }}
+        - {{ .host }}
+       {{- end }}
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        serverCertificate: "sds"
+        privateKey: "sds"
+        credentialName: {{ .Values.istio.security.credentialName }}
+  {{- end }}
+{{- end }}

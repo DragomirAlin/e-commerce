@@ -1,0 +1,19 @@
+{{- if .Values.istio.enabled -}}
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ include "ecommerce.fullname" . }}
+spec:
+  hosts:
+  {{- range .Values.istio.hosts }}
+    - {{ .host }}
+   {{- end }}
+  gateways:
+    - {{ include "ecommerce.fullname" . }}
+  http:
+    - route:
+        - destination:
+            host: "{{ $serviceName  }}.{{ $.Release.Namespace }}.svc.cluster.local"
+            port:
+              number: {{ $servicePort }}
+{{- end -}}
