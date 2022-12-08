@@ -1,0 +1,17 @@
+{{- if .Values.istio.security.enabled -}}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.istio.security.credentialName}}
+  namespace: istio-system
+spec:
+  commonName: {{ .Values.istio.security.commonName}}
+  dnsNames:
+    {{- range .Values.istio.security.hosts }}
+    - {{ . }}
+    {{- end }}
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  secretName: {{ .Values.istio.security.credentialName}}
+{{- end }}

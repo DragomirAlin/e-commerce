@@ -13,7 +13,7 @@ spec:
   http:
     - route:
         - destination:
-            host: "{{ $serviceName  }}.{{ $.Release.Namespace }}.svc.cluster.local"
+            host: {{ include "ecommerce.fullname" . }}
             port:
-              number: {{ $servicePort }}
+              number: {{ .Values.service.port }}
 {{- end -}}

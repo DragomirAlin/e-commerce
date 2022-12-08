@@ -82,10 +82,14 @@ tolerations: []
 affinity: {}
 
 istio:
-  enabled: false
+  enabled: true
   gateway: ingressgateway
   protocol: https
   hosts:
     - host: "chart-example.local"
   security:
+    enabled: false
     credentialName: ""
+    commonName: ""
+    hosts:
+      - "chart-example.local"
