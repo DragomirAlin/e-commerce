@@ -56,7 +56,7 @@ jobs:
           persist-credentials: true
           ref: main
       - name: Helm Package
-        run: helm package ecommerce-api --version "0.1.0+$(git rev-parse --short "$GITHUB_SHA")" -d helm-charts
+        run: helm package helm-chart --version "0.1.0+$(git rev-parse --short "$GITHUB_SHA")" -d helm-charts
       - name: Helm Push
         env:
           GITHUB_TOKEN: ${{ secrets.BOT_GH_TOKEN }}
