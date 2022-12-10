@@ -1,6 +1,6 @@
 apiVersion: v2
 name: ecommerce
-description: E-Commerce Helm chart for Kubernetes
+description: E-Commerce Helm chart for Kubernetes with Spring Boot
 
 # A chart can be either an 'application' or a 'library' chart.
 #
