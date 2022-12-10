@@ -55,6 +55,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
           ref: main
+          path: helm-charts
       - name: Helm Package
         run: helm package helm-chart --version "0.1.0+$(git rev-parse --short "$GITHUB_SHA")" -d helm-charts
       - name: Helm Push
