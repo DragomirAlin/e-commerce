@@ -97,3 +97,12 @@ istio:
 appConfig:
   spring:
     name: "ecommerce"
+
+postgresql:
+  global:
+    postgresql:
+      auth:
+        postgresPassword: 1234
+  architecture: replication
+  replication:
+    password: 1234
