@@ -1,0 +1,12 @@
+{{- $fullName := .Release.Name -}}
+{{- if .Values.appConfig}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ecommerce.fullname" . }}-config
+data:
+  {{- with .Values.appConfig}}
+    {{- toYaml . | nindent 4 }}
+  {{- end}}
+{{- end}}
+

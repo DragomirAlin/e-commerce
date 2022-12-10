@@ -35,7 +35,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -47,6 +47,31 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: {{ $fullName }}-config
+              mountPath: /srv/config
+              readOnly: true
+          {{- if .Values.additionalMounts.configMaps }}
+          {{- range .Values.additionalMounts.configMaps }}
+            - name: cm-{{ .name }}
+              mountPath: {{ .path }}
+              readOnly: true
+          {{- end }}
+          {{- end }}
+      volumes:
+        - name: {{ $fullName }}-config
+          configMap:
+            name: {{ $fullName }}-config
+            items:
+              - key: application.yml
+                path: application.yml
+      {{- if .Values.additionalMounts.configMaps }}
+      {{- range .Values.additionalMounts.configMaps }}
+        - name: cm-{{ .name }}
+          configMap:
+            name: {{ .name }}
+      {{- end }}
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

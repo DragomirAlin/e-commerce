@@ -93,3 +93,7 @@ istio:
     commonName: ""
     hosts:
       - "chart-example.local"
+
+appConfig:
+  spring:
+    name: "ecommerce"
