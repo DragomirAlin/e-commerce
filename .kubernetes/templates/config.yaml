@@ -5,8 +5,8 @@ kind: ConfigMap
 metadata:
   name: {{ $fullName }}-config
 data:
+  application.yml: |
   {{- with .Values.appConfig}}
     {{- toYaml . | nindent 4 }}
   {{- end}}
 {{- end}}
-
