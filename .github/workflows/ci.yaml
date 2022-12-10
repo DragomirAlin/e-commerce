@@ -57,14 +57,14 @@ jobs:
           ref: main
           path: helm-charts
       - name: Helm Package
-        run: helm package helm-chart --version "dev" -d helm-charts
+        run: helm package helm-chart --version "0.0.1+dev" -d helm-charts
       - name: Helm Push
         env:
           GITHUB_TOKEN: ${{ secrets.BOT_GH_TOKEN }}
         run: |
           git config --global user.email "bot@dragomiralin.ro"
           git config --global user.name "Helm Bot"
-          CHART_PACKAGE_NAME="ecommerce-dev.tgz"
+          CHART_PACKAGE_NAME="ecommerce-0.0.1+dev.tgz"
           cd helm-charts
           git add "$CHART_PACKAGE_NAME"
           git commit -m "$CHART_PACKAGE_NAME"
