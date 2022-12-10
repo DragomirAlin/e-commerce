@@ -1,4 +1,4 @@
-name: ECommerce CI
+name: Continuous Integration (CI)
 on:
   push:
     branches:

@@ -1,4 +1,4 @@
-name: ECommerce CI
+name: Package and Publish Helm Chart
 on:
   push:
     paths:
