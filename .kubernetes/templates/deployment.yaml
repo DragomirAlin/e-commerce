@@ -1,3 +1,4 @@
+{{- $fullName := include "ecommerce.fullname" . -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -51,13 +52,6 @@ spec:
             - name: {{ $fullName }}-config
               mountPath: /srv/config
               readOnly: true
-          {{- if .Values.additionalMounts.configMaps }}
-          {{- range .Values.additionalMounts.configMaps }}
-            - name: cm-{{ .name }}
-              mountPath: {{ .path }}
-              readOnly: true
-          {{- end }}
-          {{- end }}
       volumes:
         - name: {{ $fullName }}-config
           configMap:
@@ -65,13 +59,6 @@ spec:
             items:
               - key: application.yml
                 path: application.yml
-      {{- if .Values.additionalMounts.configMaps }}
-      {{- range .Values.additionalMounts.configMaps }}
-        - name: cm-{{ .name }}
-          configMap:
-            name: {{ .name }}
-      {{- end }}
-      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
