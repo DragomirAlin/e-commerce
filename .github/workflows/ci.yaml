@@ -50,7 +50,7 @@ jobs:
       - name: Helm Repository Checkout
         uses: actions/checkout@v2
         with:
-          repository: https://github.com/DragomirAlin/helm-charts
+          repository: DragomirAlin/helm-charts
           token: ${{ secrets.BOT_GH_TOKEN }}
           fetch-depth: 0
           persist-credentials: true
@@ -63,7 +63,7 @@ jobs:
         run: |
           git config --global user.email "bot@dragomiralin.ro"
           git config --global user.name "Helm Bot"
-          CHART_PACKAGE_NAME="my-chart-0.1.0+$(git rev-parse --short "$GITHUB_SHA").tgz"
+          CHART_PACKAGE_NAME="ecommerce-api-0.1.0+$(git rev-parse --short "$GITHUB_SHA").tgz"
           cd helm-charts
           git add "$CHART_PACKAGE_NAME"
           git commit -m "$CHART_PACKAGE_NAME"
