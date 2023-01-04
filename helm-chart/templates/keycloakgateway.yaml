@@ -5,7 +5,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: {{ include "keycloak.fullname" . }}
+  name: {{ include "keycloak.fullname" . }}-keycloak-gateway
   labels:
     app.kubernetes.io/name: {{ include "keycloak.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

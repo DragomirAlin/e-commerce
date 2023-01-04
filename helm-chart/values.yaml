@@ -108,7 +108,6 @@ postgresql:
   replication:
     password: 1234
 
-
 keycloak:
   istio:
     enabled: true
