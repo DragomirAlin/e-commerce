@@ -8,8 +8,6 @@ Another E-Commerce project used to learn and practice a wide range of best pract
 
 :dancers: Hands-On with Spring JPA, Hibernate, Transactions, SQL
 
-![shop](.documentation/img/online-shop.png)
-
 ## Documentation
 
 The E-Commerce documentation, diagrams, schemas, notes can be found
@@ -40,6 +38,12 @@ microservices.
 Detailed planning can be found here:
 - [Planning](./documentation/planning.md)
 - [E-Commerce Kanban](https://github.com/DragomirAlin/spring-transactions/projects/1)
+
+#### Phase 1
+Create a monolith application
+
+#### Phase 2
+Fork this repository and split the monolith into microservices.
 
 
 ### Data Model
