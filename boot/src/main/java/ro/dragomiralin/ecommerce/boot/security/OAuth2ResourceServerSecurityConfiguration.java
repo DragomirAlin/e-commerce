@@ -2,20 +2,30 @@ package ro.dragomiralin.ecommerce.boot.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
+import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class OAuth2ResourceServerSecurityConfiguration {
 
     @Bean
@@ -23,11 +33,34 @@ public class OAuth2ResourceServerSecurityConfiguration {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .anyRequest().authenticated()
-                )
+                        .anyRequest().authenticated())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
         return http.build();
     }
+
+
+
+    /**
+     * By default, Keycloak assigns user roles to a "roles" object within the "realm_access" claim.
+     * This converter extracts the list of user roles from "realm.access.roles" and builds
+     * a list of GrantedAuthority using the "ROLE_" prefix.
+     */
+    @Bean
+    public JwtAuthenticationConverter jwtAuthenticationConverterForKeycloak() {
+        Converter<Jwt, Collection<GrantedAuthority>> jwtGrantedAuthoritiesConverter = jwt -> {
+            Map<String, Collection<String>> realmAccess = jwt.getClaim("realm_access");
+            Collection<String> roles = realmAccess.get("roles");
+            return roles.stream()
+                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                    .collect(Collectors.toList());
+        };
+
+        var jwtAuthenticationConverter = new JwtAuthenticationConverter();
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
+
+        return jwtAuthenticationConverter;
+    }
+
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {

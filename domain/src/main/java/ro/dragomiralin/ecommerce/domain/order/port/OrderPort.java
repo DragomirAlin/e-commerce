@@ -1,6 +1,5 @@
 package ro.dragomiralin.ecommerce.domain.order.port;
 
-import ro.dragomiralin.ecommerce.domain.cart.domain.ShoppingCartItemDO;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
 

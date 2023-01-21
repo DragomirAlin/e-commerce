@@ -2,18 +2,18 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: {{ include "keycloak.fullname" . }}-keycloak
+  name: {{ include "keycloak.fullname" . }}-keycloak-virtual-service
 spec:
   hosts:
   {{- range .Values.keycloak.istio.hosts }}
     - {{ .host }}
    {{- end }}
   gateways:
-    - {{ include "keycloak.fullname" . }}
+    - {{ include "keycloak.fullname" . }}-keycloak-gateway
   http:
     - route:
         - destination:
-            host: {{ include "keycloak.fullname" . }}
+            host: ecommerce-keycloak-http
             port:
               number: {{ .Values.keycloak.service.httpPort }}
 {{- end -}}

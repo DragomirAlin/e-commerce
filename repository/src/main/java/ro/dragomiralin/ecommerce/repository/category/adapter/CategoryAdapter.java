@@ -3,6 +3,7 @@ package ro.dragomiralin.ecommerce.repository.category.adapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ro.dragomiralin.ecommerce.domain.category.domain.CategoryDO;
 import ro.dragomiralin.ecommerce.domain.category.port.CategoryPort;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
@@ -12,6 +13,7 @@ import ro.dragomiralin.ecommerce.repository.category.mapper.CategoryDOMapper;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CategoryAdapter implements CategoryPort {
     private final CategoryDOMapper mapper;
@@ -31,6 +33,7 @@ public class CategoryAdapter implements CategoryPort {
     }
 
     @Override
+    @Transactional
     public CategoryDO save(CategoryDO categoryDO) {
         var category = mapper.toCategory(categoryDO);
         var c = categoryRepository.save(category);

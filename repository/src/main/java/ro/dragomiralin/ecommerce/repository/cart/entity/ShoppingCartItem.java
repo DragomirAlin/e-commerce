@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import jakarta.persistence.*;
+import ro.dragomiralin.ecommerce.repository.user.entity.User;
 
 @Data
 @Entity
@@ -18,14 +19,12 @@ public class ShoppingCartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-
-    @Column(name = "user_id")
-    private long userId;
-
     @Column(name = "product_id")
     private String productId;
-
     @Column(name = "quantity")
     private Integer quantity;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

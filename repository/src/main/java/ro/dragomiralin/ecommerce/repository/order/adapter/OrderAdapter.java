@@ -3,6 +3,7 @@ package ro.dragomiralin.ecommerce.repository.order.adapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ro.dragomiralin.ecommerce.domain.cart.domain.ShoppingCartItemDO;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
@@ -14,12 +15,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class OrderAdapter implements OrderPort {
     private final OrderDOMapper mapper;
     private final OrderRepository orderRepository;
 
     @Override
+    @Transactional
     public OrderDO save(OrderDO orderDO) {
         var order = mapper.toOrder(orderDO);
         var createdOrder = orderRepository.save(order);

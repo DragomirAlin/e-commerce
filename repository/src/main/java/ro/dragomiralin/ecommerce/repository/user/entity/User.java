@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import jakarta.persistence.*;
+import ro.dragomiralin.ecommerce.repository.cart.entity.ShoppingCartItem;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -25,5 +28,6 @@ public class User {
     private String lastName;
     @Column(unique = true)
     private String email;
-
+    @OneToMany(mappedBy = "user")
+    private List<ShoppingCartItem> items;
 }

@@ -3,6 +3,7 @@ package ro.dragomiralin.ecommerce.repository.product.adapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 import ro.dragomiralin.ecommerce.domain.product.port.ProductPort;
@@ -12,6 +13,7 @@ import ro.dragomiralin.ecommerce.repository.product.repository.ProductRepository
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ProductAdapter implements ProductPort {
     private final ProductDOMapper mapper;
@@ -30,6 +32,7 @@ public class ProductAdapter implements ProductPort {
     }
 
     @Override
+    @Transactional
     public ProductDO save(ProductDO productDO) {
         var product = mapper.toProduct(productDO);
         var p = productRepository.save(product);

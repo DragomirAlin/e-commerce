@@ -31,6 +31,7 @@ public class ProductAdminController {
 
         var productDO = productMapper.toProduct(productCreateReq, categories);
         var createdProduct = productService.add(productDO);
+
         return ResponseEntity.ok(CustomResponse.single(productMapper.toProductDTO(createdProduct)));
     }
 
