@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 public class ShoppingCartItemDTO {
     private long id;
-    private long userId;
+    private UserDTO userDTO;
     private long productId;
     private Integer quantity;
 }

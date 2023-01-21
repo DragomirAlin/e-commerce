@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
 @Data
 @Builder
@@ -11,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 public class ShoppingCartItemDO {
     private long id;
-    private long userId;
+    private UserDO userDO;
     private long productId;
     private Integer quantity;
 }

@@ -9,6 +9,7 @@ import ro.dragomiralin.ecommerce.domain.common.error.ShoppingCartItemException;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.order.OrderService;
 import ro.dragomiralin.ecommerce.domain.product.ProductService;
+import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
 import java.util.List;
 
@@ -20,11 +21,11 @@ public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     private final ProductService productService;
 
     @Override
-    public ShoppingCartItemDO create(long userId, ShoppingCartItemDO shoppingCartItemDO) {
+    public ShoppingCartItemDO create(UserDO userDO, ShoppingCartItemDO shoppingCartItemDO) {
         var product = productService.get(shoppingCartItemDO.getProductId());
 
         var req = ShoppingCartItemDO.builder()
-                .userId(userId)
+                .userDO(userDO)
                 .productId(product.getId())
                 .quantity(shoppingCartItemDO.getQuantity())
                 .build();
@@ -39,8 +40,8 @@ public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     }
 
     @Override
-    public ShoppingCartItemDO get(long id, long userId) {
-        return shoppingCartPort.findByIdAndUserId(id, userId)
+    public ShoppingCartItemDO get(UserDO userDO, long id) {
+        return shoppingCartPort.findByIdAndUser(userDO, id)
                 .orElseThrow(() -> new ShoppingCartItemException("Shopping cart not found"));
     }
 
@@ -52,17 +53,17 @@ public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     }
 
     @Override
-    public PageDO<ShoppingCartItemDO> list(long userId, int page, int size) {
-        return shoppingCartPort.list(userId, page, size);
+    public PageDO<ShoppingCartItemDO> list(UserDO userDO, int page, int size) {
+        return shoppingCartPort.list(userDO, page, size);
     }
 
     @Override
-    public List<ShoppingCartItemDO> list(long userId) {
-        return shoppingCartPort.list(userId);
+    public List<ShoppingCartItemDO> list(UserDO userDO) {
+        return shoppingCartPort.list(userDO);
     }
 
     @Override
-    public void delete(long userId, long id) {
+    public void delete(UserDO userDO, long id) {
         shoppingCartPort.findById(id)
                 .ifPresentOrElse(shoppingCartItem -> shoppingCartPort.delete(id),
                         () -> {
@@ -71,9 +72,9 @@ public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     }
 
     @Override
-    public void checkout(long userId) {
-        var shoppingCartItems = list(userId);
-        orderService.checkout(userId, shoppingCartItems);
+    public void checkout(UserDO userDO) {
+        var shoppingCartItems = list(userDO);
+        orderService.checkout(userDO.getId(), shoppingCartItems);
         shoppingCartItems
                 .forEach(shoppingCartItem -> shoppingCartPort.delete(shoppingCartItem.getId()));
     }

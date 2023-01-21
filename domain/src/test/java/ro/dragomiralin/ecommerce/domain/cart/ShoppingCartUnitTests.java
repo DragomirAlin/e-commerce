@@ -11,6 +11,7 @@ import ro.dragomiralin.ecommerce.domain.common.error.ShoppingCartItemException;
 import ro.dragomiralin.ecommerce.domain.order.OrderService;
 import ro.dragomiralin.ecommerce.domain.product.ProductService;
 import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
+import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,12 +37,15 @@ public class ShoppingCartUnitTests {
         var userId = 1L;
         var productId = 2L;
         var quantity = 3;
+        var userDO = UserDO.builder()
+                .id(userId)
+                .build();
         var product = ProductDO.builder()
                 .id(productId)
                 .name("Product")
                 .build();
         var shoppingCartItemDO = ShoppingCartItemDO.builder()
-                .userId(userId)
+                .userDO(userDO)
                 .productId(productId)
                 .quantity(quantity)
                 .build();
@@ -49,7 +53,7 @@ public class ShoppingCartUnitTests {
         when(productService.get(productId)).thenReturn(product);
         when(shoppingCartPort.save(any(ShoppingCartItemDO.class))).thenReturn(shoppingCartItemDO);
 
-        var result = classUnderTest.create(userId, shoppingCartItemDO);
+        var result = classUnderTest.create(userDO, shoppingCartItemDO);
 
         verify(productService, times(1)).get(productId);
         verify(shoppingCartPort, times(1)).save(shoppingCartItemDO);
@@ -68,17 +72,24 @@ public class ShoppingCartUnitTests {
 
     @Test
     public void testGetShoppingCartByUserIdNotFound() {
-        when(shoppingCartPort.findByIdAndUserId(anyLong(), anyLong())).thenReturn(Optional.empty());
+        when(shoppingCartPort.findByIdAndUser(any(UserDO.class), anyLong())).thenReturn(Optional.empty());
+
+        var userDO = UserDO.builder()
+                .id(1L)
+                .build();
 
         assertThrows(ShoppingCartItemException.class, () -> {
-            classUnderTest.get(1, 1);
+            classUnderTest.get(userDO, 1);
         });
     }
 
     @Test
     public void testUpdate() {
         var id = 1L;
-        var shoppingCartItemDO = new ShoppingCartItemDO(id, 1L, 2L, 3);
+        var userDO = UserDO.builder()
+                .id(1L)
+                .build();
+        var shoppingCartItemDO = new ShoppingCartItemDO(id, userDO, 2L, 3);
 
         when(shoppingCartPort.findById(id)).thenReturn(Optional.of(shoppingCartItemDO));
         when(shoppingCartPort.save(shoppingCartItemDO)).thenReturn(shoppingCartItemDO);
@@ -94,14 +105,17 @@ public class ShoppingCartUnitTests {
     public void testDelete() {
         var id = 1L;
         var userId = 2L;
+        var userDO = UserDO.builder()
+                .id(1L)
+                .build();
         var shoppingCartItem = ShoppingCartItemDO.builder()
                 .id(id)
-                .userId(userId)
+                .userDO(userDO)
                 .build();
 
-        when(shoppingCartPort.findByIdAndUserId(id, userId)).thenReturn(Optional.of(shoppingCartItem));
+        when(shoppingCartPort.findByIdAndUser(userDO, userId)).thenReturn(Optional.of(shoppingCartItem));
         when(shoppingCartPort.findById(id)).thenReturn(Optional.of(shoppingCartItem));
-        classUnderTest.delete(userId, id);
+        classUnderTest.delete(userDO, id);
         verify(shoppingCartPort, times(1)).delete(id);
     }
 
@@ -109,34 +123,42 @@ public class ShoppingCartUnitTests {
     public void testDeleteShoppingCartNotFound() {
         var id = 1L;
         var userId = 2L;
+        var userDO = UserDO.builder()
+                .id(userId)
+                .build();
+
         when(shoppingCartPort.findById(id)).thenReturn(Optional.empty());
         assertThrows(ShoppingCartItemException.class, () -> {
-            classUnderTest.delete(userId, id);
+            classUnderTest.delete(userDO, id);
         });
         verify(shoppingCartPort, never()).delete(id);
     }
 
     @Test
     public void testCheckout() {
+        var userDO = UserDO.builder()
+                .id(1L)
+                .build();
+
         var userId = 1L;
         var shoppingCartItems = List.of(
                 ShoppingCartItemDO.builder()
                         .id(1L)
-                        .userId(userId)
+                        .userDO(userDO)
                         .productId(2L)
                         .quantity(3)
                         .build(),
                 ShoppingCartItemDO.builder()
                         .id(2L)
-                        .userId(userId)
+                        .userDO(userDO)
                         .productId(3L)
                         .quantity(4)
                         .build()
         );
 
-        when(shoppingCartPort.list(userId)).thenReturn(shoppingCartItems);
+        when(shoppingCartPort.list(userDO)).thenReturn(shoppingCartItems);
 
-        classUnderTest.checkout(userId);
+        classUnderTest.checkout(userDO);
 
         verify(orderService, times(1)).checkout(userId, shoppingCartItems);
         shoppingCartItems.forEach(item -> verify(shoppingCartPort, times(1)).delete(item.getId()));
