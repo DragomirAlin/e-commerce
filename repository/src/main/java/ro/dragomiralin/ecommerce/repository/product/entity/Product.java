@@ -9,24 +9,45 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * @author Dragomir Alin
+ * @since 1.0
+ */
+@Data
 @Entity
-@Table
-@Getter
-@Setter
-@ToString
+@Table(name = "products")
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
-public class Product implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+@RequiredArgsConstructor
+@AllArgsConstructor
+public class Product  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    /**
+     * The name of the product
+     */
     @NotNull(message = "Product name is required.")
+    @Column(name = "name")
     private String name;
+
+    /**
+     * The description of the product
+     */
+    @NotNull(message = "Product description is required.")
+    @Column(name = "description")
     private String description;
+
+    /**
+     * The price of the product
+     */
+    @NotNull(message = "Product price is required.")
+    @Column(name = "price")
     private BigDecimal price;
+
+    /**
+     * Categories of the product
+     */
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.MERGE,
