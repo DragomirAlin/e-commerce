@@ -51,7 +51,7 @@ Detailed planning can be found here:
 
 ### Architecture
 
-Hexagonal Architecture, also known as “Ports and Adapters Pattern”, is an architectural pattern exposed by Alistair
+**Hexagonal Architecture**, also known as “**Ports and Adapters Pattern**”, is an architectural pattern exposed by Alistair
 Cockburn which applies the Anti-corruption Layer DDD Pattern in a very effective way. The concept is very simple: the
 domain model communicates with the external world using interfaces as ports. Every external module that wants to
 communicate with the domain builds an adapter and attaches it to the port.
