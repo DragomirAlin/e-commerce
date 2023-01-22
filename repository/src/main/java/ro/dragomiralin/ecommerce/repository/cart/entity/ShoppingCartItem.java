@@ -28,7 +28,7 @@ public class ShoppingCartItem {
      * The product id.
      */
     @Column(name = "product_id")
-    private String productId;
+    private long productId;
 
     /**
      * The quantity of the product in the cart
