@@ -50,6 +50,7 @@ Detailed planning can be found here:
    Fork this repository and split the monolith into microservices.
 
 ### Architecture
+![Architecture](.documentation/img/architecture/ecommerce_architecture_0.0.1.png)
 
 **Hexagonal Architecture**, also known as “**Ports and Adapters Pattern**”, is an architectural pattern exposed by Alistair
 Cockburn which applies the Anti-corruption Layer DDD Pattern in a very effective way. The concept is very simple: the
@@ -62,6 +63,11 @@ communicate with the domain builds an adapter and attaches it to the port.
 | boot       |       ro.dragomiralin.ecommerce.boot        | domain, repository, controller |
 | repository | ro.dragomiralin.ecommerce.infra.persistence |                         domain |
 | controller |  ro.dragomiralin.ecommerce.infra.api.rest   |                    api, domain |
+
+### Data Modelling
+
+![Diagram](.documentation/img/db_diagram/db_diagram_0.0.1.png)
+[E-Commerce Data Model](./documentation/dbdiagram.md)
 
 ### Technologies
 
@@ -116,10 +122,6 @@ communicate with the domain builds an adapter and attaches it to the port.
 
 - Terraform
 
-### Data Modelling
-
-![Diagram](.documentation/img/db_diagram/db_diagram_0.0.1.png)
-[E-Commerce Data Model](./documentation/dbdiagram.md)
 
 ### References and further reading
 
