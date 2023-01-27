@@ -27,13 +27,11 @@ The provided services are:
 |--------------------------- |-------------------------------------------------------------------------------------- |
 | **User service**            | handles the user's data and billing information |
 | **Product service**        | handles the products catalog(create, delete, update, retrieve)                        |
-| **Shopping cart service**    | handles the user's shopping cart(persist the items, update, delete, checkout)
-|
-| **Order service**            | handles the user's orders(create order from shopping cart, update, delete, retrieve)
-|
+| **Shopping cart service**    | handles the user's shopping cart(persist the items, update, delete, checkout) |
+| **Order service**            | handles the user's orders(create order from shopping cart, update, delete, retrieve) |
 | **Payment service**        | handles the orders' payments using external services(Stripe, PayPal, BTPay)            |
-| **Category service**        | handles the products categories(relation between products and categories)
-|
+| **Category service**        | handles the products categories(relation between products and categories) |
+
 
 ### Project Planning
 
