@@ -1,5 +1,9 @@
 package ro.dragomiralin.ecommerce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,11 +23,16 @@ import java.util.List;
 @Controller
 @RequestMapping("/cart")
 @RequiredArgsConstructor
+@Tag(name = "Shopping Cart", description = "Shopping Cart API")
 public class ShoppingCartItemController implements BaseController {
     private final UserDTOMapper userDTOMapper;
     private final ShoppingCartItemDTOMapper mapper;
     private final ShoppingCartItemService shoppingCartItemService;
 
+    @Operation(summary = "Add product to cart")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Product added to cart"),
+    })
     @PostMapping
     public ResponseEntity<CustomResponse<ShoppingCartItemDTO>> create(@AuthenticationPrincipal UserDTO userDTO, @RequestBody CreateShoppingCartItem createShoppingCartItem) {
         var userDO = userDTOMapper.toUserDO(userDTO);
@@ -32,6 +41,10 @@ public class ShoppingCartItemController implements BaseController {
         return ResponseEntity.ok(CustomResponse.single(mapper.toShoppingCartItemDTO(cart)));
     }
 
+    @Operation(summary = "Get product by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the product"),
+    })
     @GetMapping("/{id}")
     public ResponseEntity<CustomResponse<ShoppingCartItemDTO>> get(@AuthenticationPrincipal UserDTO userDTO, @PathVariable long id) {
         var userDO = userDTOMapper.toUserDO(userDTO);
@@ -40,6 +53,10 @@ public class ShoppingCartItemController implements BaseController {
         return ResponseEntity.ok(CustomResponse.single(mapper.toShoppingCartItemDTO(cart)));
     }
 
+    @Operation(summary = "Get all products")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the products"),
+    })
     @GetMapping
     public ResponseEntity<CustomResponse<List<ShoppingCartItemDTO>>> list(@AuthenticationPrincipal UserDTO userDTO, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "50") int size) {
         var userDO = userDTOMapper.toUserDO(userDTO);
@@ -49,6 +66,10 @@ public class ShoppingCartItemController implements BaseController {
         return ResponseEntity.ok(CustomResponse.list(list));
     }
 
+    @Operation(summary = "Delete product by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Product deleted"),
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<CustomResponse<Void>> delete(@AuthenticationPrincipal UserDTO userDTO, @PathVariable long id) {
         var userDO = userDTOMapper.toUserDO(userDTO);
@@ -57,6 +78,10 @@ public class ShoppingCartItemController implements BaseController {
         return ResponseEntity.ok(CustomResponse.empty());
     }
 
+    @Operation(summary = "Checkout cart")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cart checked out"),
+    })
     @PostMapping("/checkout")
     public ResponseEntity<CustomResponse<Void>> checkout(@AuthenticationPrincipal UserDTO userDTO) {
         var userDO = userDTOMapper.toUserDO(userDTO);
