@@ -10,6 +10,7 @@ import ro.dragomiralin.ecommerce.domain.order.domain.OrderDOStatus;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderItemDO;
 import ro.dragomiralin.ecommerce.domain.order.impl.OrderServiceImpl;
 import ro.dragomiralin.ecommerce.domain.order.port.OrderPort;
+import ro.dragomiralin.ecommerce.domain.payment.PaymentService;
 import ro.dragomiralin.ecommerce.domain.product.ProductService;
 import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
@@ -28,6 +29,8 @@ public class OrderUnitTests {
     private OrderPort orderPort;
     @MockBean
     private ProductService productService;
+    @MockBean
+    private PaymentService paymentService;
     @Autowired
     private OrderServiceImpl classUnderTest;
 
