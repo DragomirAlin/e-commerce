@@ -160,7 +160,7 @@ public class ShoppingCartUnitTests {
 
         classUnderTest.checkout(userDO);
 
-        verify(orderService, times(1)).checkout(userId, shoppingCartItems);
+        verify(orderService, times(1)).checkout(userDO, shoppingCartItems);
         shoppingCartItems.forEach(item -> verify(shoppingCartPort, times(1)).delete(item.getId()));
     }
 }

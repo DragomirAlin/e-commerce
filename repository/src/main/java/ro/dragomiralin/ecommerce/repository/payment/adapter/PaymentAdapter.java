@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.payment.domain.PaymentDO;
 import ro.dragomiralin.ecommerce.domain.payment.port.PaymentPort;
+import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 import ro.dragomiralin.ecommerce.repository.payment.mapper.PaymentDOMapper;
 import ro.dragomiralin.ecommerce.repository.payment.repository.PaymentRepository;
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
 import java.util.Date;
 import java.util.List;
@@ -14,9 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDO {
     private long id;
+    private UserDO userDO;
     private OrderDOStatus status;
     private Date orderedDate;
-    private List<OrderItemDO> orderItems;
-    private long userId;
     private String customerComments;
+    private List<OrderItemDO> orderItems;
 }

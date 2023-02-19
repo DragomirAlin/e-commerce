@@ -12,6 +12,7 @@ import ro.dragomiralin.ecommerce.domain.order.impl.OrderServiceImpl;
 import ro.dragomiralin.ecommerce.domain.order.port.OrderPort;
 import ro.dragomiralin.ecommerce.domain.product.ProductService;
 import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
+import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
 import java.util.Date;
 import java.util.List;
@@ -33,6 +34,9 @@ public class OrderUnitTests {
     @Test
     public void testCreate() {
         var userId = 1L;
+        var userDO = UserDO.builder()
+                .id(userId)
+                .build();
         var orderItems = List.of(OrderItemDO.builder()
                 .id(1L)
                 .product(ProductDO.builder()
@@ -42,13 +46,13 @@ public class OrderUnitTests {
                 .build());
         var customerComments = "Test order";
         var orderDO = OrderDO.builder()
-                .userId(userId)
+                .userDO(userDO)
                 .orderItems(orderItems)
                 .customerComments(customerComments)
                 .build();
 
         var req = OrderDO.builder()
-                .userId(userId)
+                .userDO(userDO)
                 .status(OrderDOStatus.PENDING)
                 .orderItems(orderItems)
                 .customerComments(customerComments)
@@ -57,7 +61,7 @@ public class OrderUnitTests {
 
         when(orderPort.save(any())).thenReturn(req);
 
-        var result = classUnderTest.create(userId, orderDO);
+        var result = classUnderTest.create(userDO, orderDO);
 
         verify(orderPort, times(1)).save(any());
         assertEquals(req, result);
@@ -75,11 +79,14 @@ public class OrderUnitTests {
     @Test
     public void testGetOrderNotFoundByUserId() {
         var userId = 1L;
+        var userDO = UserDO.builder()
+                .id(userId)
+                .build();
         var orderId = 2L;
         when(orderPort.findById(userId, orderId)).thenReturn(Optional.empty());
 
         assertThrows(OrderException.class, () -> {
-            classUnderTest.get(userId, orderId);
+            classUnderTest.get(userDO, orderId);
         });
     }
 

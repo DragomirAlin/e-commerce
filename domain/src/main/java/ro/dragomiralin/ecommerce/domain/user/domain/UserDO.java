@@ -15,4 +15,5 @@ public class UserDO {
     private String firstName;
     private String lastName;
     private String email;
+
 }

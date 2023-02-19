@@ -10,8 +10,12 @@ import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderItemDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDOStatus;
 import ro.dragomiralin.ecommerce.domain.order.port.OrderPort;
+import ro.dragomiralin.ecommerce.domain.payment.PaymentService;
+import ro.dragomiralin.ecommerce.domain.payment.domain.PaymentDO;
 import ro.dragomiralin.ecommerce.domain.product.ProductService;
+import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -20,11 +24,12 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     private final OrderPort orderPort;
     private final ProductService productService;
+    private final PaymentService paymentService;
 
     @Override
-    public OrderDO create(long userId, OrderDO orderDO) {
+    public OrderDO create(UserDO user, OrderDO orderDO) {
         var req = OrderDO.builder()
-                .userId(userId)
+                .userDO(user)
                 .status(OrderDOStatus.PENDING)
                 .orderItems(orderDO.getOrderItems())
                 .customerComments(orderDO.getCustomerComments())
@@ -35,14 +40,24 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public OrderDO pay(UserDO user, long orderId) {
+        OrderDO orderDO = get(user, orderId);
+
+        PaymentDO paymentDO = paymentService.createPayment(orderDO);
+
+
+        return null;
+    }
+
+    @Override
     public OrderDO get(long id) {
         return orderPort.findById(id)
                 .orElseThrow(() -> new OrderException("Order not found"));
     }
 
     @Override
-    public OrderDO get(long userId, long orderId) {
-        return orderPort.findById(userId, orderId)
+    public OrderDO get(UserDO user, long orderId) {
+        return orderPort.findById(user.getId(), orderId)
                 .orElseThrow(() -> new OrderException("Order not found"));
     }
 
@@ -57,23 +72,23 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void delete(long userId, long id) {
-        var orderDO = get(userId, id);
+    public void delete(UserDO user, long id) {
+        var orderDO = get(user, id);
         orderPort.delete(orderDO.getId());
     }
 
     @Override
-    public List<OrderDO> list(long userId) {
-        return orderPort.list(userId);
+    public List<OrderDO> list(UserDO user) {
+        return orderPort.list(user.getId());
     }
 
     @Override
-    public PageDO<OrderDO> list(long userId, int page, int size) {
-        return orderPort.list(userId, page, size);
+    public PageDO<OrderDO> list(UserDO user, int page, int size) {
+        return orderPort.list(user.getId(), page, size);
     }
 
     @Override
-    public void checkout(long userId, List<ShoppingCartItemDO> shoppingCartItems) {
+    public void checkout(UserDO user, List<ShoppingCartItemDO> shoppingCartItems) {
         var orderItems = shoppingCartItems.stream()
                 .map(item -> OrderItemDO.builder()
                         .product(productService.get(item.getProductId()))
@@ -85,6 +100,6 @@ public class OrderServiceImpl implements OrderService {
                 .orderItems(orderItems)
                 .build();
 
-        create(userId, orderReq);
+        create(user, orderReq);
     }
 }

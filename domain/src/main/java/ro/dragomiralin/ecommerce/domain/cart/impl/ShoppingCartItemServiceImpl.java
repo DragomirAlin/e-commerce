@@ -74,7 +74,7 @@ public class ShoppingCartItemServiceImpl implements ShoppingCartItemService {
     @Override
     public void checkout(UserDO userDO) {
         var shoppingCartItems = list(userDO);
-        orderService.checkout(userDO.getId(), shoppingCartItems);
+        orderService.checkout(userDO, shoppingCartItems);
         shoppingCartItems
                 .forEach(shoppingCartItem -> shoppingCartPort.delete(shoppingCartItem.getId()));
     }
