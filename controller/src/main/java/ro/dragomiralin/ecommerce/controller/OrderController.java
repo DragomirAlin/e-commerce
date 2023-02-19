@@ -1,5 +1,6 @@
 package ro.dragomiralin.ecommerce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ro.dragomiralin.ecommerce.controller.dto.ListResponse;
 import ro.dragomiralin.ecommerce.controller.dto.OrderDTO;
-import ro.dragomiralin.ecommerce.controller.dto.PageDTO;
 import ro.dragomiralin.ecommerce.controller.dto.UserDTO;
 import ro.dragomiralin.ecommerce.controller.mapper.OrderDTOMapper;
 import ro.dragomiralin.ecommerce.controller.request.CustomResponse;
@@ -18,11 +18,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/order")
 @RequiredArgsConstructor
-public class OrderController {
+public class OrderController implements BaseController {
     private final OrderService orderService;
     private final OrderDTOMapper mapper;
 
     @PostMapping
+    @Operation(summary = "Create a new order")
     public ResponseEntity<CustomResponse<OrderDTO>> create(@AuthenticationPrincipal UserDTO userDTO, @RequestBody OrderDTO orderDTO) {
         var order = orderService.create(userDTO.getId(), mapper.toOrderDO(orderDTO));
         return ResponseEntity.ok(CustomResponse.single(mapper.toOrderDTO(order)));

@@ -19,3 +19,14 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: ${KEYCLOAK_URL:http://localhost:8083}/auth/realms/master
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: "*" # openapi, swagger-ui
+springdoc:
+  use-management-port: true
+  show-actuator: true
+  enable-spring-security: true

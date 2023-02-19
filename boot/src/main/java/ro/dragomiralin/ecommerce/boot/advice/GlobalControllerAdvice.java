@@ -25,6 +25,7 @@ import ro.dragomiralin.ecommerce.domain.product.error.ProductNotFoundException;
 import ro.dragomiralin.ecommerce.domain.user.error.UserAlreadyExistsException;
 
 import jakarta.validation.ValidationException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,16 +75,17 @@ public class GlobalControllerAdvice {
         return new ResponseEntity<>(CustomResponse.error(error), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<CustomResponse> genericException(Exception e) {
+    
+
+    @ExceptionHandler(Throwable.class)
+    public ResponseEntity<CustomResponse> problem(final Throwable e) {
         log.error("Unhandled exception with message: {}", e.getMessage(), e);
         return new ResponseEntity(CustomResponse
                 .error(ErrorItem.builder()
                         .code(500)
                         .message(e.getMessage())
                         .build()
-                ), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+                ), HttpStatus.INTERNAL_SERVER_ERROR);    }
 
 
     @Data

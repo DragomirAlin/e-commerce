@@ -19,7 +19,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/cart")
 @RequiredArgsConstructor
-public class ShoppingCartItemController {
+public class ShoppingCartItemController implements BaseController {
     private final UserDTOMapper userDTOMapper;
     private final ShoppingCartItemDTOMapper mapper;
     private final ShoppingCartItemService shoppingCartItemService;

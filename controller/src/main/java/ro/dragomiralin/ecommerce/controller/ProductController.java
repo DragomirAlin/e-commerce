@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/product")
 @RequiredArgsConstructor
-public class ProductController {
+public class ProductController implements BaseController {
     private final ProductDTOMapper mapper;
     private final ProductService productService;
 

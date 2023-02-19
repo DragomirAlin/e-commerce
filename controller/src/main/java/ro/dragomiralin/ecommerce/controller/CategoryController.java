@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/category")
 @RequiredArgsConstructor
-public class CategoryController {
+public class CategoryController implements BaseController {
     private final CategoryDTOMapper mapper;
     private final CategoryService categoryService;
 

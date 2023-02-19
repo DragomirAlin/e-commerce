@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/admin/product")
 @RequiredArgsConstructor
-public class ProductAdminController {
+public class ProductAdminController implements BaseController {
     private final ProductService productService;
     private final CategoryService categoryService;
     private final ProductDTOMapper productMapper;
