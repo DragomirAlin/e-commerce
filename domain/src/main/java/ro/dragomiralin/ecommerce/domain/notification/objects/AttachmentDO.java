@@ -5,15 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class MailDO {
-    private String emailTo;
-    private String subject;
-    private String body;
-    private List<AttachmentDO> attachments;
+public class AttachmentDO {
+    private String name;
+    private byte[] content;
+
 }
+
