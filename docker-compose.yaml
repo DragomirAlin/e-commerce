@@ -28,6 +28,11 @@ services:
       - "8083:8080"
     depends_on:
       - db
+  redis:
+    image: redis:5.0.3-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
 volumes:
   db:
     driver: local

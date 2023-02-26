@@ -15,7 +15,6 @@ import ro.dragomiralin.ecommerce.controller.request.CustomResponse;
 import ro.dragomiralin.ecommerce.controller.request.ProductCreateReq;
 import ro.dragomiralin.ecommerce.domain.category.CategoryService;
 import ro.dragomiralin.ecommerce.domain.product.ProductService;
-import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 
 import java.util.stream.Collectors;
 
