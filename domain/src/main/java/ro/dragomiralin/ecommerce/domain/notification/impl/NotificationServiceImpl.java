@@ -13,6 +13,6 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void sendMail(MailDO mailDO) {
-        defaultEmailClient.sendEmail(mailDO.getEmailTo(), mailDO.getSubject(), mailDO.getBody());
+        defaultEmailClient.sendEmail(mailDO);
     }
 }

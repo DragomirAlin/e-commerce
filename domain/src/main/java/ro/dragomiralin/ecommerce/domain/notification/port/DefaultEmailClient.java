@@ -1,11 +1,12 @@
 package ro.dragomiralin.ecommerce.domain.notification.port;
 
 
+import ro.dragomiralin.ecommerce.domain.notification.objects.MailDO;
+
 import java.util.List;
 
 public interface DefaultEmailClient {
 
-    void sendEmail(String to, String subject, String body);
+    void sendEmail(MailDO mailDO);
 
-    void sendEmail(String to, String subject, String body, List<Byte> attachments);
 }

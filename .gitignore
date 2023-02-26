@@ -1,4 +1,5 @@
 .data
+/boot/src/main/resources/application-dev.yml
 # Created by https://www.toptal.com/developers/gitignore/api/java,intellij+all,maven,vscode
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,intellij+all,maven,vscode
 
