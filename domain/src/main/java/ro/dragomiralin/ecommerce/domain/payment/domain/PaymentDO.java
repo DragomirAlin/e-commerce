@@ -14,10 +14,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class PaymentDO {
     private long id;
-    private String externalPaymentId;
     private OrderDO order;
     private BigDecimal amount;
-    private PaymentDOCurrency currency;
-    private PaymentDOGateway gateway;
     private PaymentDOStatus status;
+    private PaymentDOGateway gateway;
+    private String externalPaymentId;
+    private PaymentDOCurrency currency;
 }

@@ -44,5 +44,11 @@ springdoc:
 ecommerce:
   mail:
     from:
-
+  storage:
+    s3:
+      access-key:
+      secret-key:
+      bucket-name:
+      region:
+      endpoint:
 

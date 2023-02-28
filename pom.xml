@@ -31,6 +31,7 @@
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
         <net.datafaker.version>1.6.0</net.datafaker.version>
         <guava.version>31.1-jre</guava.version>
+        <software.amazon.awssdk.version>2.20.12</software.amazon.awssdk.version>
     </properties>
     <dependencies>
         <!-- Test -->
@@ -202,6 +203,13 @@
                 <groupId>io.micrometer</groupId>
                 <artifactId>micrometer-tracing-bom</artifactId>
                 <version>${micrometer-tracing.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>${software.amazon.awssdk.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
