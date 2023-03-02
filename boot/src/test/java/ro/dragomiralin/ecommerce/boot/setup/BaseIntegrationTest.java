@@ -26,8 +26,7 @@ public class BaseIntegrationTest extends BaseTest {
     @Autowired
     protected MockMvc mockMvc;
     @Container
-    static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>(parse("postgres:14"))
-            .withExposedPorts(5432);
+    static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>(parse("postgres:14"));
     @Container
     static GenericContainer<?> redis =
             new GenericContainer<>(DockerImageName.parse("redis:5.0.3-alpine"))
@@ -43,7 +42,6 @@ public class BaseIntegrationTest extends BaseTest {
         registry.add("spring.datasource.url", postgreSQLContainer::getJdbcUrl);
         registry.add("spring.datasource.username", postgreSQLContainer::getUsername);
         registry.add("spring.datasource.password", postgreSQLContainer::getPassword);
-        registry.add("spring.datasource.driver-class-name", postgreSQLContainer::getDriverClassName);
     }
 
     @Before
