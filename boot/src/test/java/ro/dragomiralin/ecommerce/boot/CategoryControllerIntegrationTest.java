@@ -7,6 +7,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import ro.dragomiralin.ecommerce.boot.setup.BaseIntegrationTest;
 import ro.dragomiralin.ecommerce.controller.request.CategoryCreateReq;
 
+import java.util.UUID;
+
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -31,7 +33,7 @@ public class CategoryControllerIntegrationTest extends BaseIntegrationTest {
         public void create_category_when_isAdmin() throws Exception {
 
             var category = CategoryCreateReq.builder()
-                    .name("test")
+                    .name(UUID.randomUUID().toString())
                     .build();
             mockMvc
                     .perform(
@@ -47,7 +49,7 @@ public class CategoryControllerIntegrationTest extends BaseIntegrationTest {
         @WithMockUser(username = "user", password = "user", roles = "USER")
         public void create_category_when_isUser() throws Exception {
             var category = CategoryCreateReq.builder()
-                    .name("test")
+                    .name(UUID.randomUUID().toString())
                     .build();
             mockMvc
                     .perform(

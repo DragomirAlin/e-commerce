@@ -1,25 +1,57 @@
 spring:
-#  datasource:
-#    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-#    driver-class-name: org.h2.Driver
-#    username: sa
-#    password:
+  application:
+    name: e-commerce
   datasource:
-    url: jdbc:tc:postgresql:14:///ecommerce?TC_REUSABLE=true
-    username: root
-    password: pass
-    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:postgresql://localhost:5432/ecommerce
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     database-platform: postgres
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-#        dialect: org.hibernate.dialect.H2Dialect
     show-sql: true
   security:
     oauth2:
       resourceserver:
         jwt:
           issuer-uri: ${KEYCLOAK_URL:http://localhost:8083}/auth/realms/master
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username:
+    password:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: "*" # openapi, swagger-ui
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+springdoc:
+  use-management-port: true
+  show-actuator: true
+  enable-spring-security: true
+
+ecommerce:
+  mail:
+    from:
+  storage:
+    s3:
+      access-key:
+      secret-key:
+      bucket-name:
+      region:
+      endpoint:
+
