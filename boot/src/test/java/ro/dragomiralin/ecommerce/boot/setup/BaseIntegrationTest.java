@@ -16,6 +16,7 @@ import org.testcontainers.utility.DockerImageName;
 import ro.dragomiralin.ecommerce.boot.ECommerceApplication;
 
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.testcontainers.utility.DockerImageName.parse;
 
 @SpringBootTest(classes = {ECommerceApplication.class})
 @AutoConfigureMockMvc
@@ -25,17 +26,23 @@ public class BaseIntegrationTest extends BaseTest {
     @Autowired
     protected MockMvc mockMvc;
     @Container
-    protected static final PostgreSQLContainer DB = PostgresqlSingletonContainer.INSTANCE.getContainer();
+    static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>(parse("postgres:14"))
+            .withExposedPorts(5432);
     @Container
-    static GenericContainer redis =
-            new GenericContainer(DockerImageName.parse("redis:5.0.3-alpine"))
+    static GenericContainer<?> redis =
+            new GenericContainer<>(DockerImageName.parse("redis:5.0.3-alpine"))
                     .withExposedPorts(6379);
 
     @DynamicPropertySource
-    static void redisProperties(DynamicPropertyRegistry registry) {
+    static void containersProperties(DynamicPropertyRegistry registry) {
         redis.start();
+        postgreSQLContainer.start();
         registry.add("spring.data.redis.host", redis::getHost);
         registry.add("spring.data.redis.port", redis::getFirstMappedPort);
+
+        registry.add("spring.datasource.url", postgreSQLContainer::getJdbcUrl);
+        registry.add("spring.datasource.username", postgreSQLContainer::getUsername);
+        registry.add("spring.datasource.password", postgreSQLContainer::getPassword);
     }
 
     @Before
