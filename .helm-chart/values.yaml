@@ -1,14 +1,11 @@
-# Default values for ecommerce.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
+# Ecommerce Chart Configuration
 replicaCount: 1
 
 image:
   repository: dragomiralin/ecommerce-api
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "main"
 
 imagePullSecrets: [ ]
 nameOverride: ""
@@ -33,18 +30,18 @@ securityContext: { }
   #   drop:
   #   - ALL
   # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
+# runAsNonRoot: true
 # runAsUser: 1000
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
 
 ingress:
   enabled: false
   className: ""
   annotations: { }
-    # kubernetes.io/ingress.class: nginx
+  # kubernetes.io/ingress.class: nginx
   # kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
@@ -65,7 +62,7 @@ resources: { }
   #   cpu: 100m
   #   memory: 128Mi
   # requests:
-  #   cpu: 100m
+#   cpu: 100m
 #   memory: 128Mi
 
 autoscaling:
@@ -86,18 +83,77 @@ istio:
   gateway: ingressgateway
   protocol: https
   hosts:
-    - host: "chart-example.local"
+    - host: "api.yourdomain"
   security:
-    enabled: false
-    credentialName: ""
-    commonName: ""
+    enabled: true
+    credentialName: "cert-api.yourdomain"
+    commonName: "api.yourdomain"
     hosts:
-      - "chart-example.local"
+      - "api.yourdomain"
 
-appConfig:
-  spring:
-    name: "ecommerce"
+spring:
+  application:
+    name: e-commerce
+  datasource:
+    url: jdbc:postgresql://ecommerce-postgresql-primary:5432/ecommercedb
+    username: ecommerce
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: postgres
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://keycloak.yourdomain/auth/realms/master
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username:
+    password:
+  data:
+    redis:
+      host: redis-master
+      password: 1234
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: "*" # openapi, swagger-ui
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+springdoc:
+  use-management-port: true
+  show-actuator: true
+  enable-spring-security: true
+ecommerce:
+  mail:
+    from:
+  storage:
+    s3:
+      access-key:
+      secret-key:
+      bucket-name:
+      region:
+      endpoint:
 
+# Redis Chart Configuration
+redis:
+  enabled: true
+  auth:
+    password:
+
+# PostgreSQL Chart Configuration
 postgresql:
   enabled: true
   global:
@@ -107,59 +163,26 @@ postgresql:
   architecture: replication
   replication:
     password: 1234
+  initdbScripts:
+    00_create_db_keycloak.sql: |
+      create database IF NOT EXISTS keycloak;
+      create user keycloak with encrypted password '1234';
+      grant all privileges on database keycloak to keycloak;
+    01_create_db_ecommerce.sql: |
+      create database IF NOT EXISTS ecommercedb;
+      create user ecommerce with encrypted password '1234';
+      grant all privileges on database ecommercedb to ecommerce;
+  initdbUser: postgres
+  initdbPassword: 1234
 
+# Keycloak Chart Configuration
 keycloak:
-  istio:
-    enabled: true
-    gateway: ingressgateway
-    protocol: https
-    hosts:
-      - host: "chart-example.local"
-    security:
-      enabled: false
-      credentialName: ""
-      commonName: ""
-      hosts:
-        - "chart-example.local"
   enabled: true
   replicas: 3
-  ingress:
-    enabled: false
-    annotations:
-      kubernetes.io/ingress.class: "nginx"
-      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
-    rules:
-      - host: keycloak.example.com
-        paths:
-          - path: /
-            pathType: Prefix
-    tls:
-      - hosts:
-          - keycloak.example.com
-        secretName: keycloak.example.com-tls
-    console:
-      enabled: true
-      annotations:
-        cert-manager.io/issuer: letsencrypt-prod
-      rules:
-        - host: keycloak.example.com
-          paths:
-            - path: /auth/admin/
-              pathType: Prefix
-      tls:
-        - hosts:
-            - keycloak.example.com
-          secretName: keycloak.example.com-tls
-
   postgresql:
     enabled: false
-    postgresqlUsername: keycloak
-    postgresqlPassword: 1234
-    postgresqlDatabase: keycloak
-
   service:
     type: NodePort
-
   rbac:
     create: true
     rules:
@@ -170,7 +193,6 @@ keycloak:
         verbs:
           - get
           - list
-
   extraEnv: |
     - name: JGROUPS_DISCOVERY_PROTOCOL
       value: kubernetes.KUBE_PING
@@ -202,6 +224,19 @@ keycloak:
     - name: KEYCLOAK_PASSWORD
       value: "1234"
     - name: KEYCLOAK_FRONTEND_URL
-      value: "http://keycloak.example.com/auth/"
+      value: "https://keycloak.yourdomain/auth/"
     - name: JAVA_OPTS_APPEND
-      value: "-Dkeycloak.adminUrl=http://keycloak.example.com/auth/"
+      value: "-Dkeycloak.adminUrl=https://keycloak.yourdomain/auth/"
+
+  istio:
+    enabled: true
+    gateway: ingressgateway
+    protocol: https
+    hosts:
+      - host: "keycloak.yourdomain"
+    security:
+      enabled: true
+      credentialName: "cert-keycloak.yourdomain"
+      commonName: "keycloak.yourdomain"
+      hosts:
+        - "keycloak.yourdomain"
