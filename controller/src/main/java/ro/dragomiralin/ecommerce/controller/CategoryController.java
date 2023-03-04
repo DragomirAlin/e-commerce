@@ -18,7 +18,7 @@ import ro.dragomiralin.ecommerce.domain.category.CategoryService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/v1/category")
 @RequiredArgsConstructor
 @Tag(name = "Category", description = "Category API")
 public class CategoryController implements BaseController {

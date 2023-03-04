@@ -17,7 +17,7 @@ import ro.dragomiralin.ecommerce.domain.category.CategoryService;
 import ro.dragomiralin.ecommerce.domain.category.domain.CategoryDO;
 
 @RestController
-@RequestMapping("/admin/category")
+@RequestMapping("/v1/admin/category")
 @RequiredArgsConstructor
 @Tag(name = "Category Admin", description = "Category Admin API")
 public class CategoryAdminController implements BaseController {

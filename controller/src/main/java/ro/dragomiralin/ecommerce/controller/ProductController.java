@@ -18,7 +18,7 @@ import ro.dragomiralin.ecommerce.domain.product.ProductService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/v1/product")
 @RequiredArgsConstructor
 @Tag(name = "Product", description = "Product API")
 public class ProductController implements BaseController {

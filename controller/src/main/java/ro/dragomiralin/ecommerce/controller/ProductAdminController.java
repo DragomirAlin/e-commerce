@@ -19,7 +19,7 @@ import ro.dragomiralin.ecommerce.domain.product.ProductService;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/admin/product")
+@RequestMapping("/v1/admin/product")
 @RequiredArgsConstructor
 @Tag(name = "Product Admin", description = "Product Admin API")
 public class ProductAdminController implements BaseController {
