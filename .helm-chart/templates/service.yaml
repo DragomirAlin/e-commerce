@@ -11,5 +11,9 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    - port: {{ .Values.service.health.port }}
+      targetPort: health
+      protocol: TCP
+      name: health
   selector:
     {{- include "ecommerce.selectorLabels" . | nindent 4 }}

@@ -119,7 +119,7 @@ spring:
     password:
   data:
     redis:
-      host: redis-master
+      host: ecommerce-redis-master
       password: 1234
 management:
   server:
