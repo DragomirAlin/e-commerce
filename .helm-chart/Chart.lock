@@ -5,5 +5,8 @@ dependencies:
 - name: keycloak
   repository: https://codecentric.github.io/helm-charts
   version: 18.3.0
-digest: sha256:1dd8c607c551d548593f43b001454da0a528ea925d722967368b6f327ea28962
-generated: "2022-12-10T19:30:39.269519+02:00"
+- name: redis
+  repository: https://charts.bitnami.com/bitnami
+  version: 17.8.2
+digest: sha256:a94caba83eae178e5f991cf160965026a3e2a9a0ea1a817c4cbc576f9da77b0f
+generated: "2023-03-04T14:08:02.266873+02:00"
