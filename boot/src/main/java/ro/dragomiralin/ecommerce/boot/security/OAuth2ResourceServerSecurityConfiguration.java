@@ -29,7 +29,11 @@ import java.util.stream.Collectors;
 public class OAuth2ResourceServerSecurityConfiguration {
     private static final String[] AUTH_WHITELIST = {
             "/actuator/**",
-            "/v3/api-docs.yaml",
+    };
+
+    private static final String[] ADMIN_LIST = {
+            "/v1/admin/**",
+            "/admin/**",
     };
 
     @Bean
@@ -37,7 +41,7 @@ public class OAuth2ResourceServerSecurityConfiguration {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers(ADMIN_LIST).hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
         http.cors();
