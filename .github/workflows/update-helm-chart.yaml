@@ -2,7 +2,8 @@ name: Package and Publish Helm Chart
 on:
   push:
     paths:
-      - helm-chart/**
+      - .helm-chart/**
+  workflow_dispatch:
   pull_request:
     branches: [ main ]
 jobs:
