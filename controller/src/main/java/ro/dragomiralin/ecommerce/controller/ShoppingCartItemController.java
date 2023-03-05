@@ -49,7 +49,7 @@ public class ShoppingCartItemController implements BaseController {
     public ResponseEntity<CustomResponse<ShoppingCartItemDTO>> get(@AuthenticationPrincipal UserDTO userDTO, @PathVariable long id) {
         var userDO = userDTOMapper.toUserDO(userDTO);
 
-        var cart = shoppingCartItemService.get(userDO, userDTO.getId());
+        var cart = shoppingCartItemService.get(userDO, userDTO.id());
         return ResponseEntity.ok(CustomResponse.single(mapper.toShoppingCartItemDTO(cart)));
     }
 

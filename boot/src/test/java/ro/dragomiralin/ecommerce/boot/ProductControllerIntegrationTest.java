@@ -54,7 +54,7 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
         var response = getMvcResult(result, new TypeReference<CustomResponse<ProductDTO>>() {
         });
 
-        var id = response.getData().getId();
+        var id = response.getData().id();
         mockMvc
                 .perform(
                         get("/v1/product/{id}", id)

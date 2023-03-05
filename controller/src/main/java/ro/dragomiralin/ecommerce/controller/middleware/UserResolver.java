@@ -25,7 +25,7 @@ public class UserResolver {
             var claims = jwt.getToken().getClaims();
 
             UserDTO user = UserDTO.from(claims);
-            return userService.findBySub(user.getSub())
+            return userService.findBySub(user.sub())
                     .map(userDTOMapper::toUserDTO)
                     .orElseGet(() -> {
                         var userDO = userDTOMapper.toUserDO(user);

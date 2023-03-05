@@ -23,12 +23,12 @@ public class CustomResponse<T> {
 
     public static <T> CustomResponse<List<T>> list(ListResponse<T> listResponse) {
         CustomResponse<List<T>> customHttpResponse = new CustomResponse<>();
-        customHttpResponse.setData(listResponse.getData() == null ? new ArrayList<>() : listResponse.getData());
+        customHttpResponse.setData(listResponse.data() == null ? new ArrayList<>() : listResponse.data());
         customHttpResponse.setPaging(
                 Paging.builder()
-                        .limit(listResponse.getLimit())
-                        .offset(listResponse.getOffset())
-                        .total(listResponse.getTotal())
+                        .limit(listResponse.limit())
+                        .offset(listResponse.offset())
+                        .total(listResponse.total())
                         .build()
         );
 

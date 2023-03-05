@@ -1,23 +1,18 @@
 package ro.dragomiralin.ecommerce.controller.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
 
-@Data
 @Builder
-@RequiredArgsConstructor
-@AllArgsConstructor
-public class UserDTO {
-    private long id;
-    private String sub;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private boolean verifiedEmail;
+public record UserDTO(
+        long id,
+        String sub,
+        String firstName,
+        String lastName,
+        String email,
+        boolean verifiedEmail) {
+
 
     public static final class Fields {
         public static final String SUB = "sub";
@@ -35,29 +30,29 @@ public class UserDTO {
      * @return
      */
     public static UserDTO from(Map<String, Object> claims) {
-        var user = new UserDTO();
+        var builder = new UserDTOBuilder();
 
         if (claims.containsKey(Fields.SUB)) {
-            user.setSub((String) claims.get(Fields.SUB));
+            builder.sub((String) claims.get(Fields.SUB));
         }
 
         if (claims.containsKey(Fields.FIRST_NAME)) {
-            user.setFirstName((String) claims.get(Fields.FIRST_NAME));
+            builder.firstName((String) claims.get(Fields.FIRST_NAME));
         }
 
         if (claims.containsKey(Fields.LAST_NAME)) {
-            user.setLastName((String) claims.get(Fields.LAST_NAME));
+            builder.lastName((String) claims.get(Fields.LAST_NAME));
         }
 
         if (claims.containsKey(Fields.EMAIL)) {
-            user.setEmail((String) claims.get(Fields.EMAIL));
+            builder.email((String) claims.get(Fields.EMAIL));
         }
 
         if (claims.containsKey(Fields.EMAIL_VERIFIED)) {
-            user.setVerifiedEmail((boolean) claims.get(Fields.EMAIL_VERIFIED));
+            builder.verifiedEmail((boolean) claims.get(Fields.EMAIL_VERIFIED));
         }
 
-        return user;
+        return builder.build();
     }
 
 

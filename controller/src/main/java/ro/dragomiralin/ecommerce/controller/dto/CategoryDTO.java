@@ -8,13 +8,9 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-@Data
 @Builder
-@RequiredArgsConstructor
-@AllArgsConstructor
-public class CategoryDTO {
-    private long id;
-    private String name;
-    @JsonIgnore
-    private List<ProductDTO> products;
+public record CategoryDTO(String id,
+                          String name,
+                          @JsonIgnore List<ProductDTO> products) {
 }
+
