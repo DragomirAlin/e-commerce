@@ -4,10 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
 import ro.dragomiralin.ecommerce.domain.payment.PaymentService;
-import ro.dragomiralin.ecommerce.domain.payment.domain.PaymentDO;
-import ro.dragomiralin.ecommerce.domain.payment.domain.PaymentDOCurrency;
-import ro.dragomiralin.ecommerce.domain.payment.domain.PaymentDOStatus;
+import ro.dragomiralin.ecommerce.domain.payment.domain.*;
 import ro.dragomiralin.ecommerce.domain.payment.port.PaymentPort;
+import ro.dragomiralin.ecommerce.domain.payment.port.StripeClient;
 
 import java.math.BigDecimal;
 
@@ -16,9 +15,10 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentPort paymentPort;
+    private final StripeClient stripeClient;
 
     @Override
-    public PaymentDO createPayment(OrderDO orderDO) {
+    public CreatedPaymentDO createPayment(OrderDO orderDO) {
         var totalToPay = orderDO.getOrderItems().stream()
                 .map(orderItemDO -> BigDecimal.valueOf(orderItemDO.getQuantity()).multiply(orderItemDO.getProduct().getPrice()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -30,9 +30,21 @@ public class PaymentServiceImpl implements PaymentService {
                 .order(orderDO)
                 .build());
 
-        //TODO: call the payment gateway
+        PaymentResponseDO paymentResponseDO = stripeClient.createPayment(paymentDO);
 
-        return null;
+        if (paymentResponseDO.success()) {
+            paymentDO.setExternalPaymentId(paymentResponseDO.paymentExternalId());
+            paymentDO.setStatus(PaymentDOStatus.SUCCESS);
+        } else {
+            paymentDO.setStatus(PaymentDOStatus.FAILED);
+        }
+
+        paymentDO = paymentPort.save(paymentDO);
+
+        return CreatedPaymentDO.builder()
+                .paymentDO(paymentDO)
+                .paymentResponseDO(paymentResponseDO)
+                .build();
     }
 
     @Override

@@ -11,12 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ro.dragomiralin.ecommerce.controller.dto.ListResponse;
 import ro.dragomiralin.ecommerce.controller.dto.OrderDTO;
+import ro.dragomiralin.ecommerce.controller.dto.PaymentResponseDTO;
 import ro.dragomiralin.ecommerce.controller.dto.UserDTO;
 import ro.dragomiralin.ecommerce.controller.mapper.OrderDTOMapper;
+import ro.dragomiralin.ecommerce.controller.mapper.PaymentDTOMapper;
 import ro.dragomiralin.ecommerce.controller.mapper.UserDTOMapper;
 import ro.dragomiralin.ecommerce.controller.request.CustomResponse;
 import ro.dragomiralin.ecommerce.domain.order.OrderService;
-import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
+import ro.dragomiralin.ecommerce.domain.payment.domain.PaymentResponseDO;
 import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
 import java.util.List;
@@ -29,6 +31,7 @@ public class OrderController implements BaseController {
     private final OrderService orderService;
     private final OrderDTOMapper mapper;
     private final UserDTOMapper userDTOMapper;
+    private final PaymentDTOMapper paymentDTOMapper;
 
     @Operation(summary = "Create order")
     @ApiResponses(value = {
@@ -73,10 +76,10 @@ public class OrderController implements BaseController {
             @ApiResponse(responseCode = "404", description = "Order not found")
     })
     @PutMapping("/{id}/pay")
-    public ResponseEntity<CustomResponse<OrderDTO>> pay(@AuthenticationPrincipal UserDTO userDTO, @PathVariable long id) {
+    public ResponseEntity<CustomResponse<PaymentResponseDTO>> pay(@AuthenticationPrincipal UserDTO userDTO, @PathVariable long id) {
         UserDO userDO = userDTOMapper.toUserDO(userDTO);
-        var order = orderService.pay(userDO, id);
-        return ResponseEntity.ok(CustomResponse.single(mapper.toOrderDTO(order)));
+        PaymentResponseDO paymentResponseDO = orderService.pay(userDO, id);
+        return ResponseEntity.ok(CustomResponse.single(paymentDTOMapper.toPaymentResponseDTO(paymentResponseDO)));
     }
 
 }

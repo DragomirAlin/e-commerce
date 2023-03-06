@@ -1,12 +1,13 @@
 package ro.dragomiralin.ecommerce.domain.payment;
 
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
+import ro.dragomiralin.ecommerce.domain.payment.domain.CreatedPaymentDO;
 import ro.dragomiralin.ecommerce.domain.payment.domain.PaymentDO;
 
 
 public interface PaymentService {
 
-    PaymentDO createPayment(OrderDO orderDO);
+    CreatedPaymentDO createPayment(OrderDO orderDO);
 
     PaymentDO processPayment(PaymentDO paymentDO);
 

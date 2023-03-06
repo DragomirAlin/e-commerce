@@ -54,4 +54,6 @@ ecommerce:
       bucket-name:
       region:
       endpoint:
-
+  strapi:
+    public-key:
+    private-key:

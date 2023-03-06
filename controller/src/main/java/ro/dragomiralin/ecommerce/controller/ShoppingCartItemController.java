@@ -53,7 +53,7 @@ public class ShoppingCartItemController implements BaseController {
         return ResponseEntity.ok(CustomResponse.single(mapper.toShoppingCartItemDTO(cart)));
     }
 
-    @Operation(summary = "Get all products")
+    @Operation(summary = "Get all products from cart")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found the products"),
     })

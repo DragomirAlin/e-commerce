@@ -11,7 +11,9 @@ import ro.dragomiralin.ecommerce.domain.order.domain.OrderItemDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDOStatus;
 import ro.dragomiralin.ecommerce.domain.order.port.OrderPort;
 import ro.dragomiralin.ecommerce.domain.payment.PaymentService;
+import ro.dragomiralin.ecommerce.domain.payment.domain.CreatedPaymentDO;
 import ro.dragomiralin.ecommerce.domain.payment.domain.PaymentDO;
+import ro.dragomiralin.ecommerce.domain.payment.domain.PaymentResponseDO;
 import ro.dragomiralin.ecommerce.domain.product.ProductService;
 import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
@@ -40,13 +42,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDO pay(UserDO user, long orderId) {
+    public PaymentResponseDO pay(UserDO user, long orderId) {
         OrderDO orderDO = get(user, orderId);
 
-        PaymentDO paymentDO = paymentService.createPayment(orderDO);
-
-
-        return null;
+        CreatedPaymentDO createdPaymentDO = paymentService.createPayment(orderDO);
+        return createdPaymentDO.paymentResponseDO();
     }
 
     @Override
