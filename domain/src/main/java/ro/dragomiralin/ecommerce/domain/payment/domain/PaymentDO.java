@@ -17,7 +17,6 @@ public class PaymentDO {
     private OrderDO order;
     private BigDecimal amount;
     private PaymentDOStatus status;
-    private PaymentDOGateway gateway;
     private String externalPaymentId;
     private PaymentDOCurrency currency;
 }

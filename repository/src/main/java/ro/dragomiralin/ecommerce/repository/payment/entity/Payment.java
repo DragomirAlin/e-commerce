@@ -39,6 +39,18 @@ public class Payment {
     private PaymentCurrency currency;
 
     /**
+     * External payment id
+     */
+    @Column(name = "external_payment_id")
+    private String externalPaymentId;
+
+    /**
+     * The external invoice id of the payment
+     */
+    @Column(name = "external_invoice_id")
+    private String externalInvoiceId;
+
+    /**
      * The order to which the payment belongs
      */
     @ManyToOne(cascade = CascadeType.MERGE)

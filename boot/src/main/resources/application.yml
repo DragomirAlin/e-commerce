@@ -18,7 +18,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${KEYCLOAK_URL:http://localhost:8083}/auth/realms/master
+          issuer-uri: ${KEYCLOAK_URL:http://localhost:8083}/realms/master
   mail:
     host: smtp.gmail.com
     port: 587
