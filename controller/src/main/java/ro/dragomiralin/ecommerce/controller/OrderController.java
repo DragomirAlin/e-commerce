@@ -24,7 +24,7 @@ import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 import java.util.List;
 
 @Controller
-@RequestMapping("/v1/order")
+@RequestMapping("/v1/orders")
 @RequiredArgsConstructor
 @Tag(name = "Order", description = "Order API")
 public class OrderController implements BaseController {

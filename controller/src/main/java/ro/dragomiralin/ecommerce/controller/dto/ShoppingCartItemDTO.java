@@ -5,7 +5,6 @@ import lombok.Builder;
 @Builder
 public record ShoppingCartItemDTO(
         long id,
-        UserDTO userDTO,
         long productId,
         Integer quantity) {
 }

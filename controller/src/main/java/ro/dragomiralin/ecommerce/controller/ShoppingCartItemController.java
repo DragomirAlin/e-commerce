@@ -21,7 +21,7 @@ import ro.dragomiralin.ecommerce.domain.cart.ShoppingCartItemService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/v1/cart")
+@RequestMapping("/v1/carts")
 @RequiredArgsConstructor
 @Tag(name = "Shopping Cart", description = "Shopping Cart API")
 public class ShoppingCartItemController implements BaseController {
