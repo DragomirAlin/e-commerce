@@ -4,6 +4,7 @@ import lombok.Builder;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDOStatus;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderItemDO;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public record OrderDTO(
         long id,
         OrderDOStatus status,
-        Date orderedDate,
+        Instant orderedDate,
         List<OrderItemDO> orderItems,
         long userId,
         String customerComments) {

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ro.dragomiralin.ecommerce.domain.cart.domain.ShoppingCartItemDO;
 import ro.dragomiralin.ecommerce.domain.common.error.OrderException;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
+import ro.dragomiralin.ecommerce.domain.order.OrderItemService;
 import ro.dragomiralin.ecommerce.domain.order.OrderService;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderItemDO;
@@ -28,13 +29,17 @@ public class OrderServiceImpl implements OrderService {
     private final OrderPort orderPort;
     private final ProductService productService;
     private final PaymentService paymentService;
+    private final OrderItemService orderItemService;
 
     @Override
-    public OrderDO create(UserDO user, OrderDO orderDO) {
+    public OrderDO create(UserDO userDO, OrderDO orderDO, List<OrderItemDO> items) {
+        if (orderDO.getOrderItems().isEmpty()) {
+            throw new OrderException("Shopping cart is empty");
+        }
+
         var req = OrderDO.builder()
-                .userDO(user)
+                .userDO(userDO)
                 .status(OrderDOStatus.PENDING)
-                .orderItems(orderDO.getOrderItems())
                 .customerComments(orderDO.getCustomerComments())
                 .orderedDate(Instant.now())
                 .build();
@@ -90,24 +95,19 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void checkout(UserDO user, List<ShoppingCartItemDO> shoppingCartItems) {
-        var orderItems = shoppingCartItems.stream()
+        List<OrderItemDO> orderItems = shoppingCartItems.stream()
                 .map(item -> OrderItemDO.builder()
                         .product(productService.get(item.getProductId()))
                         .quantity(item.getQuantity())
                         .build())
                 .toList();
 
-        if (orderItems.isEmpty()) {
-            throw new OrderException("Shopping cart is empty");
-        }
-
-        var orderReq = OrderDO.builder()
-                .orderItems(orderItems)
+        OrderDO orderDO = OrderDO.builder()
                 .userDO(user)
                 .customerComments("No comments")
                 .orderedDate(Instant.now())
                 .build();
 
-        create(user, orderReq);
+        create(user, orderDO, orderItems);
     }
 }

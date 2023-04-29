@@ -58,14 +58,13 @@ public class OrderUnitTests {
         var req = OrderDO.builder()
                 .userDO(userDO)
                 .status(OrderDOStatus.PENDING)
-                .orderItems(orderItems)
                 .customerComments(customerComments)
                 .orderedDate(Instant.now())
                 .build();
 
         when(orderPort.save(any())).thenReturn(req);
 
-        var result = classUnderTest.create(userDO, orderDO);
+        var result = classUnderTest.create(userDO, orderDO, orderItems);
 
         verify(orderPort, times(1)).save(any());
         assertEquals(req, result);

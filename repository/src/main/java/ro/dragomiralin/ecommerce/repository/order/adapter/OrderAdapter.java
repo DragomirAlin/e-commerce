@@ -1,6 +1,7 @@
 package ro.dragomiralin.ecommerce.repository.order.adapter;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +9,7 @@ import ro.dragomiralin.ecommerce.domain.cart.domain.ShoppingCartItemDO;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
 import ro.dragomiralin.ecommerce.domain.order.port.OrderPort;
+import ro.dragomiralin.ecommerce.repository.order.entity.Order;
 import ro.dragomiralin.ecommerce.repository.order.mapper.OrderDOMapper;
 import ro.dragomiralin.ecommerce.repository.order.repository.OrderRepository;
 
@@ -24,8 +26,8 @@ public class OrderAdapter implements OrderPort {
     @Override
     @Transactional
     public OrderDO save(OrderDO orderDO) {
-        var order = mapper.toOrder(orderDO);
-        var createdOrder = orderRepository.save(order);
+        Order order = mapper.toOrder(orderDO);
+        Order createdOrder = orderRepository.save(order);
         return mapper.toOrderDO(createdOrder);
     }
 
@@ -43,7 +45,7 @@ public class OrderAdapter implements OrderPort {
 
     @Override
     public OrderDO update(OrderDO orderDO) {
-        var order = mapper.toOrder(orderDO);
+        Order order = mapper.toOrder(orderDO);
         return mapper.toOrderDO(orderRepository.save(order));
     }
 
@@ -54,7 +56,7 @@ public class OrderAdapter implements OrderPort {
 
     @Override
     public PageDO<OrderDO> list(long userId, int page, int size) {
-        var orders = orderRepository.findAllByUserId(userId, PageRequest.of(page, size));
+        Page<Order> orders = orderRepository.findAllByUserId(userId, PageRequest.of(page, size));
         return mapper.toPageDO(orders);
     }
 
