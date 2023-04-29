@@ -15,6 +15,7 @@ import ro.dragomiralin.ecommerce.domain.product.ProductService;
 import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -59,7 +60,7 @@ public class OrderUnitTests {
                 .status(OrderDOStatus.PENDING)
                 .orderItems(orderItems)
                 .customerComments(customerComments)
-                .orderedDate(new Date())
+                .orderedDate(Instant.now())
                 .build();
 
         when(orderPort.save(any())).thenReturn(req);

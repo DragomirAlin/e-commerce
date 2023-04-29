@@ -18,6 +18,7 @@ import ro.dragomiralin.ecommerce.domain.product.ProductService;
 import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
                 .status(OrderDOStatus.PENDING)
                 .orderItems(orderDO.getOrderItems())
                 .customerComments(orderDO.getCustomerComments())
-                .orderedDate(new Date())
+                .orderedDate(Instant.now())
                 .build();
 
         return orderPort.save(req);
@@ -96,8 +97,15 @@ public class OrderServiceImpl implements OrderService {
                         .build())
                 .toList();
 
+        if (orderItems.isEmpty()) {
+            throw new OrderException("Shopping cart is empty");
+        }
+
         var orderReq = OrderDO.builder()
                 .orderItems(orderItems)
+                .userDO(user)
+                .customerComments("No comments")
+                .orderedDate(Instant.now())
                 .build();
 
         create(user, orderReq);

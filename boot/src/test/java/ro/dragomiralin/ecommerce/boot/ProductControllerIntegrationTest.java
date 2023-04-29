@@ -26,7 +26,7 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
     @Test
     @WithMockUser(username = "user", password = "user", roles = "USER")
     public void list_products() throws Exception {
-        mockMvc.perform(get("/v1/product"))
+        mockMvc.perform(get("/v1/products"))
                 .andExpect(status().isOk())
                 .andReturn();
     }
@@ -43,7 +43,7 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
 
         var result = mockMvc
                 .perform(
-                        post("/v1/admin/product")
+                        post("/v1/admin/products")
                                 .contentType(APPLICATION_JSON)
                                 .content(asJsonString(product))
                                 .with(csrf().asHeader()))
@@ -57,7 +57,7 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
         var id = response.getData().id();
         mockMvc
                 .perform(
-                        get("/v1/product/{id}", id)
+                        get("/v1/products/{id}", id)
                                 .contentType(APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.data", notNullValue()));
@@ -74,7 +74,7 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
                 .build();
         mockMvc
                 .perform(
-                        post("/v1/admin/product")
+                        post("/v1/admin/products")
                                 .contentType(APPLICATION_JSON)
                                 .content(asJsonString(product)))
                 .andExpect(status().isForbidden());

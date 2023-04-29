@@ -23,7 +23,7 @@ public class CategoryControllerIntegrationTest extends BaseIntegrationTest {
         @Test
         @WithMockUser(username = "user", password = "user", roles = "USER")
         public void list_categories() throws Exception {
-            mockMvc.perform(get("/v1/category"))
+            mockMvc.perform(get("/v1/categories"))
                     .andExpect(status().isOk())
                     .andReturn();
         }
@@ -37,7 +37,7 @@ public class CategoryControllerIntegrationTest extends BaseIntegrationTest {
                     .build();
             mockMvc
                     .perform(
-                            post("/v1/admin/category")
+                            post("/v1/admin/categories")
                                     .contentType(MediaType.APPLICATION_JSON)
                                     .content(asJsonString(category))
                                     .with(csrf().asHeader()))
@@ -53,7 +53,7 @@ public class CategoryControllerIntegrationTest extends BaseIntegrationTest {
                     .build();
             mockMvc
                     .perform(
-                            post("/v1/admin/category")
+                            post("/v1/admin/categories")
                                     .contentType(MediaType.APPLICATION_JSON)
                                     .content(asJsonString(category))
                                     .with(csrf().asHeader()))

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class OrderDO {
     private long id;
     private UserDO userDO;
     private OrderDOStatus status;
-    private Date orderedDate;
+    private Instant orderedDate;
     private String customerComments;
     private List<OrderItemDO> orderItems;
 }
