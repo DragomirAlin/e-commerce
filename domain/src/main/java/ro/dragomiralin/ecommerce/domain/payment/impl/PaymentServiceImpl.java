@@ -20,7 +20,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public CreatedPaymentDO createPayment(OrderDO orderDO) {
         var totalToPay = orderDO.getOrderItems().stream()
-                .map(orderItemDO -> BigDecimal.valueOf(orderItemDO.getQuantity()).multiply(orderItemDO.getProduct().getPrice()))
+                .map(orderItemDO -> BigDecimal.valueOf(orderItemDO.getQuantity()).multiply(orderItemDO.getProductDO().getPrice()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         var paymentDO = paymentPort.save(PaymentDO.builder()

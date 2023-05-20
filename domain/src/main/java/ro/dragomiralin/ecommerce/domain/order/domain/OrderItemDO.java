@@ -13,6 +13,6 @@ import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 public class OrderItemDO {
     private long id;
     private int quantity;
-    private OrderDO order;
-    private ProductDO product;
+    private OrderDO orderDO;
+    private ProductDO productDO;
 }

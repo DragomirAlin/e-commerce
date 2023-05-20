@@ -16,7 +16,6 @@ import ro.dragomiralin.ecommerce.domain.product.domain.ProductDO;
 import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
 import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +42,7 @@ public class OrderUnitTests {
                 .build();
         var orderItems = List.of(OrderItemDO.builder()
                 .id(1L)
-                .product(ProductDO.builder()
+                .productDO(ProductDO.builder()
                         .id(1L)
                         .name("Product")
                         .build())
@@ -64,7 +63,7 @@ public class OrderUnitTests {
 
         when(orderPort.save(any())).thenReturn(req);
 
-        var result = classUnderTest.create(userDO, orderDO, orderItems);
+        var result = classUnderTest.create(userDO, orderDO);
 
         verify(orderPort, times(1)).save(any());
         assertEquals(req, result);

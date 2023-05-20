@@ -11,7 +11,7 @@ import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 import java.util.List;
 
 public interface OrderService {
-    OrderDO create(UserDO user, OrderDO orderDO, List<OrderItemDO> items);
+    OrderDO create(UserDO user, OrderDO orderDO);
 
     PaymentResponseDO pay(UserDO user, long orderId);
 

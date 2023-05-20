@@ -13,14 +13,11 @@ import ro.dragomiralin.ecommerce.domain.order.domain.OrderDOStatus;
 import ro.dragomiralin.ecommerce.domain.order.port.OrderPort;
 import ro.dragomiralin.ecommerce.domain.payment.PaymentService;
 import ro.dragomiralin.ecommerce.domain.payment.domain.CreatedPaymentDO;
-import ro.dragomiralin.ecommerce.domain.payment.domain.PaymentDO;
 import ro.dragomiralin.ecommerce.domain.payment.domain.PaymentResponseDO;
 import ro.dragomiralin.ecommerce.domain.product.ProductService;
 import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
-import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,19 +29,13 @@ public class OrderServiceImpl implements OrderService {
     private final OrderItemService orderItemService;
 
     @Override
-    public OrderDO create(UserDO userDO, OrderDO orderDO, List<OrderItemDO> items) {
-        if (orderDO.getOrderItems().isEmpty()) {
-            throw new OrderException("Shopping cart is empty");
-        }
-
-        var req = OrderDO.builder()
+    public OrderDO create(UserDO userDO, OrderDO orderDO) {
+        return orderPort.save(OrderDO.builder()
                 .userDO(userDO)
                 .status(OrderDOStatus.PENDING)
                 .customerComments(orderDO.getCustomerComments())
                 .orderedDate(Instant.now())
-                .build();
-
-        return orderPort.save(req);
+                .build());
     }
 
     @Override
@@ -95,19 +86,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void checkout(UserDO user, List<ShoppingCartItemDO> shoppingCartItems) {
-        List<OrderItemDO> orderItems = shoppingCartItems.stream()
-                .map(item -> OrderItemDO.builder()
-                        .product(productService.get(item.getProductId()))
-                        .quantity(item.getQuantity())
-                        .build())
-                .toList();
-
         OrderDO orderDO = OrderDO.builder()
                 .userDO(user)
                 .customerComments("No comments")
                 .orderedDate(Instant.now())
                 .build();
 
-        create(user, orderDO, orderItems);
+
+        OrderDO createdOrder = create(user, orderDO);
+        shoppingCartItems.forEach(item -> orderItemService.create(OrderItemDO.builder()
+                .orderDO(createdOrder)
+                .productDO(productService.get(item.getProductId()))
+                .quantity(item.getQuantity())
+                .build()));
     }
 }
