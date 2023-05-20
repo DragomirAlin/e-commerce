@@ -8,7 +8,9 @@ import ro.dragomiralin.ecommerce.domain.common.error.OrderException;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDOStatus;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderItemDO;
+import ro.dragomiralin.ecommerce.domain.order.impl.OrderItemServiceImpl;
 import ro.dragomiralin.ecommerce.domain.order.impl.OrderServiceImpl;
+import ro.dragomiralin.ecommerce.domain.order.port.OrderItemPort;
 import ro.dragomiralin.ecommerce.domain.order.port.OrderPort;
 import ro.dragomiralin.ecommerce.domain.payment.PaymentService;
 import ro.dragomiralin.ecommerce.domain.product.ProductService;
@@ -27,6 +29,8 @@ import static org.mockito.Mockito.*;
 public class OrderUnitTests {
     @MockBean
     private OrderPort orderPort;
+    @MockBean
+    private OrderItemServiceImpl orderItemService;
     @MockBean
     private ProductService productService;
     @MockBean
