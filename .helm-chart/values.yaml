@@ -129,15 +129,27 @@ postgresql:
   architecture: replication
   replication:
     password: 1234
-  initdbScripts:
-    00_create_db_keycloak.sql: |
-      create database IF NOT EXISTS keycloak;
-      create user keycloak with encrypted password '1234';
-      grant all privileges on database keycloak to keycloak;
-    01_create_db_ecommerce.sql: |
-      create database IF NOT EXISTS ecommercedb;
-      create user ecommerce with encrypted password '1234';
-      grant all privileges on database ecommercedb to ecommerce;
+  primary:
+    initdb:
+      scripts:
+        00_create_dbs.sh: |
+          #!/bin/bash
+          echo "Database setup starting...."
+
+          # Set the password for the psql CLI
+          export PGPASSWORD='1234'
+
+          # Create database and user for Keycloak
+          psql -h localhost -U postgres -c "CREATE DATABASE keycloak;"
+          psql -h localhost -U postgres -c "CREATE USER keycloak WITH ENCRYPTED PASSWORD '1234';"
+          psql -h localhost -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE keycloak TO keycloak;"
+
+          # Create database and user for ecommercedb
+          psql -h localhost -U postgres -c "CREATE DATABASE ecommercedb;"
+          psql -h localhost -U postgres -c "CREATE USER ecommerce WITH ENCRYPTED PASSWORD '1234';"
+          psql -h localhost -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE ecommercedb TO ecommerce;"
+
+          echo "Database setup completed!"
   initdbUser: postgres
   initdbPassword: 1234
 
