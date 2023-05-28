@@ -45,7 +45,7 @@ tolerations: [ ]
 affinity: { }
 
 istio:
-  enabled: true
+  enabled: false
   gateway: ingressgateway
   protocol: https
   hosts:
