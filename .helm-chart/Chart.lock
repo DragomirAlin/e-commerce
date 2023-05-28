@@ -1,12 +1,12 @@
 dependencies:
 - name: postgresql
-  repository: https://charts.bitnami.com/bitnami
+  repository: oci://registry-1.docker.io/bitnamicharts
   version: 12.1.3
 - name: keycloak
-  repository: https://codecentric.github.io/helm-charts
-  version: 18.3.0
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 14.4.0
 - name: redis
-  repository: https://charts.bitnami.com/bitnami
+  repository: oci://registry-1.docker.io/bitnamicharts
   version: 17.8.2
-digest: sha256:a94caba83eae178e5f991cf160965026a3e2a9a0ea1a817c4cbc576f9da77b0f
-generated: "2023-03-04T14:08:02.266873+02:00"
+digest: sha256:95a1c68a274fc36c5b2496587b683d83000589f9ec39d946b944d45e70cf81c0
+generated: "2023-05-28T16:00:51.553119+03:00"
