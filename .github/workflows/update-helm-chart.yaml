@@ -19,7 +19,7 @@ jobs:
       - name: Helm Repository Checkout
         uses: actions/checkout@v2
         with:
-          repository: https://github.com/DragomirAlin/helm-charts
+          repository: DragomirAlin/helm-charts
           token: ${{ secrets.BOT_GH_TOKEN }}
           fetch-depth: 0
           persist-credentials: true
