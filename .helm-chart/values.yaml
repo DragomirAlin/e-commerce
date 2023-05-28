@@ -143,6 +143,7 @@ postgresql:
           psql -h localhost -U postgres -c "CREATE DATABASE keycloak;"
           psql -h localhost -U postgres -c "CREATE USER keycloak WITH ENCRYPTED PASSWORD '1234';"
           psql -h localhost -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE keycloak TO keycloak;"
+          psql -h localhost -U postgres -c "GRANT CREATE ON SCHEMA public TO keycloak;"
 
           # Create database and user for ecommercedb
           psql -h localhost -U postgres -c "CREATE DATABASE ecommercedb;"
@@ -207,7 +208,7 @@ keycloak:
       value: "-Dkeycloak.adminUrl=https://keycloak.yourdomain/auth/"
 
   istio:
-    enabled: true
+    enabled: false
     gateway: ingressgateway
     protocol: https
     hosts:
