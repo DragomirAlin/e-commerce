@@ -29,6 +29,21 @@ service:
     port: 8081
 ingress:
   enabled: false
+  pathType: Prefix
+  path: /
+  hostname: api.yourdomain
+  tls:
+    - hosts:
+        - "api.yourdomain"
+      secretName: api.yourdomain-certs
+  hosts:
+    - host: api.yourdomain
+      paths:
+        - path: /
+          pathType: Prefix
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 
 resources: { }
 
@@ -207,6 +222,21 @@ keycloak:
       value: "https://keycloak.yourdomain/auth/"
     - name: JAVA_OPTS_APPEND
       value: "-Dkeycloak.adminUrl=https://keycloak.yourdomain/auth/"
+
+  ingress:
+    enabled: false
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    tls:
+      - hosts:
+          - keycloak.yourdomain
+        secretName: keycloak.yourdomain-certs
+    rules:
+      - host: keycloak.yourdomain
+        paths:
+          - path: /
+            pathType: Prefix
 
   istio:
     enabled: false
