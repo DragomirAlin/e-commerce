@@ -144,7 +144,7 @@ postgresql:
           psql -h localhost -U postgres -c "CREATE USER keycloak WITH ENCRYPTED PASSWORD '1234';"
           psql -h localhost -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE keycloak TO keycloak;"
           psql -h localhost -U postgres -c "ALTER DATABASE keycloak OWNER TO keycloak;"
-          psql -h localhost -U postgres -c "GRANT USAGE, CREATE ON SCHEMA PUBLIC TO keycloak;"
+          psql -h localhost -U postgres -c "GRANT ALL ON SCHEMA PUBLIC TO keycloak;"
 
           # Create database and user for ecommercedb
           psql -h localhost -U postgres -c "CREATE DATABASE ecommercedb;"
