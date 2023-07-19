@@ -1,5 +1,6 @@
 package ro.dragomiralin.ecommerce.repository.payment.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -55,6 +56,7 @@ public class Payment {
      */
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "order_id")
+    @JsonBackReference
     private Order order;
 
 }

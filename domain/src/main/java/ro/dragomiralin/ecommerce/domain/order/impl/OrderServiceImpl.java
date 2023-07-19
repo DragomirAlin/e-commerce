@@ -43,6 +43,8 @@ public class OrderServiceImpl implements OrderService {
         OrderDO orderDO = get(user, orderId);
 
         CreatedPaymentDO createdPaymentDO = paymentService.createPayment(orderDO);
+        orderDO.setStatus(OrderDOStatus.PAYMENT_PENDING);
+        orderPort.update(orderDO);
         return createdPaymentDO.paymentResponseDO();
     }
 

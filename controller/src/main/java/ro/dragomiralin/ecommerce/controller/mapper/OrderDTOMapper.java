@@ -1,11 +1,8 @@
 package ro.dragomiralin.ecommerce.controller.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import ro.dragomiralin.ecommerce.controller.dto.OrderDTO;
 import ro.dragomiralin.ecommerce.controller.dto.PageDTO;
-import ro.dragomiralin.ecommerce.controller.dto.ShoppingCartItemDTO;
-import ro.dragomiralin.ecommerce.domain.cart.domain.ShoppingCartItemDO;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
 

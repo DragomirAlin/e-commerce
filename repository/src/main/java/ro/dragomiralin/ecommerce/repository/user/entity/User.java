@@ -1,5 +1,6 @@
 package ro.dragomiralin.ecommerce.repository.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -54,11 +55,13 @@ public class User {
      * The shopping cart items of the user
      */
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<ShoppingCartItem> items;
 
     /**
      * The orders of the user
      */
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<Order> orders;
 }

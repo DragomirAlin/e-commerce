@@ -1,10 +1,9 @@
 package ro.dragomiralin.ecommerce.repository.order.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import ro.dragomiralin.ecommerce.repository.payment.entity.Payment;
 import ro.dragomiralin.ecommerce.repository.user.entity.User;
 
@@ -15,7 +14,9 @@ import java.util.List;
  * @author Dragomir Alin
  * @since 1.0
  */
-@Data
+
+@Getter
+@Setter
 @Builder
 @Table(name = "orders")
 @Entity
@@ -48,13 +49,15 @@ public class Order {
     /**
      * Items of the order
      */
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<OrderItem> items;
 
     /**
      * Payments of the order
      */
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Payment> payments;
 
     /**
@@ -62,5 +65,6 @@ public class Order {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 }

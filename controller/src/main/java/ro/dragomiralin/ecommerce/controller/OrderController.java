@@ -75,7 +75,7 @@ public class OrderController implements BaseController {
             @ApiResponse(responseCode = "200", description = "Order paid"),
             @ApiResponse(responseCode = "404", description = "Order not found")
     })
-    @PutMapping("/{id}/pay")
+    @PostMapping("/{id}/pay")
     public ResponseEntity<CustomResponse<PaymentResponseDTO>> pay(@AuthenticationPrincipal UserDTO userDTO, @PathVariable long id) {
         UserDO userDO = userDTOMapper.toUserDO(userDTO);
         PaymentResponseDO paymentResponseDO = orderService.pay(userDO, id);

@@ -1,10 +1,7 @@
 package ro.dragomiralin.ecommerce.repository.order.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 import ro.dragomiralin.ecommerce.repository.product.entity.Product;
 
 import jakarta.persistence.*;
@@ -14,7 +11,8 @@ import jakarta.validation.constraints.NotNull;
  * @author Dragomir Alin
  * @since 1.0
  */
-@Data
+@Getter
+@Setter
 @Entity
 @Builder
 @RequiredArgsConstructor
@@ -36,8 +34,8 @@ public class OrderItem {
      * The order to which the product belongs
      */
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "order_id")
+    @JsonBackReference
     private Order order;
 
     /**
