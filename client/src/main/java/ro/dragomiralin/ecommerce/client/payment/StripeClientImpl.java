@@ -56,8 +56,4 @@ public class StripeClientImpl implements StripeClient {
         return null;
     }
 
-    @Override
-    public byte[] downloadInvoice(String paymentId) {
-        return new byte[0];
-    }
 }

@@ -19,7 +19,7 @@ import java.util.Objects;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DefaultEmailClientImpl implements DefaultEmailClient {
+public class SmtpEmailClientImpl implements DefaultEmailClient {
     @Value("${ecommerce.mail.from}")
     private String from;
 

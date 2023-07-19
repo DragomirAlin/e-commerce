@@ -11,5 +11,4 @@ public interface StripeClient {
 
     PaymentResponseDO refundPayment(String paymentId);
 
-    byte[] downloadInvoice(String paymentId);
 }
