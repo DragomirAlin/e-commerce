@@ -29,7 +29,7 @@ service:
     port: 8081
 ingress:
   enabled: false
-  ingressClassName: nginx
+  className: nginx
   pathType: Prefix
   path: /
   hostname: api.yourdomain
@@ -219,15 +219,3 @@ keycloak:
       value: "-Dkeycloak.adminUrl=https://keycloak.yourdomain/auth/"
   ingress:
     enabled: false
-    ingressClassName: nginx
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-    tls:
-      - hosts:
-          - keycloak.yourdomain
-        secretName: keycloak.yourdomain-certs
-    rules:
-      - host: keycloak.yourdomain
-        paths:
-          - path: /
-            pathType: Prefix
