@@ -118,6 +118,8 @@ ecommerce:
 # Redis Chart Configuration
 redis:
   enabled: true
+  replica:
+    replicaCount: 1
   auth:
     password:
 
@@ -175,6 +177,12 @@ keycloak:
         verbs:
           - get
           - list
+  externalDatabase:
+    host: ecommerce-postgresql-primary
+    database: keycloak
+    port: 5432
+    user: keycloak
+    password: 1234
   extraEnv: |
     - name: JGROUPS_DISCOVERY_PROTOCOL
       value: kubernetes.KUBE_PING
@@ -209,7 +217,6 @@ keycloak:
       value: "https://keycloak.yourdomain/auth/"
     - name: JAVA_OPTS_APPEND
       value: "-Dkeycloak.adminUrl=https://keycloak.yourdomain/auth/"
-
   ingress:
     enabled: false
     ingressClassName: nginx
