@@ -29,6 +29,7 @@ service:
     port: 8081
 ingress:
   enabled: false
+  ingressClassName: nginx
   pathType: Prefix
   path: /
   hostname: api.yourdomain
@@ -42,8 +43,7 @@ ingress:
         - path: /
           pathType: Prefix
   annotations:
-    kubernetes.io/ingress.class: "nginx"
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt
 
 resources: { }
 
@@ -58,19 +58,6 @@ nodeSelector: { }
 tolerations: [ ]
 
 affinity: { }
-
-istio:
-  enabled: false
-  gateway: ingressgateway
-  protocol: https
-  hosts:
-    - host: "api.yourdomain"
-  security:
-    enabled: true
-    credentialName: "cert-api.yourdomain"
-    commonName: "api.yourdomain"
-    hosts:
-      - "api.yourdomain"
 
 spring:
   application:
@@ -225,9 +212,9 @@ keycloak:
 
   ingress:
     enabled: false
+    ingressClassName: nginx
     annotations:
-      kubernetes.io/ingress.class: "nginx"
-      cert-manager.io/cluster-issuer: letsencrypt-prod
+      cert-manager.io/cluster-issuer: letsencrypt
     tls:
       - hosts:
           - keycloak.yourdomain
@@ -237,16 +224,3 @@ keycloak:
         paths:
           - path: /
             pathType: Prefix
-
-  istio:
-    enabled: false
-    gateway: ingressgateway
-    protocol: https
-    hosts:
-      - host: "keycloak.yourdomain"
-    security:
-      enabled: true
-      credentialName: "cert-keycloak.yourdomain"
-      commonName: "keycloak.yourdomain"
-      hosts:
-        - "keycloak.yourdomain"
