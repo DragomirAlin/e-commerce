@@ -63,7 +63,7 @@ spring:
   application:
     name: e-commerce
   datasource:
-    url: jdbc:postgresql://ecommerce-postgresql-primary:5432/ecommercedb
+    url: jdbc:postgresql://ecommerce-postgresql-primary:5432/ecommerce
     username: ecommerce
     password: 1234
     driver-class-name: org.postgresql.Driver
