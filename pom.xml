@@ -32,6 +32,12 @@
         <net.datafaker.version>1.6.0</net.datafaker.version>
         <guava.version>31.1-jre</guava.version>
         <software.amazon.awssdk.version>2.20.12</software.amazon.awssdk.version>
+        <!-- JaCoCo Properties -->
+        <jacoco.version>0.8.6</jacoco.version>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.language>java</sonar.language>
     </properties>
     <dependencies>
         <!-- Test -->
@@ -73,6 +79,11 @@
             <groupId>net.datafaker</groupId>
             <artifactId>datafaker</artifactId>
             <version>${net.datafaker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.version}</version>
         </dependency>
         <!-- Test -->
 
@@ -154,30 +165,30 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-            <!-- Java Code Coverage Library -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+            </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco-maven-plugin.version}</version>
+                <version>${jacoco.version}</version>
                 <executions>
                     <execution>
+                        <id>jacoco-initialize</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>report</id>
-                        <phase>prepare-package</phase>
+                        <id>jacoco-site</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>report-aggregate</goal>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
             </plugin>
         </plugins>
     </build>
