@@ -1,5 +1,5 @@
 ## E-Commerce
-
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DragomirAlin_e-commerce&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=DragomirAlin_e-commerce)
 ![java](https://img.shields.io/badge/Java-17-green)
 ![spring](https://img.shields.io/badge/Spring-3.0.0-green)
 ![build](https://img.shields.io/github/actions/workflow/status/dragomiralin/e-commerce/ci.yaml)
@@ -8,6 +8,7 @@
 ![contributors](https://img.shields.io/github/contributors/dragomiralin/e-commerce)
 ![rest-api](https://img.shields.io/badge/REST-API-violet)
 
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=DragomirAlin_e-commerce)
 ### Overview
 
 Another E-Commerce project used to learn and practice a wide range of best practices and tools.
