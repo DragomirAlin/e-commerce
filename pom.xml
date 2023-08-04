@@ -35,7 +35,7 @@
         <software.amazon.awssdk.version>2.20.12</software.amazon.awssdk.version>
         <!-- JaCoCo Properties -->
         <jacoco.version>0.8.10</jacoco.version>
-        <sonar.coverage.jacoco.xmlReportPaths>../jacoco/target/jacoco-report/jacoco.xml
+        <sonar.coverage.jacoco.xmlReportPaths>../jacoco/target/site/jacoco-aggregate/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>
     </properties>
     <dependencies>
