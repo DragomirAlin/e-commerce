@@ -7,6 +7,7 @@ import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.payment.domain.PaymentDO;
 import ro.dragomiralin.ecommerce.domain.payment.port.PaymentPort;
 import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
+import ro.dragomiralin.ecommerce.repository.payment.entity.Payment;
 import ro.dragomiralin.ecommerce.repository.payment.mapper.PaymentDOMapper;
 import ro.dragomiralin.ecommerce.repository.payment.repository.PaymentRepository;
 
@@ -23,8 +24,8 @@ public class PaymentAdapter implements PaymentPort {
     @Override
     @Transactional
     public PaymentDO save(PaymentDO paymentDO) {
-        var payment = mapper.toPayment(paymentDO);
-        var createdPayment = paymentRepository.save(payment);
+        Payment payment = mapper.toPayment(paymentDO);
+        Payment createdPayment = paymentRepository.save(payment);
         return mapper.toPaymentDO(createdPayment);
     }
 

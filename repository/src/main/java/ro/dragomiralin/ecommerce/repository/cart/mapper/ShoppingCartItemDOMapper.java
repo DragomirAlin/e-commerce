@@ -11,6 +11,7 @@ import ro.dragomiralin.ecommerce.repository.user.mapper.UserDOMapper;
 @Mapper(componentModel = "spring", uses = UserDOMapper.class)
 public interface ShoppingCartItemDOMapper {
 
+    @Mapping(target = "userDO", source = "shoppingCartItem.user")
     ShoppingCartItemDO toShoppingCartItemDO(ShoppingCartItem shoppingCartItem);
 
     @Mapping(target = "user", source = "shoppingCartItemDO.userDO")

@@ -37,6 +37,7 @@ public class Payment {
      * Currency of the payment
      */
     @Column(name = "currency")
+    @Enumerated(EnumType.STRING)
     private PaymentCurrency currency;
 
     /**
@@ -54,7 +55,7 @@ public class Payment {
     /**
      * The order to which the payment belongs
      */
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     @JsonBackReference
     private Order order;

@@ -32,6 +32,7 @@ public class Order {
      * Status of the order
      */
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
     /**

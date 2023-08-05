@@ -5,12 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ro.dragomiralin.ecommerce.domain.cart.domain.ShoppingCartItemDO;
 import ro.dragomiralin.ecommerce.domain.common.page.PageDO;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderDO;
 import ro.dragomiralin.ecommerce.domain.order.port.OrderPort;
 import ro.dragomiralin.ecommerce.repository.order.entity.Order;
-import ro.dragomiralin.ecommerce.repository.order.mapper.OrderDOMapper;
+import ro.dragomiralin.ecommerce.repository.order.mapper.OrderBaseMapper;
 import ro.dragomiralin.ecommerce.repository.order.repository.OrderRepository;
 
 import java.util.List;
@@ -20,7 +19,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class OrderAdapter implements OrderPort {
-    private final OrderDOMapper mapper;
+    private final OrderBaseMapper mapper;
     private final OrderRepository orderRepository;
 
     @Override

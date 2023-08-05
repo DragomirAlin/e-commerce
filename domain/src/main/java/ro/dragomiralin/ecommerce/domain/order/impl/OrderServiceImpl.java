@@ -42,6 +42,14 @@ public class OrderServiceImpl implements OrderService {
     public PaymentResponseDO pay(UserDO user, long orderId) {
         OrderDO orderDO = get(user, orderId);
 
+        if (orderDO.getStatus() != OrderDOStatus.PENDING) {
+            throw new OrderException("Order is already processed");
+        }
+
+        if (orderDO.getOrderItems() == null || orderDO.getOrderItems().isEmpty()) {
+            throw new OrderException("Order has no items");
+        }
+
         CreatedPaymentDO createdPaymentDO = paymentService.createPayment(orderDO);
         orderDO.setStatus(OrderDOStatus.PAYMENT_PENDING);
         orderPort.update(orderDO);

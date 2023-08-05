@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ro.dragomiralin.ecommerce.domain.order.domain.OrderItemDO;
 import ro.dragomiralin.ecommerce.domain.order.port.OrderItemPort;
 import ro.dragomiralin.ecommerce.repository.order.entity.OrderItem;
-import ro.dragomiralin.ecommerce.repository.order.mapper.OrderItemDOMapper;
+import ro.dragomiralin.ecommerce.repository.order.mapper.OrderBaseMapper;
 import ro.dragomiralin.ecommerce.repository.order.repository.OrderItemRepository;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class OrderItemAdapter implements OrderItemPort {
-    private final OrderItemDOMapper mapper;
+    private final OrderBaseMapper mapper;
     private final OrderItemRepository orderItemsRepository;
 
     @Override

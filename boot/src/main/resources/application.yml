@@ -48,12 +48,13 @@ ecommerce:
   mail:
     from:
   storage:
-    s3:
-      access-key:
-      secret-key:
-      bucket-name:
-      region:
-      endpoint:
+    provider:
+      s3:
+        access-key:
+        secret-key:
+        bucket-name:
+        region:
+        endpoint:
   payment:
     stripe:
       public-key:
