@@ -55,7 +55,7 @@ public class Payment {
     /**
      * The order to which the payment belongs
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "order_id")
     @JsonBackReference
     private Order order;

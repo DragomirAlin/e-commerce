@@ -7,6 +7,7 @@ import ro.dragomiralin.ecommerce.domain.payment.PaymentService;
 import ro.dragomiralin.ecommerce.domain.payment.domain.*;
 import ro.dragomiralin.ecommerce.domain.payment.port.PaymentPort;
 import ro.dragomiralin.ecommerce.domain.payment.port.StripeClient;
+import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
 import java.math.BigDecimal;
 
@@ -18,7 +19,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final StripeClient stripeClient;
 
     @Override
-    public CreatedPaymentDO createPayment(OrderDO orderDO) {
+    public CreatedPaymentDO createPayment(UserDO userDO, OrderDO orderDO) {
         var totalToPay = orderDO.getOrderItems().stream()
                 .map(orderItemDO -> BigDecimal.valueOf(orderItemDO.getQuantity()).multiply(orderItemDO.getProductDO().getPrice()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -30,7 +31,7 @@ public class PaymentServiceImpl implements PaymentService {
                 .order(orderDO)
                 .build());
 
-        PaymentResponseDO paymentResponseDO = stripeClient.createPayment(paymentDO);
+        PaymentResponseDO paymentResponseDO = stripeClient.createPayment(userDO, paymentDO);
 
         if (paymentResponseDO.success()) {
             paymentDO.setExternalPaymentId(paymentResponseDO.paymentExternalId());

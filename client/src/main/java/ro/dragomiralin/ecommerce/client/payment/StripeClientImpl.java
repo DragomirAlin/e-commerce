@@ -2,12 +2,13 @@ package ro.dragomiralin.ecommerce.client.payment;
 
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Charge;
-import com.stripe.model.Customer;
-import com.stripe.model.CustomerSearchResult;
+import com.stripe.model.*;
+import com.stripe.model.checkout.Session;
 import com.stripe.param.ChargeCreateParams;
 import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.CustomerSearchParams;
+import com.stripe.param.PaymentIntentCreateParams;
+import com.stripe.param.checkout.SessionCreateParams;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import ro.dragomiralin.ecommerce.domain.payment.port.StripeClient;
 import ro.dragomiralin.ecommerce.domain.user.domain.UserDO;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 
@@ -33,17 +35,30 @@ public class StripeClientImpl implements StripeClient {
     }
 
     @Override
-    public PaymentResponseDO createPayment(PaymentDO paymentDO) {
+    public PaymentResponseDO createPayment(UserDO userDO, PaymentDO paymentDO) {
         try {
-            Charge charge = Charge.create(ChargeCreateParams.builder()
-                    .setCustomer(getOrCreateStripeCustomer(paymentDO.getOrder().getUserDO()).getId())
-                    .setCurrency(paymentDO.getCurrency().name())
-                    .setAmount(paymentDO.getAmount().multiply(BigDecimal.valueOf(100)).longValue())
+            Session session = Session.create(SessionCreateParams.builder()
+                    .setMode(SessionCreateParams.Mode.PAYMENT)
+                    .setSuccessUrl("http://localhost:8080/success")
+                    .setCancelUrl("http://localhost:8080/cancel")
+                    .setCurrency("eur")
+                    .addLineItem(
+                            SessionCreateParams.LineItem.builder()
+                                    .setQuantity(1L)
+                                    .setPriceData(SessionCreateParams.LineItem.PriceData.builder()
+                                            .setCurrency("eur")
+                                            .setUnitAmountDecimal(paymentDO.getAmount().setScale(2, RoundingMode.CEILING))
+                                            .setProductData(
+                                                    SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                                                            .setName("T-shirt")
+                                                            .build())
+                                            .build())
+                                    .build())
                     .build());
 
             return PaymentResponseDO.builder()
-                    .paymentExternalId(charge.getId())
-                    .paymentUri(charge.getReceiptUrl())
+                    .paymentExternalId(session.getId())
+                    .paymentUri(session.getUrl())
                     .build();
         } catch (Exception e) {
             log.error("Error while creating payment {}", paymentDO.getId(), e);

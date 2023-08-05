@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
             throw new OrderException("Order has no items");
         }
 
-        CreatedPaymentDO createdPaymentDO = paymentService.createPayment(orderDO);
+        CreatedPaymentDO createdPaymentDO = paymentService.createPayment(user, orderDO);
         orderDO.setStatus(OrderDOStatus.PAYMENT_PENDING);
         orderPort.update(orderDO);
         return createdPaymentDO.paymentResponseDO();
