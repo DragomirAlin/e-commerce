@@ -54,6 +54,7 @@ ecommerce:
       bucket-name:
       region:
       endpoint:
-  stripe:
-    public-key:
-    private-key:
+  payment:
+    stripe:
+      public-key:
+      secret-key:
