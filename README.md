@@ -46,8 +46,8 @@ Detailed planning can be found here:
 
 1. Phase 1 ***(current)***
    Create a monolith application
-2. Phase 2
-   Fork this repository and split the monolith into microservices.
+2. ~~Phase 2
+   Fork this repository and split the monolith into microservices.~~ Keep the monolith to give the advantage of Hexagonal Architecture. (for microservice architecture, check [smartfactory](https://github.com/DragomirAlin/smartfactory) project)
 
 ### Architecture
 
