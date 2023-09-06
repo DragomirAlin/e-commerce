@@ -49,7 +49,7 @@ public class Order {
     /**
      * Items of the order
      */
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
     @JsonManagedReference
     private List<OrderItem> items;
 

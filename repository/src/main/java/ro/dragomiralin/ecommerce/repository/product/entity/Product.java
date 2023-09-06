@@ -53,7 +53,6 @@ public class Product  {
                     CascadeType.MERGE,
                     CascadeType.DETACH,
                     CascadeType.REFRESH,
-                    CascadeType.REMOVE,
             })
     @JoinTable(name = "products_categories", joinColumns = {
             @JoinColumn(name = "product_id", referencedColumnName = "id")}, inverseJoinColumns = {
