@@ -1,4 +1,4 @@
-FROM openjdk:17-bullseye
+FROM openjdk:19-jdk-bullseye
 
 WORKDIR /app
 
