@@ -1,6 +1,5 @@
 ## E-Commerce
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DragomirAlin_e-commerce&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=DragomirAlin_e-commerce)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DragomirAlin_e-commerce&metric=coverage)](https://sonarcloud.io/summary/new_code?id=DragomirAlin_e-commerce)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=DragomirAlin_e-commerce&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=DragomirAlin_e-commerce)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DragomirAlin_e-commerce&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=DragomirAlin_e-commerce)
 ![java](https://img.shields.io/badge/Java-19-green)
