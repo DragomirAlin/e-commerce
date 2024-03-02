@@ -36,7 +36,10 @@
         <!-- JaCoCo Properties -->
         <jacoco.version>0.8.10</jacoco.version>
         <sonar.coverage.exclusions>
-            ro/dragomiralin/ecommerce/repository/**/entity/*.class,
+            controller/src/main/java/ro/dragomiralin/ecommerce/controller/dto/*,
+            domain/ro/dragomiralin/ecommerce/repository/**/entity/*,
+            domain/src/main/java/ro/dragomiralin/ecommerce/domain/**/domain/*
+            boot/src/test/java/ro/dragomiralin/ecommerce/boot/**/*,
         </sonar.coverage.exclusions>
     </properties>
     <dependencies>
@@ -200,11 +203,6 @@
                                     <limits>
                                         <limit>
                                             <counter>LINE</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.00</minimum>
-                                        </limit>
-                                        <limit>
-                                            <counter>BRANCH</counter>
                                             <value>COVEREDRATIO</value>
                                             <minimum>0.00</minimum>
                                         </limit>
