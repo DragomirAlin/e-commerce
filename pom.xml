@@ -36,9 +36,10 @@
         <!-- JaCoCo Properties -->
         <jacoco.version>0.8.10</jacoco.version>
         <sonar.coverage.exclusions>
+            client/src/main/java/ro/dragomiralin/ecommerce/client/mail/EmailConfiguration.java,
             controller/src/main/java/ro/dragomiralin/ecommerce/controller/dto/*,
             domain/ro/dragomiralin/ecommerce/repository/**/entity/*,
-            domain/src/main/java/ro/dragomiralin/ecommerce/domain/**/domain/*
+            domain/src/main/java/ro/dragomiralin/ecommerce/domain/**/domain/*,
             boot/src/test/java/ro/dragomiralin/ecommerce/boot/**/*,
         </sonar.coverage.exclusions>
     </properties>
