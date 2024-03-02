@@ -35,6 +35,9 @@
         <software.amazon.awssdk.version>2.20.12</software.amazon.awssdk.version>
         <!-- JaCoCo Properties -->
         <jacoco.version>0.8.10</jacoco.version>
+        <sonar.coverage.exclusions>
+            ro/dragomiralin/ecommerce/repository/**/entity/*.class,
+        </sonar.coverage.exclusions>
     </properties>
     <dependencies>
         <!-- Test -->
